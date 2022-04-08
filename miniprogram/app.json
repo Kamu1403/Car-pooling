@@ -1,25 +1,37 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"
+    "pages/carpooling/carpooling",    
+    "pages/login/login",
+    "pages/friends/friends"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "嘉定拼车系统",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "list":[
+      {
+        "pagePath":"pages/carpooling/carpooling",
+        "text":"拼车",
+        "iconPath": "icons/carpooling.png",
+        "selectedIconPath":  "icons/_carpooling.png"   
+      },
+      {
+        "pagePath":"pages/friends/friends",
+        "text":"好友",
+        "iconPath": "icons/friends.png",
+        "selectedIconPath":  "icons/_friends.png"   
+      },
+      {
+        "pagePath":"pages/login/login",
+        "text":"我",
+        "iconPath": "icons/info.png",
+        "selectedIconPath":  "icons/_info.png"   
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
