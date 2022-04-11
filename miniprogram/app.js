@@ -14,6 +14,15 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      userInfo: {
+        username:"",
+        usergender:0,
+        userphoto:"",
+        userage:18,
+        useropenid:""
+      },
+      logined:false
+    }
   }
 })

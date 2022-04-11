@@ -1,2 +1,25 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<image class="bgpic" style="opacity:{{0.9}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
+<view wx:if="{{logined==false}}">
+  <view class="buttonbox">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="getUserProfile">请点击这里登陆</button>
+  </view>
+</view>
+<view wx:elif="{{useropenid==null || useropenid===''}}">
+  <loading>
+    加载中...
+  </loading>
+</view>
+<view class="afterlogin" wx:elif="{{logined==true}}" style="height:100%">
+  <view class="infobox">
+    <image mode="aspectFit" class="userimg" src="{{userphoto}}"></image>
+    <text class="infoword">{{username}}
+    </text>
+  </view>
+  <view class="optionlist">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx">个人信息管理</button>
+    <text>
+    </text>
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="logout">退出登录</button>
+  </view>  
+</view>

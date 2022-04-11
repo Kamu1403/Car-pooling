@@ -154,3 +154,11 @@ page {
   line-height: 36rpx;
   word-break: break-all;
 }
+.bgpic
+{
+  width: 100%;
+  height: 100%;
+  position:fixed; 
+  background-size:100% 100%;
+  z-index: -1;
+}
