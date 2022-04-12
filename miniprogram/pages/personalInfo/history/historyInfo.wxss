@@ -1,0 +1,3 @@
+/* pages/personalInfo/history/historyInfo.wxss */
+@import '../../../style/common.wxss';
+@import '../../../style/weui.wxss';

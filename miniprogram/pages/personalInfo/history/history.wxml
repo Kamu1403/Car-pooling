@@ -1,0 +1,33 @@
+<!--pages/personalInfo/history/history.wxml-->
+<view class="page" data-weui-theme="{{theme}}">    <view class="page__hd">
+        <view class="page__title">我的历史行程</view>
+        <!-- <view class="page__desc">表单预览</view> -->
+    </view>
+    <view class="page__bd">
+        <view class="weui-form-preview" wx:for="{{history}}" data-item="item" wx:for-index="idx">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">行程状态</view>
+                    <view class="weui-form-preview__value_in-hd" style="color:{{item.color}}">{{item.status}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">时间</view>
+                    <view class="weui-form-preview__value">{{item.time}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">起点</view>
+                    <view class="weui-form-preview__value">{{item.from}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">终点</view>
+                    <view class="weui-form-preview__value">{{item.to}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="jumpHistoryInfo">详情</navigator>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,10 +1,37 @@
-// pages/carpooling/carpooling.js
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
+    theme: "light",
+    history:[
+      {
+        status:"正在进行",
+        color:"red",
+        time:"2022/4/12 14:54",
+        from:"嘉定校区友园7号楼",
+        to:"旋转门"
+      },{
+        status:"已完成",
+        color:"green",
+        time:"2022/4/10 09:34",
+        from:"嘉定校区接待中心",
+        to:"四平"
+      },{
+        status:"已取消",
+        color:"gray",
+        time:"2022/1/12 10:54",
+        from:"嘉定校区马桶楼",
+        to:"图书馆"
+      }
+    ],
+  },
 
+  jumpHistoryInfo() {
+    wx.navigateTo({
+      url: '/pages/personalInfo/history/historyInfo',
+    })
   },
 
   /**
@@ -63,3 +90,4 @@ Page({
 
   }
 })
+

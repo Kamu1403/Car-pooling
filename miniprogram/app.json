@@ -2,7 +2,9 @@
   "pages": [
     "pages/carpooling/carpooling",    
     "pages/login/login",
-    "pages/friends/friends"
+    "pages/friends/friends",
+    "pages/personalInfo/history/history",
+    "pages/personalInfo/history/historyInfo"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -34,5 +36,8 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  }
 }

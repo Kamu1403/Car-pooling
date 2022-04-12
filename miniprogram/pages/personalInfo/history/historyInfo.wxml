@@ -1,0 +1,19 @@
+<!--pages/personalInfo/history/historyInfo.wxml-->
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="page__hd">
+        <view class="page__title">行程详细信息</view>
+    </view>
+    <view class="page__bd">
+        <mp-cells title="行程信息">
+            <mp-cell hover value="时间" footer="{{time}}"></mp-cell>
+            <mp-cell hover value="起点" footer="{{from}}"></mp-cell>
+            <mp-cell hover value="终点" footer="{{to}}"></mp-cell>
+        </mp-cells>
+        <mp-cells title="队伍信息">
+            <mp-cell hover value="小队队长" footer="{{group_leader}}"></mp-cell>
+            <mp-cell hover value="小队成员" wx:for="{{group_member}}" data-item="item" wx:for-index="idx" footer="{{group_member[idx]}}"></mp-cell>
+        </mp-cells>
+    </view>
+</view>
+
+
