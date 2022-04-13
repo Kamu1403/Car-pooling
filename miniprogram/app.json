@@ -3,7 +3,13 @@
     "pages/carpooling/carpooling",    
     "pages/login/login",
     "pages/friends/friends",
-    "pages/teamCreate/teamCreate"
+    "pages/teamCreate/teamCreate",
+    "pages/personalInfo/personalInfo",
+    "pages/personalInfo/change",
+    "pages/personalInfo/changepwd",
+    "pages/personalInfo/changeheadimg",
+    "pages/personalInfo/history/history",
+    "pages/personalInfo/history/historyInfo"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -35,5 +41,8 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2"
+  "style": "v2",
+  "useExtendedLib": {
+    "weui": true
+  }
 }
