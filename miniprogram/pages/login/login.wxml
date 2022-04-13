@@ -17,8 +17,7 @@
     </text>
   </view>
   <view class="optionlist">
-    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpPersonalInfo">个人信息管理</button>
-    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpHistory">查看历史行程</button>
+    <button style="height:100rpx;width:450rpx;font-size:45rpx">个人信息管理</button>
     <text>
     </text>
     <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="logout">退出登录</button>
