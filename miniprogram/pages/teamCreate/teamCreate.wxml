@@ -1,8 +1,10 @@
 <!--pages/teamCreate.wxml-->
 
+<!-- 背景图片 -->
+<image class="bgpic" style="opacity:{{0.9}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
 
 <!-- 用户填写的表单信息 -->
-<form bindsubmit="formSubmit" bindreset="formReset">
+<form bindsubmit="formSubmit" bindreset="formReset" class="weui-form__control-area">
     <!-- 队伍名 -->
     <view class="section">
       <view class="">队伍名</view>
@@ -39,14 +41,14 @@
 
     <!-- 出发时间 -->
     <view class="section">
-        <view class="">出发时间</view>
+        <view >出发时间</view>
         <!-- 选择日期 -->
         <picker mode="date" bindchange= "bindDatetimeChange" data-op_type="start_date" value="{{start_date}}">
             <!-- 如果选择了就显示日期，否则提示日期 -->
             <view wx:if="{{start_date}}" class="picker">
                 <view>{{start_date}}</view>
             </view>
-            <view wx:else>选择日期</view>
+            <view wx:else class="hint">选择日期</view>
         </picker>
         <!-- 选择时间 -->
         <picker mode="time" bindchange= "bindDatetimeChange" data-op_type="start_time" value="{{start_time}}">
@@ -54,20 +56,20 @@
             <view wx:if="{{start_time}}" class="picker">
                 <view>{{start_time}}</view>
             </view>
-            <view wx:else>选择时间</view>
+            <view wx:else class="hint">选择时间</view>
         </picker>
     </view>
 
     <!-- 到达时间 -->
     <view class="section">
-        <view class="">到达时间</view>
+        <view>到达时间</view>
         <!-- 选择日期 -->
         <picker mode="date" bindchange= "bindDatetimeChange" data-op_type="end_date" value="{{end_date}}">
             <!-- 如果选择了就显示日期，否则提示日期 -->
             <view wx:if="{{end_date}}" class="picker">
                 <view>{{end_date}}</view>
             </view>
-            <view wx:else>选择日期</view>
+            <view wx:else class="hint">选择日期</view>
         </picker>
         <!-- 选择时间 -->
         <picker mode="time" bindchange= "bindDatetimeChange" data-op_type="end_time" value="{{end_time}}">
@@ -75,15 +77,26 @@
             <view wx:if="{{end_time}}" class="picker">
                 <view>{{end_time}}</view>
             </view>
-            <view wx:else>选择时间</view>
+            <view wx:else class="hint">选择时间</view>
         </picker>
     </view>
+
+    <!-- 备注 -->
+    <view class="section">备注</view>
+    <div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+            <div class="weui-textarea-counter"><span>0</span>/200</div>
+        </div>
+    </div>
+</div>
 
 
     <!-- 提交 -->
     <view class="btn-area">
       <button formType="submit" class="weui-btn weui-btn_primary">提交</button>
-      <button formType="reset">重置</button>
+      <button formType="reset" class="weui-btn weui-btn_warn">重置</button>
     </view>
 </form>
 

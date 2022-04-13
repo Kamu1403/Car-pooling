@@ -14,3 +14,12 @@
 button{
   margin: 10rpx 0;
 }
+
+
+/* 提示的字体设置 */
+.hint {
+  /*字体设置*/
+  font-family: FZShuTi; /*方正舒体*/
+  text-align: center; /*字体位置*/
+  color: rgb(165, 160, 160);
+}
