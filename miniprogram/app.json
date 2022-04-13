@@ -1,15 +1,15 @@
 {
   "pages": [
-    "pages/carpooling/carpooling",    
     "pages/login/login",
     "pages/friends/friends",
-    "pages/teamCreate/teamCreate",
     "pages/personalInfo/personalInfo",
     "pages/personalInfo/change",
     "pages/personalInfo/changepwd",
     "pages/personalInfo/changeheadimg",
     "pages/personalInfo/history/history",
-    "pages/personalInfo/history/historyInfo"
+    "pages/personalInfo/history/historyInfo",
+    "pages/carpooling/carpooling",
+    "pages/teamCreate/teamCreate"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
