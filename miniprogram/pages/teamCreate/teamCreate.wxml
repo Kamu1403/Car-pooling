@@ -1,116 +1,104 @@
 <!--pages/teamCreate.wxml-->
 
 <!-- 背景图片 -->
-<image class="bgpic" style="opacity:{{0.9}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
+<image class="bgpic" style="opacity:{{0.5}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
 
-<!-- 用户填写的表单信息 -->
-<form bindsubmit="formSubmit" bindreset="formReset" class="weui-form__control-area">
-    <!-- 队伍名 -->
-    <view class="section">
-      <view class="">队伍名</view>
-      <input name="teamname" placeholder="队伍名" type="text" />
-    </view>
- 
-    <!-- 手机号 -->
-    <view class="section">
-      <view class="">手机号</view>
-      <input name="phone" placeholder="手机号"
-             maxlength="11" type="number" />
-    </view>
+<view class="page" data-weui-theme="{{theme}}">
+    <!-- 用户填写的表单信息 -->
+    <form bindsubmit="formSubmit" bindreset="formReset" class="weui-form__control-area">
+        
+        <!-- 队伍名 -->
+        <view class="section">
+          <view style="color:#000;">队伍名</view>
+          <input name="teamname" placeholder="队伍名" type="text" />
+        </view>
+    
+        <!-- 手机号 -->
+        <view class="section">
+          <view>手机号</view>
+          <input name="phone" placeholder="手机号"
+                 maxlength="11" type="number" />
+        </view>
 
-    <!-- 性别 -->
-    <view class="section section_gap">
-        <view class="">性别</view>
-        <radio-group name="sex">
-            <label><radio value="男" /> 男 </label>     <!-- 默认勾选男性，<radio value="男" /> -->
-            <label><radio value="女" /> 女 </label>
-        </radio-group>
-    </view>
+        <!-- 性别 -->
+        <view class="section">
+            <view>性别</view>
+            <radio-group name="sex">
+                <label><radio value="男" /> 男 </label>     <!-- 默认勾选男性，<radio value="男" /> -->
+                <label><radio value="女" /> 女 </label>
+            </radio-group>
+        </view>
+        
+        <!-- 出发地 -->
+        <view class="container">
+            <button bindtap="showStartMap">选择出发位置</button>
+            <view style="margin-top:10px">地址：{{start_addr ? start_addr : "暂无"}}</view>
+            <view style="margin-top:10px">名称：{{start_locationName ? start_locationName : "暂无"}}</view>
+        </view>
+        <!-- 目的地 -->
+        <view class="container">
+            <button bindtap="showDesMap">选择目的位置</button>
+            <view style="margin-top:5px">地址：{{des_addr?des_addr:"暂无"}}</view>
+            <view style="margin-top:5px">名称：{{des_locationName?des_locationName:"暂无"}}</view>
+        </view>
+        <!-- 出发时间 -->
+        <view class="section">
+            <view >出发时间</view>
+            <!-- 选择日期 -->
+            <picker mode="date" bindchange= "bindDatetimeChange" data-op_type="start_date" value="{{start_date}}">
+                <!-- 如果选择了就显示日期，否则提示日期 -->
+                <view wx:if="{{start_date}}" class="picker">
+                    <view>{{start_date}}</view>
+                </view>
+                <view wx:else class="hint">选择日期</view>
+            </picker>
+            <!-- 选择时间 -->
+            <picker mode="time" bindchange= "bindDatetimeChange" data-op_type="start_time" value="{{start_time}}">
+                <!-- 如果选择了就显示时间，否则提示时间 -->
+                <view wx:if="{{start_time}}" class="picker">
+                    <view>{{start_time}}</view>
+                </view>
+                <view wx:else class="hint">选择时间</view>
+            </picker>
+        </view>
 
-    <!-- 出发地 -->
-    <!-- <view class="section">
-        <view class="">出发地</view>
-        <input name="phone" placeholder="出发地" type="text" />
-    </view> -->
-    <!-- 出发地 -->
-    <view class="container">
-    <button  bindtap="showStartMap">选择出发位置</button>
-    <view style="margin-top:10px">地址：{{start_addr?start_addr:"暂无"}}</view>
-    <view style="margin-top:10px">名称：{{start_locationName?start_locationName:"暂无"}}</view>
-    </view>
-    <!-- 目的地 -->
-    <!-- <view class="section">
-        <view class="">目的地</view>
-        <input name="phone" placeholder="目的地" type="text" />
-    </view> -->
-    <!-- 目的地 -->
-    <view class="container">
-    <button  style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="showDesMap">选择目的位置</button>
-    <view style="margin-top:5px">地址：{{des_addr?des_addr:"暂无"}}</view>
-    <view style="margin-top:5px">名称：{{des_locationName?des_locationName:"暂无"}}</view>
-    </view>
-    <!-- 出发时间 -->
-    <view class="section">
-        <view >出发时间</view>
-        <!-- 选择日期 -->
-        <picker mode="date" bindchange= "bindDatetimeChange" data-op_type="start_date" value="{{start_date}}">
-            <!-- 如果选择了就显示日期，否则提示日期 -->
-            <view wx:if="{{start_date}}" class="picker">
-                <view>{{start_date}}</view>
-            </view>
-            <view wx:else class="hint">选择日期</view>
-        </picker>
-        <!-- 选择时间 -->
-        <picker mode="time" bindchange= "bindDatetimeChange" data-op_type="start_time" value="{{start_time}}">
-            <!-- 如果选择了就显示时间，否则提示时间 -->
-            <view wx:if="{{start_time}}" class="picker">
-                <view>{{start_time}}</view>
-            </view>
-            <view wx:else class="hint">选择时间</view>
-        </picker>
-    </view>
+        <!-- 到达时间 -->
+        <view class="section">
+            <view>到达时间</view>
+            <!-- 选择日期 -->
+            <picker mode="date" bindchange= "bindDatetimeChange" data-op_type="end_date" value="{{end_date}}">
+                <!-- 如果选择了就显示日期，否则提示日期 -->
+                <view wx:if="{{end_date}}" class="picker">
+                    <view>{{end_date}}</view>
+                </view>
+                <view wx:else class="hint">选择日期</view>
+            </picker>
+            <!-- 选择时间 -->
+            <picker mode="time" bindchange= "bindDatetimeChange" data-op_type="end_time" value="{{end_time}}">
+                <!-- 如果选择了就显示时间，否则提示时间 -->
+                <view wx:if="{{end_time}}" class="picker">
+                    <view>{{end_time}}</view>
+                </view>
+                <view wx:else class="hint">选择时间</view>
+            </picker>
+        </view>
 
-    <!-- 到达时间 -->
-    <view class="section">
-        <view>到达时间</view>
-        <!-- 选择日期 -->
-        <picker mode="date" bindchange= "bindDatetimeChange" data-op_type="end_date" value="{{end_date}}">
-            <!-- 如果选择了就显示日期，否则提示日期 -->
-            <view wx:if="{{end_date}}" class="picker">
-                <view>{{end_date}}</view>
-            </view>
-            <view wx:else class="hint">选择日期</view>
-        </picker>
-        <!-- 选择时间 -->
-        <picker mode="time" bindchange= "bindDatetimeChange" data-op_type="end_time" value="{{end_time}}">
-            <!-- 如果选择了就显示时间，否则提示时间 -->
-            <view wx:if="{{end_time}}" class="picker">
-                <view>{{end_time}}</view>
-            </view>
-            <view wx:else class="hint">选择时间</view>
-        </picker>
-    </view>
-
-    <!-- 备注 -->
-    <view class="section">备注</view>
-    <div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
-            <div class="weui-textarea-counter"><span>0</span>/200</div>
+        <!-- 备注 -->
+        <view class="section">备注</view>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea"  bindblur="bindTextAreaBlur" placeholder="请输入文本" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
+        <!-- 提交 -->
+        <view class="btn-area">
+          <button formType="submit" class="weui-btn weui-btn_primary">提交</button>
+          <button formType="reset" class="weui-btn weui-btn_warn">重置</button>
+        </view>
+    </form>
 
-    <!-- 提交 -->
-    <view class="btn-area">
-      <button formType="submit" class="weui-btn weui-btn_primary">提交</button>
-      <button formType="reset" class="weui-btn weui-btn_warn">重置</button>
-    </view>
-</form>
-
-
-<view wx:if="{{isSubmit}}">
-  {{warn ? warn : "是否公开信息："+isPub+"，手机号："+phone+"，密码："+pwd+"，性别："+sex}}
 </view>
