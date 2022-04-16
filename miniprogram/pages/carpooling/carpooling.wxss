@@ -1,1 +1,23 @@
 /* pages/carpooling/carpooling.wxss */
+.flex-wrp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.butn {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 450rpx;
+  font-size: 45rpx;
+}
+
+navigator {
+  font-weight: bold;
+  margin: 5%;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #5A9CCE;
+}

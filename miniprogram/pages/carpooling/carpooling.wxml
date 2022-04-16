@@ -1,11 +1,7 @@
 <!--pages/carpooling/carpooling.wxml-->
-<view class="buttonbox">
-    
-    <navigator class="weui_btn weui_btn_primary"
-               style="height:100rpx;width:450rpx;font-size:45rpx" 
-               url="/pages/teamCreate/teamCreate" open-type="navigate" 
-               hover-class="hover">拼车</navigator>
+<image class="bgpic" style="opacity:{{0.9}}" src="../../images/carpoolingbgpic.jpg" mode="aspectFill"></image>
+
+<view class="flex-wrp" style="height: 300px;">
+  <navigator class="butn" url="/pages/teamCreate/teamCreate" open-type="navigate" hover-class="hover">创建队伍</navigator>
+  <navigator class="butn" url="/pages/teamCreate/teamCreate" open-type="navigate" hover-class="hover">队伍管理</navigator>
 </view>
-
-
-
