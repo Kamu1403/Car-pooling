@@ -5,9 +5,8 @@
 
 
 <!-- 队伍名 -->
-<view class="section">
-  <view style="color:#000;">队伍名</view>
-  <text> {{teamInfo.name}} </text>
+<view class="section" style="flex-direction: column;">
+  <view class="title" style="text-align: center; font-size: 60rpx;"> {{teamInfo.name}} </view>
 </view>
 
 <!-- 手机号 -->
@@ -19,15 +18,15 @@
 <!-- 出发地 -->
 <view class="container" style="margin: 20rpx;">
   <text class="title">出发位置</text>
-  <view style="margin-top:10px">地址：{{teamInfo.start_addr ? teamInfo.start_addr : "暂无"}}</view>
-  <view style="margin-top:10px">名称：{{teamInfo.start_locationName ? teamInfo.start_locationName : "暂无"}}</view>
+  <view style="margin-top:10rpx">地址：{{teamInfo.start_addr ? teamInfo.start_addr : "暂无"}}</view>
+  <view style="margin-top:10rpx">名称：{{teamInfo.start_locationName ? teamInfo.start_locationName : "暂无"}}</view>
 </view>
 
 <!-- 目的地 -->
 <view class="container" style="margin: 20rpx;">
   <text class="title">出发位置</text>
-  <view style="margin-top:5px">地址：{{teamInfo.des_addr?teamInfo.des_addr:"暂无"}}</view>
-  <view style="margin-top:5px">名称：{{teamInfo.des_locationName?teamInfo.des_locationName:"暂无"}}</view>
+  <view style="margin-top:5rpx">地址：{{teamInfo.des_addr?teamInfo.des_addr:"暂无"}}</view>
+  <view style="margin-top:5rpx">名称：{{teamInfo.des_locationName?teamInfo.des_locationName:"暂无"}}</view>
 </view>
 
 <!-- 出发时间 -->
@@ -77,4 +76,5 @@
     </block>
     <button type="primary" style="width: 90%; margin-top: 10rpx;">邀请队员</button>
   </view>
+  <button type="warn" style="width: 90%; margin-top: 50rpx;">解散队伍</button>
 </view>
