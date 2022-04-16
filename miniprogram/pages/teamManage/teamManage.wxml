@@ -1,0 +1,7 @@
+<!--pages/teamManage/teamManage.wxml-->
+
+<image class="bgpic" style="opacity:{{0.9}}" src="../../images/teamManagebg.jpg" mode="aspectFill"></image>
+
+<view class="flex-wrp" style="height: 300px;">
+  <navigator class="butn" url="/pages/teamManage/singleTeam" open-type="navigate" hover-class="hover" wx:for="{{teamList}}" wx:key="{{name}}">{{item.name}}</navigator>
+</view>

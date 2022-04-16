@@ -1,0 +1,75 @@
+<!--pages/teamManage/singleTeam.wxml-->
+
+<!-- 队伍名 -->
+<view class="section">
+  <view style="color:#000;">队伍名</view>
+  <text> {{teamInfo.name}} </text>
+</view>
+
+<!-- 手机号 -->
+<view class="section">
+  <view>手机号</view>
+  <text> {{teamInfo.phonenumber}} </text>
+</view>
+
+<!-- 出发地 -->
+<view class="container" style="margin: 20rpx;">
+  <text class="title">选择出发位置</text>
+  <view style="margin-top:10px">地址：{{teamInfo.start_addr ? teamInfo.start_addr : "暂无"}}</view>
+  <view style="margin-top:10px">名称：{{teamInfo.start_locationName ? teamInfo.start_locationName : "暂无"}}</view>
+</view>
+
+<!-- 目的地 -->
+<view class="container" style="margin: 20rpx;">
+  <text class="title">选择出发位置</text>
+  <view style="margin-top:5px">地址：{{teamInfo.des_addr?teamInfo.des_addr:"暂无"}}</view>
+  <view style="margin-top:5px">名称：{{teamInfo.des_locationName?teamInfo.des_locationName:"暂无"}}</view>
+</view>
+
+<!-- 出发时间 -->
+<view class="section">
+  <view>出发时间</view>
+  <view>{{teamInfo.start_date}}</view>
+  <view>{{teamInfo.start_time}}</view>
+</view>
+
+<!-- 到达时间 -->
+<view class="section">
+  <view>到达时间</view>
+  <view>{{teamInfo.end_date}}</view>
+  <view>{{teamInfo.end_time}}</view>
+</view>
+
+<!-- 备注 -->
+<view class="section">
+  <view>备注:</view>
+  <view>{{teamInfo.note}}</view>
+</view>
+
+<view class="section" style="flex-direction: column;">
+  <view class="title" style="text-align: center;">成员信息</view>
+
+  <view class="table">
+    <view class="tr bg-w">
+      <view class="th">姓名</view>
+      <view class="th">学号</view>
+      <view class="th">操作</view>
+    </view>
+    <block wx:for="{{listData}}" wx:key="{{name}}">
+      <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+        <view class="td">{{item.name}}</view>
+        <view class="td">{{item.id}}</view>
+        <view class="td">
+          <button formType="reset" style="width: 100%" class="weui-btn weui-btn_warn">移除</button>
+        </view>
+      </view>
+      <view class="tr" wx:else>
+        <view class="td">{{item.name}}</view>
+        <view class="td">{{item.id}}</view>
+        <view class="td">
+          <button formType="reset" style="width: 100%" class="weui-btn weui-btn_warn">移除</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

@@ -3,5 +3,5 @@
 
 <view class="flex-wrp" style="height: 300px;">
   <navigator class="butn" url="/pages/teamCreate/teamCreate" open-type="navigate" hover-class="hover">创建队伍</navigator>
-  <navigator class="butn" url="/pages/teamCreate/teamCreate" open-type="navigate" hover-class="hover">队伍管理</navigator>
+  <navigator class="butn" url="/pages/teamManage/teamManage" open-type="navigate" hover-class="hover">队伍管理</navigator>
 </view>
