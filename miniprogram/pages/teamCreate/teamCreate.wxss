@@ -13,6 +13,8 @@
 }
 button{
   margin: 10rpx 0;
+  color:#5A9CCE;
+  background-color:white
 }
 
 

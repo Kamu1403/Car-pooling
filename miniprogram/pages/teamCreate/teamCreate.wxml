@@ -1,7 +1,7 @@
 <!--pages/teamCreate.wxml-->
 
 <!-- 背景图片 -->
-<image class="bgpic" style="opacity:{{0.5}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
+<image class="bgpic" style="opacity:{{0.2}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
 
 <view class="page" data-weui-theme="{{theme}}">
     <!-- 用户填写的表单信息 -->
@@ -37,9 +37,9 @@
         </view>
         <!-- 目的地 -->
         <view class="container">
-            <button bindtap="showDesMap">选择目的位置</button>
-            <view style="margin-top:5px">地址：{{des_addr?des_addr:"暂无"}}</view>
-            <view style="margin-top:5px">名称：{{des_locationName?des_locationName:"暂无"}}</view>
+                <button  bindtap="showDesMap">选择目的位置</button>
+                <view style="margin-top:5px">地址：{{des_addr?des_addr:"暂无"}}</view>
+                <view style="margin-top:5px">名称：{{des_locationName?des_locationName:"暂无"}}</view>         
         </view>
         <!-- 出发时间 -->
         <view class="section">
