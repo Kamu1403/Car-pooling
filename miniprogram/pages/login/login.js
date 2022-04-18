@@ -58,6 +58,16 @@ Page({
     app.globalData.logined=true;
     app.globalData.userInfo.useropenid='';
   },
+  jumpPersonalInfo() {
+    wx.navigateTo({
+      url: '/pages/personalInfo/personalInfo',
+    })
+  },
+  jumpHistory() {
+    wx.navigateTo({
+      url: '/pages/personalInfo/history/history',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
