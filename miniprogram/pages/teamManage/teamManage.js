@@ -5,18 +5,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-    teamList: [{
-      "name": "队伍一",
-      "id": "1953001",
-    },
-    {
-      "name": "队伍二",
-      "id": "1953002",
+    theme: "light",
+    TeamList: [{
+      name: "队伍一",
+      role: "队长",
+      color: "red",
+      time: "2022/4/12 14:54",
+      from: "嘉定校区友园7号楼",
+      to: "旋转门",
+      phone: "13912345678"
     }, {
-      "name": "队伍三",
-      "id": "1953003",
-    }
-  ]
+      name: "队伍二",
+      role: "队员",
+      color: "green",
+      time: "2022/4/10 09:34",
+      from: "嘉定校区接待中心",
+      to: "四平",
+      phone: "13912345678"
+    }, {
+      name: "队伍三",
+      role: "队长",
+      color: "red",
+      time: "2022/1/12 10:54",
+      from: "嘉定校区马桶楼",
+      to: "图书馆",
+      phone: "13912345678"
+    }],
+  },
+
+  jumpDetailInfo() {
+    wx.navigateTo({
+      url: '/pages/teamManage/singleTeam',
+    })
   },
 
   /**
