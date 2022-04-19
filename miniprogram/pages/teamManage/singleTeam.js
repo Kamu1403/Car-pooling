@@ -1,96 +1,116 @@
-// pages/teamManage/singleTeam.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    listData: [{
-        "name": "邬嘉晟",
-        "id": "1953000",
+    teamName: "嘉定出行",
+    theme: "",
+    time: Date().split(" ")[4],
+    from: "出发地",
+    to: "目的地",
+    teamNum: 3,
+    teamLeader: {
+      memberName: "邬嘉晟1",
+      avatar: "user-unlogin.png"
+    },
+    memberInfo: [{
+        memberName: "邬嘉晟2",
+        avatar: "user-unlogin.png",
+        slideviewShow: false
       },
       {
-        "name": "邬嘉晟",
-        "id": "1953000",
-      }, {
-        "name": "邬嘉晟",
-        "id": "1953000",
-      }, {
-        "name": "邬嘉晟",
-        "id": "1953000",
-      }, {
-        "name": "邬嘉晟",
-        "id": "1953000",
+        memberName: "邬嘉晟3",
+        avatar: "user-unlogin.png",
+        slideviewShow: false
+      },
+      {
+        memberName: "邬嘉晟4",
+        avatar: "user-unlogin.png",
+        slideviewShow: false
       }
     ],
-    teamInfo: {
-      name : "队伍一",
-      phonenumber : "139000000",
-      start_date: "2022-2-15", // 车队出发的日期
-      start_time: "9:18", // 车队出发的时间
-      end_date: "2022-2-15", // 车队到达的日期
-      end_time: "12:30", // 车队到达的时间
-      start_addr: "曹安公路4800号", //出发地址
-      start_locationName: "同济大学嘉定校区", //出发地址名称
-      des_addr: "四平1235号", //终点地址
-      des_locationName: "同济大学四平校区", //终点地址名称
-      note: "暂无备注" // 备注信息
+    slideButtons: [{
+      type: 'warn',
+      extClass: "my-weui-slidebutton",
+      text: '删除'
+    }],
+    slideviewShowIndex: 0
+  },
+
+  // 获取当前用户
+  getNowUser() {
+    return "邬嘉晟1";
+  },
+  isTeamLeader() {
+    if (this.getNowUser() == this.data.teamLeader.memberName) {
+      return true;
+    }
+    else {
+      return false;
     }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  // 删除成员
+  delMember(e) {
+    console.log("删除成员");
+  },
+  // 添加成员
+  addMember(e) {
+    console.log("添加成员");
+  },
+  // 离开队伍
+  leaveTeam(e) {
+    let now_user = this.getNowUser();
+    console.log("离开队伍");
+    if (now_user == this.data.teamLeader.memberName) {
+      // 队长离开队伍，需要将权限给别人
+    }
+    else {
+      // 直接退出
+    }
+  },
+  // 解散队伍
+  delTeam(e) {
+    console.log("解散队伍");
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  // 以下两个函数保证slide-view自动收回
+  getTap(e) {
+    var targetId = e.target.id; //触发点击事件的组件id
+    var targetIndex = e.target.dataset.index; //触发点击事件的列表组件的序号
+    //console.log(targetId);
+    //console.log(targetIndex);
+    let slideviewShowIndex = this.data.slideviewShowIndex; //展开slideview的列表序号
+    let list = this.data.memberInfo;
+    let listSlideView = "memberInfo[" + slideviewShowIndex + "].slideviewShow" //拼贴字符串，为了在setData里动态改变这一项的数据，减少setData传输的值
+    // console.log(list[slideviewShowIndex].slideviewShow); //打印确认一下已经展开的列表项的确是true
+    if (targetId !== "listItem") //点击的不是列表项
+    {
+      this.setData({
+        [listSlideView]: false
+      });
+    } else if (targetIndex !== slideviewShowIndex) //点击的不是slideview展开的列表项
+    {
+      this.setData({
+        [listSlideView]: false
+      });
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  showSlideview(e) {
+    let Index = e.currentTarget.dataset.index;
+    //console.log('slideview is showing', Index);//打印当前展开的序号
+    let list = this.data.memberInfo;
+    let listSlideView = "memberInfo[" + Index + "].slideviewShow"
+    let i;
+    this.setData({
+      slideviewShowIndex: Index
+    });
+    this.setData({
+      [listSlideView]: true
+    });
+    //for循环是为了保证其他的列表slideview收拢 删掉这个for循环就能同时展开几个列表（如果操作一个展开之后拖动别的展开）
+    for (i = 0; i < list.length; ++i) {
+      let checkSlideView = "memberInfo[" + i + "].slideviewShow"
+      if (i != Index)
+        this.setData({
+          [checkSlideView]: false
+        });
+    }
   }
 })

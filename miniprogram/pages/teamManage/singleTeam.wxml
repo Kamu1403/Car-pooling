@@ -1,80 +1,50 @@
-<!--pages/teamManage/singleTeam.wxml-->
-
-<!-- 背景图片 -->
-<image class="bgpic" style="opacity:{{0.2}}" src="../../images/singleTeam.jpg" mode="aspectFill"></image>
-
-
-<!-- 队伍名 -->
-<view class="section" style="flex-direction: column;">
-  <view class="title" style="text-align: center; font-size: 60rpx;"> {{teamInfo.name}} </view>
-</view>
-
-<!-- 手机号 -->
-<view class="section">
-  <view>手机号</view>
-  <text> {{teamInfo.phonenumber}} </text>
-</view>
-
-<!-- 出发地 -->
-<view class="container" style="margin: 20rpx;">
-  <text class="title">出发位置</text>
-  <view style="margin-top:10rpx">地址：{{teamInfo.start_addr ? teamInfo.start_addr : "暂无"}}</view>
-  <view style="margin-top:10rpx">名称：{{teamInfo.start_locationName ? teamInfo.start_locationName : "暂无"}}</view>
-</view>
-
-<!-- 目的地 -->
-<view class="container" style="margin: 20rpx;">
-  <text class="title">出发位置</text>
-  <view style="margin-top:5rpx">地址：{{teamInfo.des_addr?teamInfo.des_addr:"暂无"}}</view>
-  <view style="margin-top:5rpx">名称：{{teamInfo.des_locationName?teamInfo.des_locationName:"暂无"}}</view>
-</view>
-
-<!-- 出发时间 -->
-<view class="section">
-  <view>出发时间</view>
-  <view>{{teamInfo.start_date}}</view>
-  <view>{{teamInfo.start_time}}</view>
-</view>
-
-<!-- 到达时间 -->
-<view class="section">
-  <view>到达时间</view>
-  <view>{{teamInfo.end_date}}</view>
-  <view>{{teamInfo.end_time}}</view>
-</view>
-
-<!-- 备注 -->
-<view class="section">
-  <view>备注:</view>
-  <view>{{teamInfo.note}}</view>
-</view>
-
-<view class="section" style="flex-direction: column;">
-  <view class="title" style="text-align: center;">成员信息</view>
-
-  <view class="table">
-    <view class="tr bg-w">
-      <view class="th" style="margin-right: 0;">姓名</view>
-      <view class="th" style="margin-right: 0;">学号</view>
-      <view class="th" style="margin-right: 0;">操作</view>
-    </view>
-    <block wx:for="{{listData}}" wx:key="{{name}}">
-      <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-        <view class="td">{{item.name}}</view>
-        <view class="td">{{item.id}}</view>
-        <view class="td">
-          <button formType="reset" style="width: 100%" class="weui-btn weui-btn_warn">移除</button>
-        </view>
-      </view>
-      <view class="tr" wx:else>
-        <view class="td">{{item.name}}</view>
-        <view class="td">{{item.id}}</view>
-        <view class="td">
-          <button formType="reset" style="width: 100%" class="weui-btn weui-btn_warn">移除</button>
-        </view>
-      </view>
-    </block>
-    <button type="primary" style="width: 90%; margin-top: 10rpx;">邀请队员</button>
+<view class="page" data-weui-theme="{{theme}}" bindtap="getTap">
+  <view class="page__hd">
+    <view class="page__title">行程详细信息</view>
   </view>
-  <button type="warn" style="width: 90%; margin-top: 50rpx;">解散队伍</button>
+  <view class="page__bd">
+    <mp-cells title="行程信息">
+      <mp-cell value="时间" footer="{{time}}"></mp-cell>
+      <mp-cell value="起点" footer="{{from}}"></mp-cell>
+      <mp-cell value="终点" footer="{{to}}"></mp-cell>
+    </mp-cells>
+
+    <mp-cells title="队伍信息">
+      <!-- 队长信息 -->
+      <mp-cells title="队长">
+        <mp-cell value="{{teamLeader.memberName}}" class="my-weui-cell">
+          <view slot="icon">
+            <image src="{{teamLeader.avatar}}" class="my-weui-slideicon"></image>
+          </view>
+        </mp-cell>
+      </mp-cells>
+      <!-- 队员信息 -->
+      <mp-cells title="成员">
+        <view wx:for="{{memberInfo}}" wx:key="index">
+          <mp-slideview id="slideview" show="{{item.slideviewShow}}" bindshow="showSlideview" data-Index="{{index}}" buttons="{{slideButtons}}" bindbuttontap="delMember">
+            <mp-cell class="my-weui-cell" value="{{item.memberName}}" id="listItem" data-Index="{{index}}">
+              <view slot="icon">
+                <image src="{{item.avatar}}" class="my-weui-slideicon"></image>
+              </view>
+            </mp-cell>
+          </mp-slideview>
+        </view>
+      </mp-cells>
+    </mp-cells>
+  </view>
+
+  <!-- 控制队伍人数（多于7人时不显示） -->
+  <view wx:if="{{teamNum < 7}}">
+    <button type="primary" bindtap="addMember" class="my-button">邀请成员</button>
+  </view>
+
+  <!-- 退出队伍 -->
+  <view>
+    <button type="warn" bindtap="leaveTeam" class="my-button">离开队伍</button>
+  </view>
+
+  <!-- 解散队伍按钮（只有是队长时显示解散队伍，普通成员显示退出队伍） -->
+  <view wx:if="isTeamLeader()">
+    <button type="warn" bindtap="delTeam" class="my-button">解散队伍</button>
+  </view>
 </view>

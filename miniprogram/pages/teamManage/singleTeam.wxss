@@ -1,53 +1,16 @@
-/* pages/teamManage/singleTeam.wxss */
+@import '../../style/common.wxss';
+@import '../../style/weui.wxss';
 
-.section {
-  display: flex;
-  flex-direction: row;
-  margin: 20rpx;
+.my-weui-cell .weui-cell{
+  padding: 10rpx;
 }
-
-.section view {
-  margin-right: 20rpx;
+.my-weui-slideicon {
+  width: 100rpx;
+  height: 100rpx;
+  border-collapse: collapse;
+  border-radius: 50%;
+  margin-right: 30rpx;
 }
-
-.table {
-  border: 0px solid darkgray;
-}
-
-.tr {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  height: 3rem;
-  align-items: center;
-}
-
-.title {
-  margin: 10rpx 0;
-  color: #5A9CCE;
-  background-color: rgba(255, 255, 255, 0.2)
-}
-
-.td {
-  width: 34%;
-  justify-content: center;
-  text-align: center;
-}
-
-.bg-w {
-  background: snow;
-}
-
-.bg-g {
-  background-color: rgba(90, 118, 240, 0.2);
-}
-
-.th {
-  width: 40%;
-  justify-content: center;
-  background-color: rgba(9, 51, 240, 0.5);
-  color: #fff;
-  display: flex;
-  height: 3rem;
-  align-items: center;
+.my-button {
+  margin: 40rpx;
 }
