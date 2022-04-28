@@ -31,23 +31,37 @@ Page({
               useropenid:ress.result.openid
             })
             app.globalData.userInfo.useropenid=ress.result.openid;
+            this.setData({
+            userInfo: res.userInfo,
+            usergender:res.userInfo.gender,
+            username:res.userInfo.nickName,
+            userphoto:res.userInfo.avatarUrl,
+            logined: true
+            })
+            app.globalData.userInfo.usergender=res.userInfo.gender;
+            app.globalData.userInfo.username=res.userInfo.nickName;
+            app.globalData.userInfo.userphoto=res.userInfo.avatarUrl;
+            app.globalData.logined=true;
+            console.log(app.globalData.userInfo);
+            wx.request({
+              method:'POST',
+              data:{
+                'useropenid':ress.result.openid,
+                'username':res.userInfo.nickName,
+                'usergender': res.userInfo.gender
+              },
+              url: 'http://124.71.160.151:3000/basicuser',
+              success:function(res){
+                console.log(res.data)
+              }
+            })              
           }        
         }
       );
-        this.setData({
-        userInfo: res.userInfo,
-        usergender:res.userInfo.gender,
-        username:res.userInfo.nickName,
-        userphoto:res.userInfo.avatarUrl,
-        logined: true
-        })
-        app.globalData.userInfo.usergender=res.userInfo.gender;
-        app.globalData.userInfo.username=res.userInfo.nickName;
-        app.globalData.userInfo.userphoto=res.userInfo.avatarUrl;
-        app.globalData.logined=true;
-        console.log(app.globalData.userInfo);
+      
     }
     })
+
   },
   logout()
   {
