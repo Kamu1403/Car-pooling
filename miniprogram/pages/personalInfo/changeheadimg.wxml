@@ -31,5 +31,8 @@
         </view>
       </view>
     </view>
+    <view class="button">
+      <view aria-role="button" bindtap="submit">保存</view>
+    </view>
   </view>
 </view>

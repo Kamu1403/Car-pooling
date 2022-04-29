@@ -1,13 +1,14 @@
 // pages/personalinfo/changeheadimg.js
+var app=getApp();
 Page({
 
   data: {
-    files: [],
+    files: []
   },
 
   chooseImage() {
     const that = this;
-    if(that.data.files.length >= 1){
+    if(that.data.files.length >= 3){
       wx.showToast({
         title: '最多只能上传一张图片',
         icon: 'none',
@@ -31,6 +32,37 @@ Page({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.files, // 需要预览的图片http链接列表
     });
+  },
+
+  submit:function(){
+    //用于测试，后期应当写入数据库，并在下方加入返回前一个页面的函数
+    if(this.data.files.length ==  0){
+      wx.showToast({
+        title: '请上传一张照片',
+        icon: 'none'
+      })
+      return;
+    }
+    wx.request({
+      method:'POST',
+      data:{
+        'option': 'photo',
+        'useropenid': app.globalData.userInfo.useropenid,
+        'value': this.data.files[0],
+      },
+      url: 'http://124.71.160.151:3006/modifyuserinfo',
+      success:function(res){
+        console.log(res.data)
+        wx.showToast({
+          title: '修改成功',
+        })
+        setTimeout(()=>{
+          wx.navigateBack()
+        }, 1000)
+      }
+    })
+
+
   },
 
   /**
