@@ -6,7 +6,6 @@ var chooseDesLocation;
 Page({
     data: {
         isSubmit: false,
-        warn: "",
         phone: "",
         sex: "",
         start_date: "",      // 车队出发的日期
@@ -50,6 +49,7 @@ Page({
             )
         }
     },
+
     //展现地图
     showStartMap() {
         //使用在腾讯位置服务申请的key（必填）
@@ -76,8 +76,8 @@ Page({
         chooseDesLocation=requirePlugin('chooseLocation');
     },
 
-        // 选择出发\到达的时间\日期的变化
-        bindDatetimeChange: function(e) {
+    // 选择出发\到达的时间\日期的变化
+    bindDatetimeChange: function(e) {
             /******
              * 函数功能：选择出发\到达的时间\日期的变化
              * 函数参数：e.target.dataset.op_type取自[start_date, start_time, end_date, end_time]
@@ -107,7 +107,7 @@ Page({
                     console.log("Wrong Operation! Please make sure that the parameter is among [start_date, start_time, end_date, end_time]");
                     break;
            };
-        },
+    },
 
     // 获取文本框输入
     bindTextAreaBlur: function(e) {
@@ -117,43 +117,46 @@ Page({
     },    
 
 
-    // 检查提交的表单的合法性
-    formSubmit: function (e) {
+    /******************************
+    * Function: 检查提交的表单的合法性
+    * Return: true：合法，并且已经设置了；false，不合法
+    * Notice: 会有弹窗
+    *****************************/
+    _formCheker: function(e){
         // 获得结果
         let { teamname, phone, sex } = e.detail.value;  
         // 提示信息
-        var checker = "";
-        checker = !teamname ? checker + "队伍名字为空 " : checker;  // 没有填写队名
-        checker = phone.length!=11 ? checker + "手机号码不规范 " : checker; // 手机号码位数不对
-        checker = !sex ? checker + "未选择性别 " : checker; 
-        checker = this.data.start_date == "" ? checker + "未选择出发日期 " : checker;
-        checker = this.data.start_time == "" ? checker + "未选择出发时间 " : checker;
-        checker = this.data.end_date == "" ? checker + "未选择到达日期 " : checker;
-        checker = this.data.end_time == "" ? checker + "未选择到达时间 " : checker;
-        checker = this.data.start_addr == "" ? checker + "未选择出发地 " : checker;
-        checker = this.data.des_addr == "" ? checker + "未选择目的地 " : checker;
+        var error_info = "";
+        error_info = !teamname ? error_info + "队伍名字为空 " : error_info;  // 没有填写队名
+        error_info = phone.length!=11 ? error_info + "手机号码不规范 " : error_info; // 手机号码位数不对
+        error_info = !sex ? error_info + "未选择性别 " : error_info; 
+        error_info = this.data.start_date == "" ? error_info + "未选择出发日期 " : error_info;
+        error_info = this.data.start_time == "" ? error_info + "未选择出发时间 " : error_info;
+        error_info = this.data.end_date == "" ? error_info + "未选择到达日期 " : error_info;
+        error_info = this.data.end_time == "" ? error_info + "未选择到达时间 " : error_info;
+        error_info = this.data.start_addr == "" ? error_info + "未选择出发地 " : error_info;
+        error_info = this.data.des_addr == "" ? error_info + "未选择目的地 " : error_info;
 
         // 检查是否有错误信息
         // 有报错信息
-        if (checker != ""){
+        if (error_info != ""){
             this.setData({
-                warn: checker,
-                isSubmit: checker=="" ? true : false,
+                isSubmit: error_info=="" ? true : false,
                 phone: "",
                 sex: ""
             });
-            // 弹窗提示
+            // 弹窗提示错误信息
             wx.showToast({
-                title: checker,
+                title: error_info,
                 icon: 'none',
                 duration: 2000  // 持续的时间
             });
+            return false;
         }
         // 没有报错信息
         else{
             this.setData({
-                warn: checker,
-                isSubmit: checker=="" ? true : false,
+                isSubmit: error_info=="" ? true : false,
                 phone: phone,
                 sex: sex
             });
@@ -161,17 +164,31 @@ Page({
             wx.showToast({
                 title: '创建成功',
                 icon: 'none',
-                duration: 1500,
-                success: function () {
-                    // 弹窗后执行，可以省略
-                    setTimeout(function () {
-                        // 跳转到行程详细界面
-                        wx.navigateTo({
-                            url: "/pages/personalInfo/history/historyInfo",
-                        })
-                    }, 1500);
-                }
+                duration: 1500
             });
+            return true;
+        }
+    },
+
+
+    /******************************
+    * Function: 提交结果
+    * Return: 
+    * Notice: 
+    *****************************/
+    formSubmit: function (e) {
+        console.log(e);
+        // 检查结果
+        var res = this._formCheker(e);
+        if (res == true){
+            // 跳转到行程详细界面
+            wx.redirectTo({
+                url: "/pages/personalInfo/history/historyInfo",
+            });
+
+            // 提交数据到数据库
+            var db = require("interface.js");
+            db.uploadTeamInfo(this.data);
         }
     },
 
@@ -179,7 +196,6 @@ Page({
     formReset: function () {
         this.setData({
             isSubmit: false,
-            warn: "",
             phone: "",
             sex: "",
             start_date: "",      // 车队出发的日期
