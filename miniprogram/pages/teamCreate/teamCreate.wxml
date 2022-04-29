@@ -23,12 +23,12 @@
         <!-- 性别 -->
         <view class="section">
             <view>性别</view>
-            <radio-group name="sex">
-                <label><radio value="男" /> 男 </label>     <!-- 默认勾选男性，<radio value="男" /> -->
+            <radio-group name="gender">
+                <label><radio value="男" /> 男 </label>   <!-- 默认勾选男性，<radio value="男" /> -->
                 <label><radio value="女" /> 女 </label>
             </radio-group>
         </view>
-        
+
         <!-- 出发地 -->
         <view class="container">
             <button bindtap="showStartMap">选择出发位置</button>

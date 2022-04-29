@@ -6,8 +6,9 @@ var chooseDesLocation;
 Page({
     data: {
         isSubmit: false,
+        teamname: "",           // 队伍名
         phone: "",
-        sex: "",
+        gender: "",
         start_date: "",      // 车队出发的日期
         start_time: "",      // 车队出发的时间
         end_date: "",        // 车队到达的日期
@@ -124,12 +125,12 @@ Page({
     *****************************/
     _formCheker: function(e){
         // 获得结果
-        let { teamname, phone, sex } = e.detail.value;  
+        let { teamname, phone, gender } = e.detail.value;  
         // 提示信息
         var error_info = "";
         error_info = !teamname ? error_info + "队伍名字为空 " : error_info;  // 没有填写队名
         error_info = phone.length!=11 ? error_info + "手机号码不规范 " : error_info; // 手机号码位数不对
-        error_info = !sex ? error_info + "未选择性别 " : error_info; 
+        error_info = !gender ? error_info + "未选择性别 " : error_info; 
         error_info = this.data.start_date == "" ? error_info + "未选择出发日期 " : error_info;
         error_info = this.data.start_time == "" ? error_info + "未选择出发时间 " : error_info;
         error_info = this.data.end_date == "" ? error_info + "未选择到达日期 " : error_info;
@@ -142,8 +143,9 @@ Page({
         if (error_info != ""){
             this.setData({
                 isSubmit: error_info=="" ? true : false,
+                teamname: teamname,
                 phone: "",
-                sex: ""
+                gender: ""
             });
             // 弹窗提示错误信息
             wx.showToast({
@@ -157,8 +159,9 @@ Page({
         else{
             this.setData({
                 isSubmit: error_info=="" ? true : false,
+                teamname: teamname,
                 phone: phone,
-                sex: sex
+                gender: gender
             });
             // 弹窗提示成功
             wx.showToast({
@@ -196,18 +199,20 @@ Page({
     formReset: function () {
         this.setData({
             isSubmit: false,
+            teamname: "",
             phone: "",
-            sex: "",
+            gender: "",
             start_date: "",      // 车队出发的日期
             start_time: "",      // 车队出发的时间
             end_date: "",        // 车队到达的日期
             end_time: "",         // 车队到达的时间
             start_addr: "",       //出发地址
             start_locationName: "", //出发地址名称
-            des_addr: "", //终点地址
+            des_addr: "",           //终点地址
             des_locationName: "",    //终点地址名称
-            note: ""            // 备注信息
+            note: ""                // 备注信息
         });
         this.onReady();
     }
 })
+

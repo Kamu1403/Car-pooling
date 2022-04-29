@@ -4,10 +4,12 @@
  * Function: 向数据库传送数据
  ****************************************/
 function uploadTeamInfo(data){
+	console.log(data);
+
 	wx.request({
 		method: 'POST',
 		data:{
-			'name': 'idk',
+			'teamname': 'idk',
 			'phone': data.phone,
 			'sex': data.sex,
 			'start_addr': data.start_addr,
