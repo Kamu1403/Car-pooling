@@ -34,7 +34,6 @@ Page({
     });
   },
 
-
   submit:function(){
     //用于测试，后期应当写入数据库，并在下方加入返回前一个页面的函数
     if(this.data.files.length ==  0){
