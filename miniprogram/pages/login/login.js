@@ -48,7 +48,9 @@ Page({
               data:{
                 'useropenid':ress.result.openid,
                 'username':res.userInfo.nickName,
-                'usergender': res.userInfo.gender
+                'usergender': res.userInfo.gender,
+                'userphoto':res.userInfo.avatarUrl,
+                'userrole':0
               },
               url: 'http://124.71.160.151:3000/basicuser',
               success:function(res){
