@@ -18,6 +18,8 @@
         </mp-cells>
         -->
     </view>
+
+    <button type="primary" bindtap="joinTeam" class="my-button">加入队伍</button>
 </view>
 
 

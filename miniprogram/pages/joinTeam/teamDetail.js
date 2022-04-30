@@ -41,6 +41,11 @@ Page({
 				});
 			}
 		})
+	},
+
+	// 加入队伍
+	joinTeam: function(){
+		
 	}
 })
 
