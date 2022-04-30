@@ -17,7 +17,41 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let seq = JSON.parse(options.dataList);
+        console.log('group seq:'+seq);
+        var that=this;
+        //从数据库读取用户的基本信息
+        wx.request({
+            method:'POST',
+            data:{
+                'seq': seq
+            },
+            url: 'http://124.71.160.151:3002/getHistoryInfo',
+            success:function(res){
+                console.log(res.data.length)
+                var list =[];
+                for (let i = 0; i < res.data.length; i++) {
+                    if(res.data[i].team_role=='leader'){
+                        that.setData({
+                            group_leader:res.data[i].name
+                        });
+                    }else if(res.data[i].team_role=='member'){
+                        list = list.concat(res.data[i].name);
+                    }else{
+                        console.log('role not match!');
+                        return;
+                    }
+                }
+                console.log(list);
+                that.setData({
+                    time:res.data[0].start_date+'  '+res.data[0].start_time,
+                    from:res.data[0].start_locationName,
+                    to:res.data[0].des_locationName,
+                    group_member:list,
+                });
+                console.log(res.data);
+            }
+        })
     },
 
     /**

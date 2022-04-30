@@ -26,7 +26,7 @@
                 </view>
             </view>
             <view class="weui-form-preview__ft">
-                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="jumpHistoryInfo">详情</navigator>
+                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="jumpHistoryInfo" data-src="{{item.seq}}">详情</navigator>
             </view>
         </view>
     </view>
