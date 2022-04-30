@@ -1,0 +1,41 @@
+<page-meta root-font-size="system"/>
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+	<!-- 主体部分 -->
+    <view class="page__bd">
+        <view class="weui-cells__title">所有的队伍</view>
+            
+		<!-- 显示每一支队伍 -->
+		<block wx:for="{{teamList}}" wx:key="index">
+			<!-- 每支队伍的信息 -->
+			<navigator class="weui-form-preview" url="">
+				<!-- 队伍名字 -->
+				<view class="weui-form-preview__hd" aria-role="option">
+					<view class="weui-form-preview__item">
+						<label class="weui-form-preview__label">队伍名</label>
+						<em class="weui-form-preview__value">{{item.teamname}}</em>
+					</view>
+				</view>
+				<!-- 基本信息 -->
+				<view aria-labelledby="p1 js_a11y_comma p2 js_a11y_comma p3" class="weui-form-preview__bd" aria-role="option">
+					<!-- 出发时间 -->
+					<view id="p1" class="weui-form-preview__item">
+						<label class="weui-form-preview__label">出发时间</label>
+						<text class="weui-form-preview__value">{{item.start_date}} {{item.start_time}}</text>
+					</view>   
+					<!-- 起点 -->
+					<view id="p2" class="weui-form-preview__item">
+						<label class="weui-form-preview__label">起点</label>
+						<text class="weui-form-preview__value">{{item.start_locationName}}</text>
+					</view> 
+					<!-- 终点 --> 
+					<view id="p3" class="weui-form-preview__item">
+						<label class="weui-form-preview__label">终点</label>
+						<text class="weui-form-preview__value">{{item.des_locationName}}</text>
+					</view> 
+				</view>
+			</navigator> 
+		</block>
+
+    </view>
+</view>
+

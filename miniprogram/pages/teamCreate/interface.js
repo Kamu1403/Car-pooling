@@ -19,7 +19,8 @@ function uploadTeamInfo(data){
 			'start_time': data.start_time+':00',
 			'end_date': data.end_date, 
 			'end_time': data.end_time+':00',
-			'note': data.note
+			'note': data.note,
+			'status': 'progress'
 		},
 		url: 'http://124.71.160.151:3001/teaminfo_insert', 
 		success: function(res){ 
