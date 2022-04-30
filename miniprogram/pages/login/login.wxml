@@ -1,8 +1,11 @@
 <!--pages/login/login.wxml-->
 <image class="bgpic" style="opacity:{{0.9}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
 <view wx:if="{{logined==false}}">
-  <view class="buttonbox">
-    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="getUserProfile">请点击这里登陆</button>
+  <view class="buttonbox1">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="userlogin">登陆</button> 
+  </view>
+  <view class="buttonbox2">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="userregister">注册</button> 
   </view>
 </view>
 <view wx:elif="{{useropenid==null || useropenid===''}}">

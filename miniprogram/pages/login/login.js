@@ -11,59 +11,138 @@ Page({
     usergender:0,
     username:"未登录",
     userphoto:"",
-    useropenid:""
+    useropenid:"",
+    userphone:"",
+    userrole:0,
+    userintro:"",
+    useremail:""
+  },
+  //注册所用函数
+  userregister(e){
+    const that=this;
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        wx.cloud.callFunction({
+            name:"login",
+            success:(ress)=>{
+              console.log(ress);
+              that.setData({
+                useropenid:ress.result.openid
+              })
+              app.globalData.userInfo.useropenid=ress.result.openid;
+
+              //先查数据库里有没有
+              wx.request({
+                method:'POST',
+                data:{
+                  'useropenid':ress.result.openid
+                },
+                url: 'http://124.71.160.151:3000/getuserinfo',
+                success:function(res2){
+                  console.log(res2.data);
+                  console.log(res2.data.length);
+                  if(res2.data.length==0)//如果没有资料
+                  {
+                    this.setData({
+                      userInfo: res.userInfo,
+                      usergender:res.userInfo.gender,
+                      username:res.userInfo.nickName,
+                      userphoto:res.userInfo.avatarUrl,
+                      logined: true
+                      })
+                      app.globalData.userInfo.usergender=res.userInfo.gender;
+                      app.globalData.userInfo.username=res.userInfo.nickName;
+                      app.globalData.userInfo.userphoto=res.userInfo.avatarUrl;
+                      app.globalData.logined=true;
+                      console.log(app.globalData.userInfo);
+                      wx.request({
+                        method:'POST',
+                        data:{
+                          'useropenid':ress.result.openid,
+                          'username':res.userInfo.nickName,
+                          'usergender': res.userInfo.gender,
+                          'userphoto':res.userInfo.avatarUrl,
+                          'userrole':0
+                        },
+                        url: 'http://124.71.160.151:3000/basicuser',
+                        success:function(res){
+                          console.log(res.data)
+                        }
+                      })  
+                  }
+                  else//已经有账号
+                  {
+                    that.setData({
+                      usergender:res2.data[0].gender,
+                      username:res2.data[0].name,
+                      userphoto:res2.data[0].photo,
+                      logined: true,
+                      userphone:res2.data[0].phone,
+                      userrole:res2.data[0].role,
+                      userintro:res2.data[0].intro,
+                      useremail:res2.data[0].email
+                    })
+                  }                     
+                }        
+              })
+            }
+        
+        })
+      }
+    })
   },
   //登录所用函数
-  getUserProfile(e) {
+  userlogin(e) {
     const that=this;
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
-    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    //特别地，getUserProfile不能获得openid，因此额外调用云函数实现
-    wx.getUserProfile({
-    desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-    success: (res) => {
-      wx.cloud.callFunction(
-        {
-          name:"login",
-          success:(ress)=>{
-            console.log(ress);
-            that.setData({
-              useropenid:ress.result.openid
-            })
-            app.globalData.userInfo.useropenid=ress.result.openid;
-            this.setData({
-            userInfo: res.userInfo,
-            usergender:res.userInfo.gender,
-            username:res.userInfo.nickName,
-            userphoto:res.userInfo.avatarUrl,
-            logined: true
-            })
-            app.globalData.userInfo.usergender=res.userInfo.gender;
-            app.globalData.userInfo.username=res.userInfo.nickName;
-            app.globalData.userInfo.userphoto=res.userInfo.avatarUrl;
-            app.globalData.logined=true;
-            console.log(app.globalData.userInfo);
-            wx.request({
-              method:'POST',
-              data:{
-                'useropenid':ress.result.openid,
-                'username':res.userInfo.nickName,
-                'usergender': res.userInfo.gender,
-                'userphoto':res.userInfo.avatarUrl,
-                'userrole':0
-              },
-              url: 'http://124.71.160.151:3000/basicuser',
-              success:function(res){
-                console.log(res.data)
+    wx.cloud.callFunction(
+      {
+        name:"login",
+        success:(ress)=>{
+          console.log(ress);
+          that.setData({
+            useropenid:ress.result.openid
+          })
+          app.globalData.userInfo.useropenid=ress.result.openid;
+          console.log(ress.result.openid);
+          wx.request({
+            method:'POST',
+            data:{
+              'useropenid':ress.result.openid
+            },
+            url: 'http://124.71.160.151:3000/getuserinfo',
+            success:function(res2){
+              if(res2.data.length==0)//如果没有资料
+              {
+                wx.showModal({
+                  title: '登录失败',
+                  content: '您还没有账号,请返回注册',
+                  success: function (res) {
+                    if (res.confirm) {//这里是点击了确定以后
+                      console.log('用户点击确定')
+                    } else {//这里是点击了取消以后
+                      console.log('用户点击取消')
+                    }
+                  }
+                })
               }
-            })              
-          }        
+              else//已经有账号
+              {
+                that.setData({
+                  usergender:res2.data[0].gender,
+                  username:res2.data[0].name,
+                  userphoto:res2.data[0].photo,
+                  logined: true,
+                  userphone:res2.data[0].phone,
+                  userrole:res2.data[0].role,
+                  userintro:res2.data[0].intro,
+                  useremail:res2.data[0].email
+                })
+              }
+            }
+          })
         }
-      );
-      
-    }
-    })
-    
+      })
   },
   logout()
   {
@@ -103,9 +182,38 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if(this.data.logined==1)
+    {
+      console.log('test');
+      const that=this;
+          wx.request({
+            method:'POST',
+            data:{
+              'useropenid':app.globalData.userInfo.useropenid
+            },
+            url: 'http://124.71.160.151:3000/getuserinfo',
+            success:function(res2){
+              if(res2.data.length==0)//如果没有资料
+              {
+                ;
+              }
+              else//已经有账号
+              {
+                that.setData({
+                  usergender:res2.data[0].gender,
+                  username:res2.data[0].name,
+                  userphoto:res2.data[0].photo,
+                  logined: true,
+                  userphone:res2.data[0].phone,
+                  userrole:res2.data[0].role,
+                  userintro:res2.data[0].intro,
+                  useremail:res2.data[0].email
+                })
+              }
+            }
+          })
+    }
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */

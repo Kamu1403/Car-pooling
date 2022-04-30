@@ -3,9 +3,15 @@ page{
   height:100%
 }
 
-.buttonbox
+.buttonbox1
 {
-  height: 1000rpx;
+  margin-top:40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonbox2
+{
   display: flex;
   justify-content: center;
   align-items: center;
