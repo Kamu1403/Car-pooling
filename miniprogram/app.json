@@ -36,7 +36,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/carpooling/carpooling",
+        "pagePath":"pages/joinTeam/joinTeam",
         "text":"拼车",
         "iconPath": "icons/carpooling.png",
         "selectedIconPath":  "icons/_carpooling.png"   
