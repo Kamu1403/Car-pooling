@@ -4,26 +4,25 @@
  * Function: 向数据库传送数据
  ****************************************/
 function uploadTeamInfo(data){
-	console.log(data);
-
 	wx.request({
 		method: 'POST',
 		data:{
-			'teamname': 'idk',
-			'phone': data.phone,
-			'sex': data.sex,
+			'openid': data.openid,
+			'teamname': data.teamname,
+			'phone': data.phone, 
+			'gender': data.gender,
 			'start_addr': data.start_addr,
 			'start_locationName': data.start_locationName,
 			'des_addr': data.des_addr,
 			'des_locationName': data.des_locationName,
-			'start_date': data.start_date,
-			'start_time': data.start_time,
-			'end_date': data.end_date,
-			'end_time': data.end_time,
+			'start_date': data.start_date, 
+			'start_time': data.start_time+':00',
+			'end_date': data.end_date, 
+			'end_time': data.end_time+':00',
 			'note': data.note
 		},
-		url: '',
-		success: function(res){
+		url: 'http://124.71.160.151:3001/teaminfo_insert', 
+		success: function(res){ 
 			console.log("Successfully created a new team and save its info into database!");
 		}
 	});
