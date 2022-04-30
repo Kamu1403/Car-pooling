@@ -5096,14 +5096,14 @@ page {
      border-right-width: 0;
      border-top-left-radius: 1em;
      border-bottom-left-radius: 1em;
-     -webkit-mask-image: -webkit-linear-gradient(top, #000 8%, rgba(0, 0, 0, .3) 95%)
+     /*-webkit-mask-image: -webkit-linear-gradient(top, #000 8%, rgba(0, 0, 0, .3) 95%)*/
  }
  
  .weui-primary-loading:after {
      border-left-width: 0;
      border-top-right-radius: 1em;
      border-bottom-right-radius: 1em;
-     -webkit-mask-image: -webkit-linear-gradient(top, transparent 8%, rgba(0, 0, 0, .3) 95%)
+     /*-webkit-mask-image: -webkit-linear-gradient(top, transparent 8%, rgba(0, 0, 0, .3) 95%)*/
  }
  
  .weui-primary-loading__dot {
