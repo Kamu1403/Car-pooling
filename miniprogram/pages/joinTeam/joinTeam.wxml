@@ -1,8 +1,17 @@
 <page-meta root-font-size="system" />
 
 <view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+	<!-- 创建队伍按钮 -->
+	<navigator url="/pages/teamCreate/teamCreate" class="control_icon">
+		<mp-icon icon="add2" color="colorLight" size="25"></mp-icon>
+	</navigator>
+	<!-- 管理队伍按钮 -->
+	<navigator url="/pages/teamManage/teamManage" class="control_icon">
+		<mp-icon icon="group-detail" color="colorLight" size="25"></mp-icon>
+	</navigator>
+
 	<!-- 搜索栏 -->
-	<mp-searchbar search="{{search}}"></mp-searchbar>  <!-- bindselectresult="selectResult" -->
+	<mp-searchbar search="{{search}}"></mp-searchbar> <!-- bindselectresult="selectResult" -->
 
 	<!-- 队伍列表部分 -->
 	<view class="page__bd">

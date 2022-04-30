@@ -22,3 +22,12 @@
 .searchbar-result:before {
   display: none;
 }
+
+/* 添加队伍和管理队伍的图标 */
+.control_icon{
+	position: relative;
+	float: left;
+	padding: 20px 10px;
+	width: 10%;
+	box-sizing: border-box
+}
