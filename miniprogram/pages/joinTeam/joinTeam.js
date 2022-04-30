@@ -4,16 +4,10 @@ Page({
 	},
 
 	onLoad() {
-		this.setData({
-			icon: base64.icon20
-		});
 		this._getTeamInfo("progress", "20");		// 设置数据
 	},
 
 	onShow(){
-		this.setData({ 
-			icon: base64.icon20
-		});
 		this._getTeamInfo("progress", "20");		// 设置数据
 	},
 
