@@ -4,11 +4,11 @@ Page({
 	},
 
 	onLoad() {
-		this._getTeamInfo("progress", "20");		// 设置数据
+		this._getTeamInfo("progress", "20"); // 获取数据
 	},
 
-	onShow(){
-		this._getTeamInfo("progress", "20");		// 设置数据
+	onShow() {
+		this._getTeamInfo("progress", "20"); // 获取数据
 	},
 
 
@@ -27,7 +27,6 @@ Page({
 			},
 			url: 'http://124.71.160.151:3001/getTeamInfo',
 			success: function (res) {
-				console.log("实际打印", res.data);
 				that.setData({
 					teamList: res.data
 				});
