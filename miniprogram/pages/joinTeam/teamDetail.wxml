@@ -1,0 +1,23 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="page__hd">
+        <view class="page__title">队伍详细信息--{{teamname}}</view>
+    </view>
+    <view class="page__bd">
+        <mp-cells title="行程信息">
+            <mp-cell hover value="出发时间" footer="{{start_date}}"></mp-cell>
+            <mp-cell hover value="到达时间" footer="{{end_date}}"></mp-cell>
+            <mp-cell hover value="起点" footer="{{start_locationName}}"></mp-cell>
+            <mp-cell hover value="终点" footer="{{des_locationName}}"></mp-cell>
+            <mp-cell hover value="联系号码" footer="{{phone}}"></mp-cell>
+            <mp-cell hover value="备注" footer="{{note}}"></mp-cell>
+        </mp-cells>
+        <!--
+        <mp-cells title="队伍信息">
+            <mp-cell hover value="小队队长" footer="{{group_leader}}"></mp-cell>
+            <mp-cell hover value="小队成员" wx:for="{{group_member}}" data-item="item" wx:for-index="idx" footer="{{group_member[idx]}}"></mp-cell>
+        </mp-cells>
+        -->
+    </view>
+</view>
+
+

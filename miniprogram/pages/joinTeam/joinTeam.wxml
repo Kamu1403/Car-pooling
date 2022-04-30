@@ -11,7 +11,7 @@
 		<!-- 显示每一支队伍 -->
 		<block wx:for="{{teamList_filter}}" wx:key="index">
 			<!-- 每支队伍的信息 -->
-			<navigator class="weui-form-preview">
+			<navigator class="weui-form-preview" url="/pages/joinTeam/teamDetail?team_seq={{item.seq}}" open-type="navigate">
 				<!-- 队伍名字 -->
 				<view class="weui-form-preview__hd" aria-role="option">
 					<view class="weui-form-preview__item">
