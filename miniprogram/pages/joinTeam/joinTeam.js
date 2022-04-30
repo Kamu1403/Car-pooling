@@ -1,5 +1,3 @@
-const base64 = require('../../images/base64');
-
 Page({
 	data: {
 		teamList: [] // 队伍的列表
