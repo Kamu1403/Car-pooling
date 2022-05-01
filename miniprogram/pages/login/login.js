@@ -44,7 +44,7 @@ Page({
                   console.log(res2.data.length);
                   if(res2.data.length==0)//如果没有资料
                   {
-                    this.setData({
+                    that.setData({
                       userInfo: res.userInfo,
                       usergender:res.userInfo.gender,
                       username:res.userInfo.nickName,
