@@ -10,13 +10,13 @@
         <!-- 队伍名 -->
         <view class="section">
           <view style="color:#000;">队伍名</view>
-          <input name="teamname" placeholder="队伍名" type="text" />
+          <input name="teamname" placeholder="{{teamname}}" type="text" />
         </view>
     
         <!-- 手机号 -->
         <view class="section">
           <view>手机号</view>
-          <input name="phone" placeholder="手机号"
+          <input name="phone" placeholder="{{phone}}"
                  maxlength="11" type="number" />
         </view>
 
@@ -24,8 +24,8 @@
         <view class="section">
             <view>性别</view>
             <radio-group name="gender">
-                <label><radio value="男" /> 男 </label>   <!-- 默认勾选男性，<radio value="男" /> -->
-                <label><radio value="女" /> 女 </label>
+                <label><radio value="男" checked="{{checka}}"/> 男 </label>   <!-- 默认勾选男性，<radio value="男" /> -->
+                <label><radio value="女" checked="{{checkb}}"/> 女 </label>
             </radio-group>
         </view>
 
@@ -88,7 +88,7 @@
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea"  bindblur="bindTextAreaBlur" placeholder="请输入文本" rows="3"></textarea>
+                    <textarea class="weui-textarea"  bindblur="bindTextAreaBlur" placeholder="{{note}}" rows="3"></textarea>
                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                 </div>
             </div>

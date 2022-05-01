@@ -7,9 +7,9 @@ Page({
     data: {
         isSubmit: false,
         openid: "",
-        teamname: "",           // 队伍名
-        phone: "",
-        gender: "",
+        teamname: "队伍名",           // 队伍名
+        phone: "手机号",
+        gender: "男",
         start_date: "",      // 车队出发的日期
         start_time: "",      // 车队出发的时间
         end_date: "",        // 车队到达的日期
@@ -18,10 +18,61 @@ Page({
         start_locationName: "", //出发地址名称
         des_addr: "", //终点地址
         des_locationName: "",    //终点地址名称
-        note: ""            // 备注信息
+        note: "请输入文本",            // 备注信息
 
+        //check box属性
+        checka: "",
+        checkb: ""
     },
-      
+    
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        if (options.dataList) {
+            console.log('修改小队消息');
+            let seq = JSON.parse(options.dataList);
+            console.log('group seq:'+seq);
+
+            //已经获得了小组序号seq，然后从数据库读取小队消息
+            // ...
+            console.error('需要添加读取小队信息的数据库查询！！');
+
+            //使用读到的数据设置小队消息
+            this.setData({
+                teamname: "队伍1",           // 队伍名
+                phone: "12345",
+                gender: "女",
+                start_date: "2022-05-01",      // 车队出发的日期
+                start_time: "00:00",      // 车队出发的时间
+                end_date: "3022-05-01",        // 车队到达的日期
+                end_time: "10:00",         // 车队到达的时间
+                start_addr: "上海上海上海",       //出发地址
+                start_locationName: "a", //出发地址名称
+                des_addr: "北京北京北京", //终点地址
+                des_locationName: "b",    //终点地址名称
+                note: "123456"            // 备注信息
+            });
+
+            if (this.data.gender=="男") {
+                this.setData({
+                    checka: 'true'
+                });
+                console.log('a');
+            } else if (this.data.gender=="女") {
+                this.setData({
+                    checkb: 'true'
+                });
+                console.log('b');
+            } else {
+                console.error('gender not match!');
+            }
+        }else{
+            console.log('新建队伍');
+        }
+    },
+
+
     onShow: function () {
         // 从地图选点插件返回后，在页面的onShow生命周期函数中能够调用插件接口，取得选点结果对象
         // 如果点击确认选点按钮，则返回选点结果对象，否则返回null

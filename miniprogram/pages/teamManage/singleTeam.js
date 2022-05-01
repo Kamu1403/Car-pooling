@@ -31,8 +31,161 @@ Page({
       extClass: "my-weui-slidebutton",
       text: '删除'
     }],
-    slideviewShowIndex: 0
+    slideviewShowIndex: 0,
+    
+    //队长管理
+    showDialog: false,
+    groups: [
+      {text: '编辑小队信息', value: 1},
+      {text: '打车', value: 2},
+      {text: '一键提醒', value: 3},
+      {text: '提醒单个成员', value: 4},
+      {text: '转交权限并退出', type: 'warn',value: 5},
+      {text: '解散队伍', type: 'warn', value: 6}
+    ],
+
+    //开始打车
+    typeF: false,
+    buttons: [
+      {
+        type: 'default',
+        className: '',
+        text: '辅助操作',
+        value: 0
+      },
+      {
+        type: 'primary',
+        className: '',
+        text: '主操作',
+        value: 1
+      }
+    ],
+
+    //提醒队员
+    showSelectDialog: false,
+    groupsSelect: [
+      {text: '成员1', value: 1},
+      {text: '成员2', value: 2},
+    ],
+    //转交权限，json与以上groupsSelect共用
+    showAuthorityDialog: false,
   },
+
+  //队长管理
+  openDialog() {
+    this.setData({
+      showDialog: true
+    })
+  },
+  closeDialog() {
+    this.setData({
+      showDialog: false
+    })
+  },
+  btnClick(e) {
+    var seq=1; //需要seq中填入小组序号，以进行修改小队消息
+    console.error('需要在上一句seq中填入小组序号，以进行修改小队消息');
+
+    console.log('选项'+e.detail.value);
+    this.closeDialog();
+    switch (e.detail.value) {
+      case 1:
+        wx.navigateTo({
+          url: '/pages/teamCreate/teamCreate?dataList=' + seq,
+        })
+        break;
+      case 2:
+        this.openTypeF();
+        break;
+      case 3:
+        console.log('提醒所有成员');
+        break;
+      case 4:
+        this.openSelectDialog();
+        break;
+      case 5:
+        this.openAuthorityDialog();
+        break;
+      case 6:
+        this.delTeam(e);
+        break;
+    
+      default:
+        console.error('fatal error: actionSheet tap not match!')
+        break;
+    }
+  },
+
+  //开始打车
+  openTypeF() {
+    this.setData({
+      typeF: true
+    })
+  },
+  reserved(){
+    console.log('队长已预约车辆');
+    this.closeTypeF();
+  },
+  jumpReserve(){
+    console.log('自动跳转到合适的打车软件');
+    this.closeTypeF();
+  },
+  closeTypeF(){
+    this.setData({
+      typeF: false
+    })
+  },
+
+  //提醒单个成员
+  openSelectDialog() {
+    this.setData({
+      showSelectDialog: true
+    })
+  },
+  closeSelectDialog() {
+    this.setData({
+      showSelectDialog: false
+    })
+  },
+  btnSelect(e) {
+    console.log('成员'+e.detail.value);
+    this.closeSelectDialog();
+    switch (e.detail.value) {
+      case 1:
+        
+        break;
+    
+      default:
+        console.error('team member not match!')
+        break;
+    }
+  },
+
+  //转交权限
+  openAuthorityDialog() {
+    this.setData({
+      showAuthorityDialog: true
+    })
+  },
+  closeAuthorityDialog() {
+    this.setData({
+      showAuthorityDialog: false
+    })
+  },
+  btnAuthority(e) {
+    console.log('成员'+e.detail.value);
+    this.closeAuthorityDialog();
+    switch (e.detail.value) {
+      case 1:
+        
+        break;
+    
+      default:
+        console.error('team member not match!')
+        break;
+    }
+  },
+  
 
   // 获取当前用户
   getNowUser() {
