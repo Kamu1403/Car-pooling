@@ -1,4 +1,5 @@
 // pages/teamManage/teamManage.js
+var app = getApp();
 Page({
 
   /**
@@ -6,31 +7,7 @@ Page({
    */
   data: {
     theme: "light",
-    TeamList: [{
-      name: "队伍一",
-      role: "队长",
-      color: "red",
-      time: "2022/4/12 14:54",
-      from: "嘉定校区友园7号楼",
-      to: "旋转门",
-      phone: "13912345678"
-    }, {
-      name: "队伍二",
-      role: "队员",
-      color: "green",
-      time: "2022/4/10 09:34",
-      from: "嘉定校区接待中心",
-      to: "四平",
-      phone: "13912345678"
-    }, {
-      name: "队伍三",
-      role: "队长",
-      color: "red",
-      time: "2022/1/12 10:54",
-      from: "嘉定校区马桶楼",
-      to: "图书馆",
-      phone: "13912345678"
-    }],
+    TeamList: [],
   },
 
   jumpDetailInfo() {
@@ -42,22 +19,46 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
+  onLoad() {
+    // 绑定search函数
+    this.setData({
+      search: this.search.bind(this)
+    });
 
+    this._getTeamInfo(app.globalData.userInfo.useropenid); // 获取数据
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {
-
-  },
+  onReady() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    this._getTeamInfo(app.globalData.userInfo.useropenid); // 获取数据
+  },
 
+  /****************************************
+   * Function: 向数据库要队伍的数据
+   * Parameter: 如果num=0，说明取全部的；
+   ****************************************/
+  _getTeamInfo: function (useropenid) {
+    let that = this;
+
+    wx.request({
+      method: 'POST',
+      data: {
+        'useropenid': useropenid,
+      },
+      url: 'http://124.71.160.151:3004/getTeamInfo',
+      success: function (res) {
+        that.setData({
+          TeamList: res.data
+        });
+      }
+    })
   },
 
   /**
