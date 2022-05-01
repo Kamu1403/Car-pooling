@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/joinTeam/joinTeam",
     "pages/friends/friends",
     "pages/personalInfo/personalInfo",
     "pages/personalInfo/change",
@@ -11,7 +10,9 @@
     "pages/carpooling/carpooling",
     "pages/teamCreate/teamCreate",
     "pages/teamManage/teamManage",
-    "pages/teamManage/singleTeam"
+    "pages/teamManage/singleTeam",
+    "pages/joinTeam/joinTeam",
+    "pages/joinTeam/teamDetail"
   ],
   "plugins": {
       "chooseLocation": {
@@ -35,7 +36,7 @@
   "tabBar":{
     "list":[
       {
-        "pagePath":"pages/carpooling/carpooling",
+        "pagePath":"pages/joinTeam/joinTeam",
         "text":"拼车",
         "iconPath": "icons/carpooling.png",
         "selectedIconPath":  "icons/_carpooling.png"   

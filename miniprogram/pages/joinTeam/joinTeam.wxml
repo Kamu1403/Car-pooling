@@ -1,13 +1,26 @@
-<page-meta root-font-size="system"/>
+<page-meta root-font-size="system" />
+
 <view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
-	<!-- 主体部分 -->
-    <view class="page__bd">
-        <view class="weui-cells__title">所有的队伍</view>
-            
+	<!-- 创建队伍按钮 -->
+	<navigator url="/pages/teamCreate/teamCreate" class="control_icon">
+		<mp-icon icon="add2" color="colorLight" size="25"></mp-icon>
+	</navigator>
+	<!-- 管理队伍按钮 -->
+	<navigator url="/pages/teamManage/teamManage" class="control_icon">
+		<mp-icon icon="group-detail" color="colorLight" size="25"></mp-icon>
+	</navigator>
+
+	<!-- 搜索栏 -->
+	<mp-searchbar search="{{search}}"></mp-searchbar> <!-- bindselectresult="selectResult" -->
+
+	<!-- 队伍列表部分 -->
+	<view class="page__bd">
+		<view class="weui-cells__title">所有的队伍</view>
+
 		<!-- 显示每一支队伍 -->
-		<block wx:for="{{teamList}}" wx:key="index">
+		<block wx:for="{{teamList_filter}}" wx:key="index">
 			<!-- 每支队伍的信息 -->
-			<navigator class="weui-form-preview" url="">
+			<navigator class="weui-form-preview" url="/pages/joinTeam/teamDetail?team_seq={{item.seq}}" open-type="navigate">
 				<!-- 队伍名字 -->
 				<view class="weui-form-preview__hd" aria-role="option">
 					<view class="weui-form-preview__item">
@@ -21,21 +34,20 @@
 					<view id="p1" class="weui-form-preview__item">
 						<label class="weui-form-preview__label">出发时间</label>
 						<text class="weui-form-preview__value">{{item.start_date}} {{item.start_time}}</text>
-					</view>   
+					</view>
 					<!-- 起点 -->
 					<view id="p2" class="weui-form-preview__item">
 						<label class="weui-form-preview__label">起点</label>
 						<text class="weui-form-preview__value">{{item.start_locationName}}</text>
-					</view> 
-					<!-- 终点 --> 
+					</view>
+					<!-- 终点 -->
 					<view id="p3" class="weui-form-preview__item">
 						<label class="weui-form-preview__label">终点</label>
 						<text class="weui-form-preview__value">{{item.des_locationName}}</text>
-					</view> 
+					</view>
 				</view>
-			</navigator> 
+			</navigator>
 		</block>
 
-    </view>
+	</view>
 </view>
-
