@@ -233,6 +233,8 @@ Page({
         if (res == true){
             if (this.data.update_seq!=-1) {
                 //执行更新
+                var db=require("interface.js");
+                db.updateTeamInfo(this.data);
                 //...
                 console.log('执行更新');
             }else{
@@ -299,7 +301,6 @@ Page({
                     des_addr: res.data[0].des_addr, //终点地址
                     des_locationName: res.data[0].des_locationName,    //终点地址名称
                     note: res.data[0].note,            // 备注信息
-
                     update_seq: seq     //更新的seq
 				});
 			}
