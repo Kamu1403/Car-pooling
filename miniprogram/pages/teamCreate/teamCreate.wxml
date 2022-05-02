@@ -10,13 +10,13 @@
         <!-- 队伍名 -->
         <view class="section">
           <view style="color:#000;">队伍名</view>
-          <input name="teamname" placeholder="{{teamname}}" type="text" />
+          <input name="teamname" placeholder="队伍名" value="{{teamname}}" type="text" />
         </view>
     
         <!-- 手机号 -->
         <view class="section">
           <view>手机号</view>
-          <input name="phone" placeholder="{{phone}}"
+          <input name="phone" placeholder="手机号" value="{{phone}}"
                  maxlength="11" type="number" />
         </view>
 
@@ -88,7 +88,7 @@
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea"  bindblur="bindTextAreaBlur" placeholder="{{note}}" rows="3"></textarea>
+                    <textarea class="weui-textarea"  bindblur="bindTextAreaBlur" placeholder="请输入文本" value="{{note}}" rows="3"></textarea>
                     <div class="weui-textarea-counter"><span>0</span>/200</div>
                 </div>
             </div>

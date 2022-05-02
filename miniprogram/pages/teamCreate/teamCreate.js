@@ -7,9 +7,9 @@ Page({
     data: {
         isSubmit: false,
         openid: "",
-        teamname: "队伍名",           // 队伍名
-        phone: "手机号",
-        gender: "男",
+        teamname: "",           // 队伍名
+        phone: "",
+        gender: "",
         start_date: "",      // 车队出发的日期
         start_time: "",      // 车队出发的时间
         end_date: "",        // 车队到达的日期
@@ -18,7 +18,9 @@ Page({
         start_locationName: "", //出发地址名称
         des_addr: "", //终点地址
         des_locationName: "",    //终点地址名称
-        note: "请输入文本",            // 备注信息
+        note: "",            // 备注信息
+
+        update_seq: -1,       //更新的seq
 
         //check box属性
         checka: "",
@@ -229,35 +231,50 @@ Page({
         // 检查结果
         var res = this._formCheker(e);
         if (res == true){
-            // 跳转到行程详细界面
-            wx.redirectTo({
-                url: "/pages/personalInfo/history/historyInfo",
-            });
+            if (this.data.update_seq!=-1) {
+                //执行更新
+                //...
+                console.log('执行更新');
+            }else{
+                console.log('执行新建');
+                // 跳转到行程详细界面
+                wx.redirectTo({
+                    url: "/pages/personalInfo/history/historyInfo",
+                });
 
-            // 提交数据到数据库
-            var db = require("interface.js");
-            db.uploadTeamInfo(this.data);
+                // 提交数据到数据库
+                var db = require("interface.js");
+                db.uploadTeamInfo(this.data);
+            }
         }
     },
 
     // 重置表单的输入
     formReset: function () {
-        this.setData({
-            isSubmit: false,
-            teamname: "",
-            phone: "",
-            gender: "",
-            start_date: "",      // 车队出发的日期
-            start_time: "",      // 车队出发的时间
-            end_date: "",        // 车队到达的日期
-            end_time: "",         // 车队到达的时间
-            start_addr: "",       //出发地址
-            start_locationName: "", //出发地址名称
-            des_addr: "",           //终点地址
-            des_locationName: "",    //终点地址名称
-            note: ""                // 备注信息
-        });
-        this.onReady();
+        if (this.data.update_seq!=-1) {
+            //重置为原先数据（好像不用改了？）
+            //...
+            console.log('重置为原先数据');
+            this.onLoad(this.options);
+        }else{
+            console.log('重置为空');
+            this.setData({
+                isSubmit: false,
+                teamname: "",
+                phone: "",
+                gender: "",
+                start_date: "",      // 车队出发的日期
+                start_time: "",      // 车队出发的时间
+                end_date: "",        // 车队到达的日期
+                end_time: "",         // 车队到达的时间
+                start_addr: "",       //出发地址
+                start_locationName: "", //出发地址名称
+                des_addr: "",           //终点地址
+                des_locationName: "",    //终点地址名称
+                note: ""                // 备注信息
+            });
+            this.onReady();
+        }
     },
     _getOneTeamInfo: function (seq) {
 		let that = this;
@@ -281,7 +298,9 @@ Page({
                     start_locationName: res.data[0].start_locationName, //出发地址名称
                     des_addr: res.data[0].des_addr, //终点地址
                     des_locationName: res.data[0].des_locationName,    //终点地址名称
-                    note: res.data[0].note            // 备注信息
+                    note: res.data[0].note,            // 备注信息
+
+                    update_seq: seq     //更新的seq
 				});
 			}
 		})
