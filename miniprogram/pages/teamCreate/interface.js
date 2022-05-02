@@ -32,6 +32,6 @@ function uploadTeamInfo(data){
 
 module.exports = {
 	// 变量名   ： 将方法赋值到变量上面去使用
-	uploadTeamInfo: uploadTeamInfo
+	uploadTeamInfo: uploadTeamInfo,
   }
 

@@ -30,30 +30,14 @@ Page({
      */
     onLoad: function (options) {
         if (options.dataList) {
+            
             console.log('修改小队消息');
             let seq = JSON.parse(options.dataList);
             console.log('group seq:'+seq);
 
             //已经获得了小组序号seq，然后从数据库读取小队消息
-            // ...
-            console.error('需要添加读取小队信息的数据库查询！！');
-
-            //使用读到的数据设置小队消息
-            this.setData({
-                teamname: "队伍1",           // 队伍名
-                phone: "12345",
-                gender: "女",
-                start_date: "2022-05-01",      // 车队出发的日期
-                start_time: "00:00",      // 车队出发的时间
-                end_date: "3022-05-01",        // 车队到达的日期
-                end_time: "10:00",         // 车队到达的时间
-                start_addr: "上海上海上海",       //出发地址
-                start_locationName: "a", //出发地址名称
-                des_addr: "北京北京北京", //终点地址
-                des_locationName: "b",    //终点地址名称
-                note: "123456"            // 备注信息
-            });
-
+            
+            this._getOneTeamInfo(seq);
             if (this.data.gender=="男") {
                 this.setData({
                     checka: 'true'
@@ -274,6 +258,35 @@ Page({
             note: ""                // 备注信息
         });
         this.onReady();
-    }
+    },
+    _getOneTeamInfo: function (seq) {
+		let that = this;
+		wx.request({
+			method: 'POST',
+			data: {
+				'seq':seq
+			},
+			url: 'http://124.71.160.151:3001/getOneTeamInfo',
+			success: function (res) {
+                console.log(res.data);
+				that.setData({ 
+                    teamname: res.data[0].teamname,           // 队伍名
+                    phone: res.data[0].phone,
+                    gender: res.data[0].gender,
+                    start_date: res.data[0].start_date,      // 车队出发的日期
+                    start_time: res.data[0].start_time,      // 车队出发的时间
+                    end_date: res.data[0].end_date,        // 车队到达的日期
+                    end_time: res.data[0].end_time,         // 车队到达的时间
+                    start_addr: res.data[0].start_addr,       //出发地址
+                    start_locationName: res.data[0].start_locationName, //出发地址名称
+                    des_addr: res.data[0].des_addr, //终点地址
+                    des_locationName: res.data[0].des_locationName,    //终点地址名称
+                    note: res.data[0].note            // 备注信息
+				});
+			}
+		})
+	}
 })
+
+
 
