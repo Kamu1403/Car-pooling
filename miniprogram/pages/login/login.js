@@ -55,6 +55,8 @@ Page({
                       app.globalData.userInfo.username=res.userInfo.nickName;
                       app.globalData.userInfo.userphoto=res.userInfo.avatarUrl;
                       app.globalData.logined=true;
+                      app.globalData.userInfo.role=0;
+                      app.globalData.userInfo.status=1;
                       console.log(app.globalData.userInfo);
                       wx.request({
                         method:'POST',
@@ -73,6 +75,15 @@ Page({
                   }
                   else//已经有账号
                   {
+                    app.globalData.userInfo.usergender=res2.data[0].gender;
+                    app.globalData.userInfo.username=res2.data[0].name;
+                    app.globalData.userInfo.userphoto=res2.data[0].photo;
+                    app.globalData.logined=true;
+                    app.globalData.userInfo.userphone=res2.data[0].phone;
+                    app.globalData.userInfo.userrole=res2.data[0].role;
+                    app.globalData.userInfo.userintro=res2.data[0].intro;
+                    app.globalData.userInfo.useremail=res2.data[0].email;
+                    app.globalData.userInfo.userstatus=res2.data[0].status;
                     that.setData({
                       usergender:res2.data[0].gender,
                       username:res2.data[0].name,
@@ -81,7 +92,8 @@ Page({
                       userphone:res2.data[0].phone,
                       userrole:res2.data[0].role,
                       userintro:res2.data[0].intro,
-                      useremail:res2.data[0].email
+                      useremail:res2.data[0].email,
+                      userstatus:res2.data[0].status
                     })
                   }                     
                 }        
@@ -128,6 +140,15 @@ Page({
               }
               else//已经有账号
               {
+                app.globalData.userInfo.usergender=res2.data[0].gender;
+                app.globalData.userInfo.username=res2.data[0].name;
+                app.globalData.userInfo.userphoto=res2.data[0].photo;
+                app.globalData.logined=true;
+                app.globalData.userInfo.userphone=res2.data[0].phone;
+                app.globalData.userInfo.userrole=res2.data[0].role;
+                app.globalData.userInfo.userintro=res2.data[0].intro;
+                app.globalData.userInfo.useremail=res2.data[0].email;
+                app.globalData.userInfo.userstatus=res2.data[0].status;
                 that.setData({
                   usergender:res2.data[0].gender,
                   username:res2.data[0].name,

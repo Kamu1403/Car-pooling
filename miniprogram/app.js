@@ -19,8 +19,12 @@ App({
         username:"",
         usergender:0,
         userphoto:"",
-        userage:18,
-        useropenid:""
+        useropenid:"",
+        userrole:1,
+        userintro:"",
+        useremail:"",
+        userstatus:"",
+        userphone:""
       },
       logined:false
     }
