@@ -15,7 +15,8 @@ Page({
     userphone:"",
     userrole:0,
     userintro:"",
-    useremail:""
+    useremail:"",
+    userstatus:1
   },
   //注册所用函数
   userregister(e){
@@ -49,7 +50,9 @@ Page({
                       usergender:res.userInfo.gender,
                       username:res.userInfo.nickName,
                       userphoto:res.userInfo.avatarUrl,
-                      logined: true
+                      logined: true,
+                      userrole:1,
+                      userstatus:1
                       })
                       app.globalData.userInfo.usergender=res.userInfo.gender;
                       app.globalData.userInfo.username=res.userInfo.nickName;
@@ -65,7 +68,8 @@ Page({
                           'username':res.userInfo.nickName,
                           'usergender': res.userInfo.gender,
                           'userphoto':res.userInfo.avatarUrl,
-                          'userrole':0
+                          'userrole':0,
+                          'userstatus':1
                         },
                         url: 'http://124.71.160.151:3000/basicuser',
                         success:function(res){
@@ -157,7 +161,8 @@ Page({
                   userphone:res2.data[0].phone,
                   userrole:res2.data[0].role,
                   userintro:res2.data[0].intro,
-                  useremail:res2.data[0].email
+                  useremail:res2.data[0].email,
+                  userstatus:res2.data[0].status
                 })
               }
             }

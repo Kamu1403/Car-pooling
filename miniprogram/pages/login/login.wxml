@@ -13,6 +13,11 @@
     加载中...
   </loading>
 </view>
+<view wx:elif="{{logined==true && userstatus==0}}">
+  <text>
+    该账号已被封禁
+  </text>
+</view>
 <view class="afterlogin" wx:elif="{{logined==true}}" style="height:100%">
   <view class="infobox">
     <image mode="aspectFit" class="userimg" src="{{userphoto}}"></image>
