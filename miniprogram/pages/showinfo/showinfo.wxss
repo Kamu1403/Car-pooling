@@ -1,0 +1,12 @@
+/* pages/showinfo/showinfo.wxss */
+.head_image{
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+}
+button{
+  font-weight: bold;
+  margin:5%;
+  background-color: rgba(255, 255, 255, 0.85);
+  color:rgb(223, 0, 0);
+}

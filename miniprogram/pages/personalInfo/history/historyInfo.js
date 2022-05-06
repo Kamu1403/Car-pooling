@@ -9,10 +9,15 @@ Page({
         time:"2022/4/12 14:54",
         from:"嘉定校区友园7号楼",
         to:"旋转门",
-        group_leader:"leader",
-        group_member:["mem1","mem2","mem3"]
+        group_leader:{name:"leader",openid:""},
+        group_member:[{name:"mem1",openid:""},{name:"mem2",openid:""},{name:"mem3",openid:""}]
     },
-
+    jumpShowInfo(e) {
+        console.log(e.currentTarget.dataset.src);
+        wx.navigateTo({
+            url: '/pages/showinfo/showinfo?openid=' + e.currentTarget.dataset.src,
+        })
+      },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -33,10 +38,13 @@ Page({
                 for (let i = 0; i < res.data.length; i++) {
                     if(res.data[i].team_role=='leader'){
                         that.setData({
-                            group_leader:res.data[i].name
+                            group_leader:{
+                                name:res.data[i].name,
+                                openid:res.data[i].member_openid
+                            }
                         });
                     }else if(res.data[i].team_role=='member'){
-                        list = list.concat(res.data[i].name);
+                        list = list.concat({name:res.data[i].name,openid:res.data[i].member_openid});
                     }else{
                         console.log('role not match!');
                         return;

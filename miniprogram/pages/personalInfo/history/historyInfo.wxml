@@ -10,8 +10,8 @@
             <mp-cell hover value="终点" footer="{{to}}"></mp-cell>
         </mp-cells>
         <mp-cells title="队伍信息">
-            <mp-cell hover value="小队队长" footer="{{group_leader}}"></mp-cell>
-            <mp-cell hover value="小队成员" wx:for="{{group_member}}" data-item="item" wx:for-index="idx" footer="{{group_member[idx]}}"></mp-cell>
+            <mp-cell hover value="小队队长" footer="{{group_leader.name}}" bindtap="jumpShowInfo" data-src="{{group_leader.openid}}"></mp-cell>
+            <mp-cell hover value="小队成员" wx:for="{{group_member}}" data-item="item" wx:for-index="idx" footer="{{group_member[idx].name}}" bindtap="jumpShowInfo" data-src="{{group_member[idx].openid}}"></mp-cell>
         </mp-cells>
     </view>
 </view>

@@ -2,6 +2,8 @@
   "pages": [
     "pages/login/login",
     "pages/appeal/appeal",
+    "pages/showinfo/showinfo",
+    "pages/report/report",
     "pages/friends/friends",
     "pages/personalInfo/personalInfo",
     "pages/personalInfo/change",

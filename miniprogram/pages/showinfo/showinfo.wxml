@@ -1,0 +1,20 @@
+<!--pages/showinfo/showinfo.wxml-->
+<view class="weui-cells weui-cells_after-title">
+  <view  class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view aria-role="link" aria-labelledby="js_cell_tl1_bd js_cell_tl1_ft" id="js_cell_tl1_bd" class="weui-cell__bd">头像</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access" id="js_cell_tl1_ft" aria-hidden="true">
+      <image class="head_image" src="{{userphoto}}"></image>
+    </view>
+  </view>
+  <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view aria-role="link" aria-labelledby="js_cell_tl2_bd js_cell_tl2_ft" id="js_cell_tl2_bd" class="weui-cell__bd">用户名</view>
+    <view id="js_cell_tl2_ft" aria-hidden="true" class="weui-cell__ft weui-cell__ft_in-access">{{username}}</view>
+  </view>
+  <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <view aria-role="link" aria-labelledby="js_cell_tl2_bd js_cell_tl2_ft" id="js_cell_tl2_bd" class="weui-cell__bd">性别</view>
+    <view id="js_cell_tl2_ft" aria-hidden="true" class="weui-cell__ft weui-cell__ft_in-access">{{usergender==0?'男':'女'}}</view>
+  </view>
+  </view> 
+   <view class="buttonbox2">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpReport" data-src="{{openid}}">举报用户</button> 
+  </view>

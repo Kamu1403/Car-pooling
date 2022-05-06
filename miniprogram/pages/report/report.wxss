@@ -1,0 +1,28 @@
+/* pages/report/report.wxss *//* pages/appeal/appeal.wxss */
+.section{
+  padding:5%; 
+
+}
+text{
+  font-weight: bold;
+  font-size: larger;
+  color: rgba(131, 131, 131, 0.85);
+}
+.inputtext{
+  width:100%;
+  margin-top:3% ;
+  background-color: rgba(255, 255, 255, 0.774);
+  border:solid rgba(235, 234, 234, 0.85);
+}
+.buttonbox2
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button{
+  font-weight: bold;
+  margin:5%;
+  background-color: rgba(255, 255, 255, 0.85);
+  color:#5A9CCE;
+}
