@@ -1,0 +1,13 @@
+<!--pages/appeal/appeal.wxml-->
+<image class="bgpic" style="opacity:{{0.9}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
+<view class="section">
+  <text>请输入申诉信息:
+  </text>
+  <form bindsubmit="bindFormSubmit">
+    <textarea placeholder="在此键入申诉信息" class="inputtext"  name="textarea"/>
+    <view class="buttonbox2">
+    <button form-type="submit" style="height:100rpx;width:450rpx;font-size:45rpx">提交</button> 
+    </view>
+  </form>
+</view>
+

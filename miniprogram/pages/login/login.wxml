@@ -13,10 +13,26 @@
     加载中...
   </loading>
 </view>
+
 <view wx:elif="{{logined==true && userstatus==0}}">
-  <text>
-    该账号已被封禁
-  </text>
+  <view class="infobox">
+    <icon type="info" size="60" ></icon>
+    <text class="infoword">账号封禁中
+    </text>
+  </view>
+  <view class="buttonbox3">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpApeal">账号申诉</button>  
+  </view>
+</view>
+<view wx:elif="{{logined==true && userstatus==2}}">
+  <view class="infobox">
+    <icon type="info" size="60" ></icon>
+    <text class="infoword">账号申诉中
+    </text>
+  </view>
+  <view class="buttonbox3">
+    <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpApeal">账号申诉</button>  
+  </view>
 </view>
 <view class="afterlogin" wx:elif="{{logined==true}}" style="height:100%">
   <view class="infobox">

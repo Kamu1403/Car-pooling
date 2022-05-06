@@ -189,7 +189,11 @@ Page({
       url: '/pages/personalInfo/history/history',
     })
   },
-
+  jumpApeal() {
+    wx.navigateTo({
+      url:  "/pages/appeal/appeal",
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -233,7 +237,8 @@ Page({
                   userphone:res2.data[0].phone,
                   userrole:res2.data[0].role,
                   userintro:res2.data[0].intro,
-                  useremail:res2.data[0].email
+                  useremail:res2.data[0].email,
+                  userstatus:res2.data[0].status
                 })
               }
             }

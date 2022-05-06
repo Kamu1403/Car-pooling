@@ -16,6 +16,13 @@ page{
   justify-content: center;
   align-items: center;
 }
+.buttonbox3
+{
+  margin-top:30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 button{
   font-weight: bold;
   margin:5%;
