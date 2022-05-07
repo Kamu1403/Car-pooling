@@ -59,6 +59,15 @@
     </view>
   </mp-halfScreenDialog>
 
+  <mp-halfScreenDialog show="{{finishDialogShow}}">
+    <view slot="title">结束行程</view>
+    <view slot="desc">请确认是否决定结束行程</view>
+    <view slot="footer">
+      <button type="primary" class="weui-btn" bindtap="finishRoute">确认</button>
+      <button type="default" class="weui-btn" bindtap="finishReturn">返回</button>
+    </view>
+  </mp-halfScreenDialog>
+
   <mp-actionSheet bindactiontap="btnSelect" show="{{showSelectDialog}}" actions="{{groupsSelect}}" title="提醒单个成员"> </mp-actionSheet>
   <mp-actionSheet bindactiontap="btnAuthority" show="{{showAuthorityDialog}}" actions="{{groupsSelect}}" title="转交权限给以下一名用户"> </mp-actionSheet>
 </view>
