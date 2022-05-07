@@ -11,6 +11,10 @@
 
 .weui-form-preview {
   margin-bottom: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 5%;
+  opacity: 90%;
 }
 
 /* 搜索栏目  */
@@ -31,3 +35,4 @@
 	width: 10%;
 	box-sizing: border-box
 }
+
