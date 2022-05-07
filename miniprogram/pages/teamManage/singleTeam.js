@@ -18,48 +18,26 @@ Page({
       text: '删除'
     }],
     slideviewShowIndex: 0,
-
+    
     // 个人信息
     nowUser: {},
     isLeader: "",
     //队长管理
     showDialog: false,
-    groups: [{
-        text: '编辑小队信息',
-        value: 1
-      },
-      {
-        text: '打车',
-        value: 2
-      },
-      {
-        text: '一键提醒',
-        value: 3
-      },
-      {
-        text: '提醒单个成员',
-        value: 4
-      },
-      {
-        text: '结束行程',
-        type: 'warn',
-        value: 7
-      },
-      {
-        text: '转交权限并退出',
-        type: 'warn',
-        value: 5
-      },
-      {
-        text: '解散队伍',
-        type: 'warn',
-        value: 6
-      }
+    groups: [
+      {text: '编辑小队信息', value: 1},
+      {text: '打车', value: 2},
+      {text: '一键提醒', value: 3},
+      {text: '提醒单个成员', value: 4},
+      {text: '行程结束', value: 7},
+      {text: '转交权限并退出', type: 'warn',value: 5},
+      {text: '解散队伍', type: 'warn', value: 6}
     ],
 
     //开始打车
     typeF: false,
-    buttons: [{
+    buttons: [
+      {
         type: 'default',
         className: '',
         text: '辅助操作',
@@ -75,29 +53,25 @@ Page({
 
     //提醒队员
     showSelectDialog: false,
-    groupsSelect: [{
-        text: '成员1',
-        value: 1
-      },
-      {
-        text: '成员2',
-        value: 2
-      },
+    groupsSelect: [
+      {text: '成员1', value: 1, id: '123'},  
+      {text: '成员2', value: 2, id: '456'}
     ],
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
-    //结束行程
-    finishDialogShow: false,
+    //结束行程  
+    finishDialogShow: false,  
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
     let that = this;
     that.setData({
-      team_seq: options.team_seq
-    })
+        team_seq: options.team_seq
+      }
+    )
     // 根据team_seq找小队信息（）
     wx.request({
       method: 'POST',
@@ -113,7 +87,7 @@ Page({
           start_addr: res.data[0].start_addr,
           des_addr: res.data[0].des_addr,
           start_time: res.data[0].start_date.substring(0, 10) + "  " + res.data[0].start_time,
-          end_time: res.data[0].end_date.substring(0, 10) + "  " + res.data[0].end_time
+          end_time: res.data[0].end_date.substring(0,10) + "  " + res.data[0].end_time
         })
       }
     });
@@ -127,38 +101,35 @@ Page({
       success: function (res) {
         // console.dir(res);
         // 处理队员信息
-        for (let i = 0; i < res.data.length; ++i) {
+        for(let i = 0; i < res.data.length; ++i) {
           if (res.data[i]["openid"] == app.globalData.userInfo.useropenid) {
-            that.setData({
-              nowUser: res.data[i]
-            });
+            that.setData({nowUser: res.data[i]});
             if (res.data[i]["role"] == "leader") {
-              that.setData({
-                isLeader: true
-              });
-            } else {
-              that.setData({
-                isLeader: false
-              });
+              that.setData({isLeader: true});
+            }
+            else {
+              that.setData({isLeader: false});
             }
           }
           if (res.data[i]["role"] == "leader") {
-            that.setData({
-              teamLeader: res.data[i]
-            });
-          } else {
+            that.setData({teamLeader: res.data[i]});
+          }
+          else {
             let array0 = that.data.memberInfo; // 先从源数据取出值赋给一个新的数组
             let tem = that.data.teamNum + 1;
             array0.push(res.data[i]);
-            that.setData({
-              memberInfo: array0,
-              teamNum: tem
-            });
+            that.setData({memberInfo: array0, teamNum: tem});
           }
         }
       }
     })
   },
+
+  //提醒用户  
+  sendSubscribe(id){  
+    console.log('openid='+id)  
+    console.log('向服务器发送消息，开始sendCourseSubscribe\n具体参考 https://www.jianshu.com/p/493de887b5a1')  
+  }, 
 
   //队长管理
   openDialog() {
@@ -172,10 +143,10 @@ Page({
     })
   },
   btnClick(e) {
-    var seq = 1; //需要seq中填入小组序号，以进行修改小队消息
+    var seq=1; //需要seq中填入小组序号，以进行修改小队消息
     console.error('需要在上一句seq中填入小组序号，以进行修改小队消息');
 
-    console.log('选项' + e.detail.value);
+    console.log('选项'+e.detail.value);
     this.closeDialog();
     switch (e.detail.value) {
       case 1:
@@ -188,6 +159,10 @@ Page({
         break;
       case 3:
         console.log('提醒所有成员');
+        for (let index = 0; index < this.data.groupsSelect.length; index++) {  
+          let element = this.data.groupsSelect[index].id;  
+          this.sendSubscribe(element);  
+        };
         break;
       case 4:
         this.openSelectDialog();
@@ -198,11 +173,12 @@ Page({
       case 6:
         this.delTeam(e);
         break;
-      case 7:
-        this.setData({
-          finishDialogShow: true
-        })
-        break;
+      case 7:  
+        this.setData({  
+          finishDialogShow: true  
+        })  
+        break; 
+    
       default:
         console.error('fatal error: actionSheet tap not match!')
         break;
@@ -215,15 +191,22 @@ Page({
       typeF: true
     })
   },
-  reserved() {
+  reserved(){
     console.log('队长已预约车辆');
     this.closeTypeF();
+    wx.showToast({
+      title: '确认成功！',
+      icon: 'success'
+  })
   },
-  jumpReserve() {
+  jumpReserve(){
     console.log('自动跳转到合适的打车软件');
     this.closeTypeF();
+    wx.navigateTo({  
+      url: '/pages/teamManage/redirectWeb',  
+    });  
   },
-  closeTypeF() {
+  closeTypeF(){
     this.setData({
       typeF: false
     })
@@ -241,13 +224,13 @@ Page({
     })
   },
   btnSelect(e) {
-    console.log('成员' + e.detail.value);
+    console.log('成员'+e.detail.value);
     this.closeSelectDialog();
     switch (e.detail.value) {
       case 1:
-
+        this.sendSubscribe(this.data.groupsSelect[e.detail.value].id);  
         break;
-
+    
       default:
         console.error('team member not match!')
         break;
@@ -266,51 +249,52 @@ Page({
     })
   },
   btnAuthority(e) {
-    console.log('成员' + e.detail.value);
+    console.log('成员'+e.detail.value);
     this.closeAuthorityDialog();
     switch (e.detail.value) {
       case 1:
-
+        
         break;
-
+    
       default:
         console.error('team member not match!')
         break;
     }
   },
+  
+  // 结束行程  
+  finishReturn() {  
+    this.setData({  
+      finishDialogShow: false  
+    })  
+  },  
+  finishRoute() {  
+    let that = this  
+    // 结束 team_seq  
+    wx.request({  
+      method: 'POST',  
+      data: {  
+        'team_seq': this.data.team_seq,  
+      },  
+      url: 'http://124.71.160.151:3004/finishRoute',  
+      success: function (res) {  
+        console.log(res);  
+        // 处理小队信息  
+        that.setData({  
+          finishDialogShow: false  
+        })  
+        //更新旧页面  
+        var pages = getCurrentPages();  
+        var prePage = pages[pages.length - 2];  
+        // console.log("pages", pages)  
+        // console.log("prePage", prePage)  
+        // prePage.initRegionInfo();  
+        prePage.onLoad();  
+        wx.navigateBack()  
+      }  
+    });  
+  },  
 
-  // 结束行程
-  finishReturn() {
-    this.setData({
-      finishDialogShow: false
-    })
-  },
-  finishRoute() {
-    let that = this
-    // 结束 team_seq
-    wx.request({
-      method: 'POST',
-      data: {
-        'team_seq': this.data.team_seq,
-      },
-      url: 'http://124.71.160.151:3004/finishRoute',
-      success: function (res) {
-        console.log(res);
-        // 处理小队信息
-        that.setData({
-          finishDialogShow: false
-        })
-        //更新旧页面
-        var pages = getCurrentPages();
-        var prePage = pages[pages.length - 2];
-        // console.log("pages", pages)
-        // console.log("prePage", prePage)
-        // prePage.initRegionInfo();
-        prePage.onLoad();
-        wx.navigateBack()
-      }
-    });
-  },
   // 删除成员
   delMember(e) {
     console.log("删除成员");
@@ -325,7 +309,8 @@ Page({
     console.log("离开队伍");
     if (now_user == this.data.teamLeader.useropenid) {
       // 队长离开队伍，需要将权限给别人
-    } else {
+    }
+    else {
       // 直接退出
     }
   },

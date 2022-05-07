@@ -15,7 +15,8 @@
     "pages/teamManage/teamManage",
     "pages/teamManage/singleTeam",
     "pages/joinTeam/joinTeam",
-    "pages/joinTeam/teamDetail"
+    "pages/joinTeam/teamDetail",
+    "pages/teamManage/redirectWeb"
   ],
   "plugins": {
       "chooseLocation": {

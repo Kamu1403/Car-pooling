@@ -9,7 +9,8 @@
       <view class="weui-form-preview__hd">
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">{{item.name}}</view>
-          <view class="weui-form-preview__value_in-hd" style="color:{{item.role == 'member' ? 'green' : 'red'}}">{{item.role == 'leader' ? '队长' : '队员'}}</view>
+          <view class="weui-form-preview__value_in-hd" style="color:{{item.role == 'member' ? 'green' : 'red'}}">
+          {{item.role == 'leader' ? '队长': '队员'}}</view>
         </view>
       </view>
       <view class="weui-form-preview__bd">
@@ -29,10 +30,10 @@
           <view class="weui-form-preview__label">联络方式</view>
           <view class="weui-form-preview__value">{{item.phone}}</view>
         </view>
-        <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">行程状态</view>
-          <view class="weui-form-preview__value">{{item.status == 'finish' ? '已结束' : '进行中'}}</view>
-        </view>
+        <view class="weui-form-preview__item"> 
+          <view class="weui-form-preview__label">行程状态</view> 
+          <view class="weui-form-preview__value">{{item.status == 'finish' ? '已结束' : '进行中'}}</view> 
+        </view> 
       </view>
       <view class="weui-form-preview__ft">
         <navigator url="/pages/teamManage/singleTeam?team_seq={{item.team_seq}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详情</navigator>

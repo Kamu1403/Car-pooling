@@ -1,5 +1,5 @@
 // pages/joinTeam/teamDetail.js
-
+const subscribe = require('../../components/notice.js'); 
 var app=getApp();
 
 Page({
@@ -47,7 +47,7 @@ Page({
 	},
 
 	// 加入队伍
-	joinTeam: function () {
+	joinTeam: function (e) {
 		// 判断是否已经登陆
 		if (app.globalData.userInfo.useropenid==""){
 			wx.showModal({
@@ -93,6 +93,8 @@ Page({
 					duration: 2000,  // 持续的时间
 				});
 			}
-		})
+		});
+
+		subscribe.onSubscribe(e); 
 	}
 })

@@ -1,0 +1,2 @@
+<!--pages/teamManage/redirectWeb.wxml-->
+<web-view src="https://yongche.baidu.com/"></web-view>
