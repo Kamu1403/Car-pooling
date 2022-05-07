@@ -10,9 +10,9 @@ Page({
     TeamList: [],
   },
 
-  jumpDetailInfo() {
+  jumpDetailInfo(team_seq) {
     wx.navigateTo({
-      url: '/pages/teamManage/singleTeam',
+      url: '/pages/teamManage/singleTeam?team_seq=' + team_seq,
     })
   },
 
@@ -54,6 +54,7 @@ Page({
       },
       url: 'http://124.71.160.151:3004/getTeamInfo',
       success: function (res) {
+        console.log(res)
         that.setData({
           TeamList: res.data
         });
