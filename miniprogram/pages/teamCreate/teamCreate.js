@@ -32,13 +32,10 @@ Page({
      */
     onLoad: function (options) {
         if (options.dataList) {
-            
-            console.log('修改小队消息');
             let seq = JSON.parse(options.dataList);
             console.log('group seq:'+seq);
 
             //已经获得了小组序号seq，然后从数据库读取小队消息
-            
             this._getOneTeamInfo(seq);
             if (this.data.gender=="男") {
                 this.setData({
@@ -231,22 +228,22 @@ Page({
         // 检查结果
         var res = this._formCheker(e);
         if (res == true){
+            // 执行更新
             if (this.data.update_seq!=-1) {
                 //执行更新
                 var db=require("interface.js");
                 db.updateTeamInfo(this.data);
-                //...
-                console.log('执行更新');
-            }else{
-                console.log('执行新建');
-                // 跳转到行程详细界面
-                wx.redirectTo({
-                    url: "/pages/personalInfo/history/historyInfo",
-                });
-
-                // 提交数据到数据库
+            }
+            // 执行新建
+            else{
+                // 新建队伍的信息
                 var db = require("interface.js");
                 db.uploadTeamInfo(this.data);
+
+                // 跳转到行程详细界面
+                wx.redirectTo({
+                    url: '/pages/teamManage/teamManage',
+                });
             }
         }
     },
