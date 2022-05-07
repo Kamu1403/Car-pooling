@@ -4,6 +4,7 @@
  * Function: 向数据库传送数据
  ****************************************/
 function uploadTeamInfo(data){
+	// 队伍本身信息
 	wx.request({
 		method: 'POST',
 		data:{
@@ -20,14 +21,17 @@ function uploadTeamInfo(data){
 			'end_date': data.end_date, 
 			'end_time': data.end_time+':00',
 			'note': data.note,
-			'status': 'progress'
+			'status': 'progress',
+			'role': 'leader'
 		},
 		url: 'http://124.71.160.151:3001/teaminfo_insert', 
 		success: function(res){ 
-			console.log("Successfully created a new team and save its info into database!");
+			// console.log("Successfully created a new team and save its info into database!");
 		}
 	});
 };
+
+
 function updateTeamInfo(data){
 	wx.request(
 		{

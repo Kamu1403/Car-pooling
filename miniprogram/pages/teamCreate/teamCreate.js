@@ -231,22 +231,22 @@ Page({
         // 检查结果
         var res = this._formCheker(e);
         if (res == true){
+            // 执行更新
             if (this.data.update_seq!=-1) {
                 //执行更新
                 var db=require("interface.js");
                 db.updateTeamInfo(this.data);
-                //...
-                console.log('执行更新');
-            }else{
-                console.log('执行新建');
-                // 跳转到行程详细界面
-                wx.redirectTo({
-                    url: "/pages/personalInfo/history/historyInfo",
-                });
-
-                // 提交数据到数据库
+            }
+            // 执行新建
+            else{
+                // 新建队伍的信息
                 var db = require("interface.js");
                 db.uploadTeamInfo(this.data);
+
+                // 跳转到行程详细界面
+                wx.redirectTo({
+                    url: '/pages/teamManage/teamManage',
+                });
             }
         }
     },
