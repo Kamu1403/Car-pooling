@@ -8,11 +8,12 @@ Page({
   data: {
     theme: "light",
     TeamList: [],
+    search: ''
   },
 
-  jumpDetailInfo() {
+  jumpDetailInfo(team_seq) {
     wx.navigateTo({
-      url: '/pages/teamManage/singleTeam',
+      url: '/pages/teamManage/singleTeam?team_seq=' + team_seq,
     })
   },
 

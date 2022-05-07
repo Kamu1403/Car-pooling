@@ -31,7 +31,7 @@
         </view>
       </view>
       <view class="weui-form-preview__ft">
-        <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="jumpDetailInfo">详情</navigator>
+        <navigator url="/pages/teamManage/singleTeam?team_seq={{item.team_seq}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">详情</navigator>
       </view>
     </view>
   </view>
