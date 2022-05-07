@@ -32,13 +32,10 @@ Page({
      */
     onLoad: function (options) {
         if (options.dataList) {
-            
-            console.log('修改小队消息');
             let seq = JSON.parse(options.dataList);
             console.log('group seq:'+seq);
 
             //已经获得了小组序号seq，然后从数据库读取小队消息
-            
             this._getOneTeamInfo(seq);
             if (this.data.gender=="男") {
                 this.setData({
