@@ -1,18 +1,21 @@
 // pages/joinTeam/teamDetail.js
+
+var app=getApp();
+
 Page({
-    data: {
+	data: {
 		seq: "",
-        teamname: "",           // 队伍名
-        phone: "",
-        gender: "",
-        start_date: "",      // 车队出发的日期
-        start_time: "",      // 车队出发的时间
-        end_date: "",        // 车队到达的日期
-        end_time: "",         // 车队到达的时间
-        start_locationName: "", //出发地址名称
-        des_locationName: "",    //终点地址名称
-        note: ""            	// 备注信息
-    },
+		teamname: "", // 队伍名
+		phone: "",
+		gender: "",
+		start_date: "", // 车队出发的日期
+		start_time: "", // 车队出发的时间
+		end_date: "", // 车队到达的日期
+		end_time: "", // 车队到达的时间
+		start_locationName: "", //出发地址名称
+		des_locationName: "", //终点地址名称
+		note: "" // 备注信息
+	},
 
 	/**
 	 * 生命周期函数--监听页面加载
@@ -28,24 +31,68 @@ Page({
 			success: function (res) {
 				that.setData({
 					seq: res.data[0].seq,
-					teamname: res.data[0].teamname,           // 队伍名
+					teamname: res.data[0].teamname, // 队伍名
 					phone: res.data[0].phone,
 					gender: res.data[0].gender,
-					start_date: res.data[0].start_date,      	// 车队出发的日期
-					start_time: res.data[0].start_time,      	// 车队出发的时间
-					end_date: res.data[0].end_date,        		// 车队到达的日期
-					end_time: res.data[0].end_time,         	// 车队到达的时间
+					start_date: res.data[0].start_date, // 车队出发的日期
+					start_time: res.data[0].start_time, // 车队出发的时间
+					end_date: res.data[0].end_date, // 车队到达的日期
+					end_time: res.data[0].end_time, // 车队到达的时间
 					start_locationName: res.data[0].start_locationName, // 出发地址名称
-					des_locationName: res.data[0].des_locationName,    	// 终点地址名称
-					note: res.data[0].note           			// 备注信息
+					des_locationName: res.data[0].des_locationName, // 终点地址名称
+					note: res.data[0].note // 备注信息
 				});
 			}
 		})
 	},
 
 	// 加入队伍
-	joinTeam: function(){
-		
+	joinTeam: function () {
+		// 判断是否已经登陆
+		if (app.globalData.userInfo.useropenid==""){
+			wx.showModal({
+				title: "请先登陆",
+				cancelColor: 'cancelColor',
+				icon: 'none',
+				duration: 2000,  // 持续的时间
+				confirmText: "登陆",
+				success: function(res){
+					if (res.confirm) {
+						wx.switchTab({
+							url: '/pages/login/login',
+						});
+					} 
+
+			}
+			})
+
+			return;
+		}
+	
+		// 申请加入队伍
+		wx.request({
+			method: 'POST',
+			data: {
+				seq: this.data.seq,
+				openid: app.globalData.userInfo.useropenid,
+				role: 'member'
+			},
+			url: 'http://124.71.160.151:3001/joinTeam',
+			success: function (res) {
+				var info = "";		// 加入队伍的提示信息
+				if (res.data.isIn == true)
+					info = "您已加入队伍，无需重复加入";
+				else if (res.data.joinSuccess == true)
+					info = "加入队伍成功";
+				else
+					info = "加入队伍失败";
+
+				wx.showToast({
+					title: info,
+					icon: 'none',
+					duration: 2000,  // 持续的时间
+				});
+			}
+		})
 	}
 })
-
