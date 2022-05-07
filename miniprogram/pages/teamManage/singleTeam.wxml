@@ -1,20 +1,21 @@
 <view class="page" data-weui-theme="{{theme}}" bindtap="getTap">
   <view class="page__hd">
-    <view class="page__title">行程详细信息</view>
+    <view class="page__title">队伍名称：{{teamName}}</view>
   </view>
   <view class="page__bd">
-    <mp-cells title="行程信息">
-      <mp-cell value="时间" footer="{{time}}"></mp-cell>
-      <mp-cell value="起点" footer="{{from}}"></mp-cell>
-      <mp-cell value="终点" footer="{{to}}"></mp-cell>
+    <mp-cells title="行程详情">
+      <mp-cell value="起始时间" footer="{{start_time}}"></mp-cell>
+      <mp-cell value="结束时间" footer="{{end_time}}"></mp-cell>
+      <mp-cell value="起点" footer="{{start_addr}}"></mp-cell>
+      <mp-cell value="终点" footer="{{des_addr}}"></mp-cell>
     </mp-cells>
 
     <mp-cells title="队伍信息">
       <!-- 队长信息 -->
       <mp-cells title="队长">
-        <mp-cell value="{{teamLeader.memberName}}" class="my-weui-cell">
+        <mp-cell value="{{teamLeader.name}}" class="my-weui-cell">
           <view slot="icon">
-            <image src="{{teamLeader.avatar}}" class="my-weui-slideicon"></image>
+            <image src="{{teamLeader.photo}}" class="my-weui-slideicon"></image>
           </view>
         </mp-cell>
       </mp-cells>
@@ -22,9 +23,9 @@
       <mp-cells title="成员">
         <view wx:for="{{memberInfo}}" wx:key="index">
           <mp-slideview id="slideview" show="{{item.slideviewShow}}" bindshow="showSlideview" data-Index="{{index}}" buttons="{{slideButtons}}" bindbuttontap="delMember">
-            <mp-cell class="my-weui-cell" value="{{item.memberName}}" id="listItem" data-Index="{{index}}">
+            <mp-cell class="my-weui-cell" value="{{item.name}}" id="listItem" data-Index="{{index}}">
               <view slot="icon">
-                <image src="{{item.avatar}}" class="my-weui-slideicon"></image>
+                <image src="{{item.photo}}" class="my-weui-slideicon"></image>
               </view>
             </mp-cell>
           </mp-slideview>
@@ -43,12 +44,7 @@
     <button type="warn" bindtap="leaveTeam" class="my-button">离开队伍</button>
   </view>
 
-  <!-- 解散队伍按钮（只有是队长时显示解散队伍，普通成员显示退出队伍） -->
-  <!-- <view wx:if="isTeamLeader()">
-    <button type="warn" bindtap="delTeam" class="my-button">解散队伍</button>
-  </view> -->
-
-  <view wx:if="isTeamLeader()">
+  <view wx:if="{{isLeader}}">
     <button class="weui-btn" type="default" bindtap="openDialog">队长管理</button>
   </view>
 
