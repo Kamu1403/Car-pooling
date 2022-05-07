@@ -8,6 +8,7 @@ Page({
   data: {
     theme: "light",
     TeamList: [],
+    search: ''
   },
 
   jumpDetailInfo(team_seq) {
@@ -54,7 +55,6 @@ Page({
       },
       url: 'http://124.71.160.151:3004/getTeamInfo',
       success: function (res) {
-        console.log(res)
         that.setData({
           TeamList: res.data
         });

@@ -1,5 +1,6 @@
 Page({
   data: {
+    team_seq: '123',
     teamName: "嘉定出行",
     theme: "",
     time: Date().split(" ")[4],
@@ -40,6 +41,7 @@ Page({
       {text: '打车', value: 2},
       {text: '一键提醒', value: 3},
       {text: '提醒单个成员', value: 4},
+      {text: '行程结束', value: 7},
       {text: '转交权限并退出', type: 'warn',value: 5},
       {text: '解散队伍', type: 'warn', value: 6}
     ],
@@ -69,6 +71,18 @@ Page({
     ],
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
+  },
+
+  	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+    let that = this
+    that.setData(
+      {
+        team_seq: options.team_seq
+      }
+    )
   },
 
   //队长管理
