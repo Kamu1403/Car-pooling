@@ -123,7 +123,7 @@ Page({
           
           else {
             
-            that.data.groupsSelect.push({text:res.data[i]['name'],value:index+1,id:res.data[i]['openid']});
+            that.data.groupsSelect.push({text:res.data[i]['name'],value:index,id:res.data[i]['openid']});
             index+=1;
             // console.log(that.data.groupsSelect);
             let array0 = that.data.memberInfo; // 先从源数据取出值赋给一个新的数组
@@ -328,9 +328,19 @@ Page({
     })
   },
   btnAuthority(e) {
+    let that=this;
     console.log('成员'+e.detail.value);
     this.closeAuthorityDialog();
-
+    wx.request({
+      method:'POST',
+      data:{
+        seq:that.data.team_seq,
+        id:that.data.groupsSelect[e.detail.value]['id']
+      },
+      success(res){
+          console.log('权限移交成功');
+      }
+    })
     // switch (e.detail.value) {
     //   case 1:
         
