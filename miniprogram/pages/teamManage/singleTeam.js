@@ -7,6 +7,7 @@ Page({
     theme: "",
     start_addr: "",
     des_addr: "",
+    RouteStatus:'',
     start_time: Date().split(" ")[4],
     end_time: Date().split(" ")[4],
     teamNum: 0,
@@ -87,7 +88,8 @@ Page({
           start_addr: res.data[0].start_addr,
           des_addr: res.data[0].des_addr,
           start_time: res.data[0].start_date.substring(0, 10) + "  " + res.data[0].start_time,
-          end_time: res.data[0].end_date.substring(0,10) + "  " + res.data[0].end_time
+          end_time: res.data[0].end_date.substring(0, 10) + "  " + res.data[0].end_time,
+          RouteStatus: res.data[0].status
         })
       }
     });
@@ -362,6 +364,43 @@ Page({
     });  
   },  
 
+  // 结束行程
+  finishReturn() {
+    this.setData({
+      finishDialogShow: false
+    })
+  },
+  finishRoute() {
+    let that = this
+    // 结束 team_seq
+    wx.request({
+      method: 'POST',
+      data: {
+        'team_seq': this.data.team_seq,
+      },
+      url: 'http://124.71.160.151:3004/finishRoute',
+      success: function (res) {
+        console.log(res);
+        // 处理小队信息
+        that.setData({
+          finishDialogShow: false
+        })
+        //更新旧页面
+        var pages = getCurrentPages();
+        var prePage = pages[pages.length - 2];
+        // console.log("pages", pages)
+        // console.log("prePage", prePage)
+        // prePage.initRegionInfo();
+        prePage.onLoad();
+        wx.navigateBack()
+      }
+    });
+  },
+  addReview(){
+    wx.navigateTo({
+      url: '/pages/teamManage/routeReview/routeReview'
+    })
+  },
   // 删除成员
   delMember(e) {
     console.log("删除成员");

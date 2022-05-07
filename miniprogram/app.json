@@ -13,6 +13,7 @@
     "pages/carpooling/carpooling",
     "pages/teamCreate/teamCreate",
     "pages/teamManage/teamManage",
+    "pages/teamManage/routeReview/routeReview",
     "pages/teamManage/singleTeam",
     "pages/joinTeam/joinTeam",
     "pages/joinTeam/teamDetail",

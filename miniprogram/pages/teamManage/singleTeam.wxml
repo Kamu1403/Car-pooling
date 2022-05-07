@@ -34,6 +34,10 @@
     </mp-cells>
   </view>
 
+  <view wx:if="{{RouteStatus == 'finish' && !isLeader}}">
+    <button type="primary" bindtap="addReview" class="my-button">评价行程</button>
+  </view>
+
   <!-- 控制队伍人数（多于7人时不显示） -->
   <view wx:if="{{teamNum < 7}}">
     <button type="primary" bindtap="addMember" class="my-button">邀请成员</button>

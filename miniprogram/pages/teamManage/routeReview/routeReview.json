@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "Rate": "../../../components/Rate/rate"
+  }
+}

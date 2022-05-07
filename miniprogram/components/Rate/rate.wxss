@@ -1,0 +1,33 @@
+.starbox{
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+.startext {
+  font-size: 48rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #ff793e;
+  font-weight: 700;
+  margin-right: 10rpx;
+}
+.imgbox {
+  flex: 1;
+  height: 60rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.star-image {
+  width: 50rpx;
+	height: 50rpx;
+  position: absolute;
+  top: 4rpx;
+  left: 0;
+  /* margin-left: 50rpx; */
+  src: "../images/no-star.png";
+}
+.item,.allItem{
+  position: absolute;
+  top: 0rpx;
+}
