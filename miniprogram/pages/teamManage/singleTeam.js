@@ -55,8 +55,7 @@ Page({
     //提醒队员
     showSelectDialog: false,
     groupsSelect: [
-      {text: '成员1', value: 1, id: '123'},  
-      {text: '成员2', value: 2, id: '456'}
+      
     ],
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
@@ -103,7 +102,11 @@ Page({
       success: function (res) {
         // console.dir(res);
         // 处理队员信息
+        
+        let index=0;
+        
         for(let i = 0; i < res.data.length; ++i) {
+          
           if (res.data[i]["openid"] == app.globalData.userInfo.useropenid) {
             that.setData({nowUser: res.data[i]});
             if (res.data[i]["role"] == "leader") {
@@ -115,8 +118,14 @@ Page({
           }
           if (res.data[i]["role"] == "leader") {
             that.setData({teamLeader: res.data[i]});
+            
           }
+          
           else {
+            
+            that.data.groupsSelect.push({text:res.data[i]['name'],value:index+1,id:res.data[i]['openid']});
+            index+=1;
+            // console.log(that.data.groupsSelect);
             let array0 = that.data.memberInfo; // 先从源数据取出值赋给一个新的数组
             let tem = that.data.teamNum + 1;
             array0.push(res.data[i]);
@@ -193,8 +202,8 @@ Page({
     })
   },
   btnClick(e) {
-    var seq=1; //需要seq中填入小组序号，以进行修改小队消息
-    console.error('需要在上一句seq中填入小组序号，以进行修改小队消息');
+    var seq=this.data.team_seq; //需要seq中填入小组序号，以进行修改小队消息
+    // console.error('需要在上一句seq中填入小组序号，以进行修改小队消息');
 
     console.log('选项'+e.detail.value);
     this.closeDialog();
@@ -308,6 +317,7 @@ Page({
 
   //转交权限
   openAuthorityDialog() {
+   
     this.setData({
       showAuthorityDialog: true
     })
@@ -320,15 +330,24 @@ Page({
   btnAuthority(e) {
     console.log('成员'+e.detail.value);
     this.closeAuthorityDialog();
-    switch (e.detail.value) {
-      case 1:
+
+    // switch (e.detail.value) {
+    //   case 1:
         
-        break;
-    
-      default:
-        console.error('team member not match!')
-        break;
-    }
+    //     break;
+    //   case 2:
+    //     break;
+    //   case 3:
+    //     break;
+    //   case 4:
+    //     break;
+    //   case 5:
+    //     break;
+      
+    //   default:
+    //     console.error('team member not match!')
+    //     break;
+    // }
   },
   
   // 结束行程  
