@@ -56,7 +56,7 @@ Page({
       url: 'http://124.71.160.151:3004/getTeamInfo',
       success: function (res) {
         that.setData({
-          TeamList: res.data
+          TeamList: res.data.reverse()      // reverse，使得前面展示，后创建的先展示
         });
       }
     })
