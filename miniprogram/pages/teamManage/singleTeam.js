@@ -2,7 +2,6 @@ var app = getApp();
 
 Page({
   data: {
-    optionList: ['punctual'],
     team_seq: "",
     teamName: "",
     theme: "",
@@ -89,12 +88,8 @@ Page({
           start_addr: res.data[0].start_addr,
           des_addr: res.data[0].des_addr,
           start_time: res.data[0].start_date.substring(0, 10) + "  " + res.data[0].start_time,
-<<<<<<< Updated upstream
-          end_time: res.data[0].end_date.substring(0,10) + "  " + res.data[0].end_time
-=======
           end_time: res.data[0].end_date.substring(0, 10) + "  " + res.data[0].end_time,
           RouteStatus: res.data[0].status
->>>>>>> Stashed changes
         })
       }
     });
@@ -302,8 +297,6 @@ Page({
     });  
   },  
 
-<<<<<<< Updated upstream
-=======
   // 结束行程
   finishReturn() {
     this.setData({
@@ -336,22 +329,11 @@ Page({
       }
     });
   },
-  scoring: function(e) {
-    console.log(e.detail.fraction)
-    let optionsList = this.data.optionList
-    optionsList.map(item => {
-      const child = this.selectComponent(`#${item}`);
-      // console.log(child.data.number)
-      let key = `${item}Fraction`
-      this.setData({
-        [key]: child.data.number
-      })
+  addReview(){
+    wx.navigateTo({
+      url: '/pages/teamManage/routeReview/routeReview'
     })
   },
-  addReview(){
-
-  },
->>>>>>> Stashed changes
   // 删除成员
   delMember(e) {
     console.log("删除成员");

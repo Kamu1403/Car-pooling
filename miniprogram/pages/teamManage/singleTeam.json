@@ -8,7 +8,6 @@
     "mp-cell": "weui-miniprogram/cell/cell",
     "mp-icon": "weui-miniprogram/icon/icon",
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
-    "mp-halfScreenDialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
-    "Rate": "../../components/Rate/rate"
+    "mp-halfScreenDialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog"
   }
 }

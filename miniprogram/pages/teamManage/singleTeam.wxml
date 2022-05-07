@@ -34,9 +34,8 @@
     </mp-cells>
   </view>
 
-  <view wx:if="{{!isLeader && RouteStatus == 'finish'}}" wx:for="{{optionList}}" wx:key="index">
+  <view wx:if="{{RouteStatus == 'finish' && !isLeader}}">
     <button type="primary" bindtap="addReview" class="my-button">评价行程</button>
-    <Rate bind:scoring="scoring" id="{{item}}"></Rate>
   </view>
 
   <!-- 控制队伍人数（多于7人时不显示） -->
