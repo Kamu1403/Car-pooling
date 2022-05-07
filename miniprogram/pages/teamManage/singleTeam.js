@@ -1,32 +1,17 @@
+var app = getApp();
+
 Page({
   data: {
-    team_seq: '123',
-    teamName: "嘉定出行",
+    team_seq: "",
+    teamName: "",
     theme: "",
-    time: Date().split(" ")[4],
-    from: "出发地",
-    to: "目的地",
-    teamNum: 3,
-    teamLeader: {
-      memberName: "邬嘉晟1",
-      avatar: "user-unlogin.png"
-    },
-    memberInfo: [{
-        memberName: "邬嘉晟2",
-        avatar: "user-unlogin.png",
-        slideviewShow: false
-      },
-      {
-        memberName: "邬嘉晟3",
-        avatar: "user-unlogin.png",
-        slideviewShow: false
-      },
-      {
-        memberName: "邬嘉晟4",
-        avatar: "user-unlogin.png",
-        slideviewShow: false
-      }
-    ],
+    start_addr: "",
+    des_addr: "",
+    start_time: Date().split(" ")[4],
+    end_time: Date().split(" ")[4],
+    teamNum: 0,
+    teamLeader: {},
+    memberInfo: [],
     slideButtons: [{
       type: 'warn',
       extClass: "my-weui-slidebutton",
@@ -34,6 +19,9 @@ Page({
     }],
     slideviewShowIndex: 0,
     
+    // 个人信息
+    nowUser: {},
+    isLeader: "",
     //队长管理
     showDialog: false,
     groups: [
@@ -77,12 +65,62 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-    let that = this
-    that.setData(
-      {
+    let that = this;
+    that.setData({
         team_seq: options.team_seq
       }
     )
+    // 根据team_seq找小队信息（）
+    wx.request({
+      method: 'POST',
+      data: {
+        'team_seq': this.data.team_seq,
+      },
+      url: 'http://124.71.160.151:3003/getMainInfo',
+      success: function (res) {
+        // console.dir(res);
+        // 处理小队信息
+        that.setData({
+          teamName: res.data[0].teamname,
+          start_addr: res.data[0].start_addr,
+          des_addr: res.data[0].des_addr,
+          start_time: res.data[0].start_date.substring(0, 10) + "  " + res.data[0].start_time,
+          end_time: res.data[0].end_date.substring(0,10) + "  " + res.data[0].end_time
+        })
+      }
+    });
+    // 根据team_seq找队员信息（队员的openid找对应的头像信息）
+    wx.request({
+      method: 'POST',
+      data: {
+        'team_seq': this.data.team_seq,
+      },
+      url: 'http://124.71.160.151:3003/getMemberInfo',
+      success: function (res) {
+        // console.dir(res);
+        // 处理队员信息
+        for(let i = 0; i < res.data.length; ++i) {
+          if (res.data[i]["openid"] == app.globalData.userInfo.useropenid) {
+            that.setData({nowUser: res.data[i]});
+            if (res.data[i]["role"] == "leader") {
+              that.setData({isLeader: true});
+            }
+            else {
+              that.setData({isLeader: false});
+            }
+          }
+          if (res.data[i]["role"] == "leader") {
+            that.setData({teamLeader: res.data[i]});
+          }
+          else {
+            let array0 = that.data.memberInfo; // 先从源数据取出值赋给一个新的数组
+            let tem = that.data.teamNum + 1;
+            array0.push(res.data[i]);
+            that.setData({memberInfo: array0, teamNum: tem});
+          }
+        }
+      }
+    })
   },
 
   //队长管理
@@ -200,19 +238,6 @@ Page({
     }
   },
   
-
-  // 获取当前用户
-  getNowUser() {
-    return "邬嘉晟1";
-  },
-  isTeamLeader() {
-    if (this.getNowUser() == this.data.teamLeader.memberName) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  },
   // 删除成员
   delMember(e) {
     console.log("删除成员");
@@ -223,9 +248,9 @@ Page({
   },
   // 离开队伍
   leaveTeam(e) {
-    let now_user = this.getNowUser();
+    let now_user = this.data.nowUser.useropenid;
     console.log("离开队伍");
-    if (now_user == this.data.teamLeader.memberName) {
+    if (now_user == this.data.teamLeader.useropenid) {
       // 队长离开队伍，需要将权限给别人
     }
     else {
