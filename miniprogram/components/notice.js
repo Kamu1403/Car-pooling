@@ -19,27 +19,29 @@ function onSubscribe(e) {
                 console.log('用户点击允许')
                 console.log('请参考 https://www.jianshu.com/p/493de887b5a1 修改后端');
                 // 调用云函数subscribe，向云数据库插入一条记录，具体参考 https://www.jianshu.com/p/493de887b5a1
-                wx.cloud.callFunction({
-                    name: 'addBookingMsg',
-                    page: page,
-                    data: noticeData
-                })
-                .then(() => {
-                    wx.showToast({
-                        title: '订阅成功！',
-                        icon: 'success'
-                    })
-                })
-                .catch((e) => {
-                    // dothing...
-                    console.log(e)
-                    wx.showToast({
-                        title: '订阅失败！',
-                        icon: 'error'
-                    });
-                })
+                // wx.cloud.callFunction({
+                //     name: 'addBookingMsg',
+                //     page: page,
+                //     data: noticeData
+                // })
+                //.
+                // then(() => {
+                //     wx.showToast({
+                //         title: '订阅成功！',
+                //         icon: 'success'
+                //     })
+                // })
+                // .catch((e) => {
+                //     // dothing...
+                //     console.log(e)
+                //     wx.showToast({
+                //         title: '订阅失败！',
+                //         icon: 'error'
+                //     });
+                // })
+                console.log('用户点击接受')
             }
-            if (res[tmplId] == 'reject') {
+            if (res[templateId] == 'reject') {
                 console.log('用户点击取消')
             }
         }

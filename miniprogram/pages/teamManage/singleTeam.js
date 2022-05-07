@@ -127,8 +127,56 @@ Page({
 
   //提醒用户  
   sendSubscribe(id){  
-    console.log('openid='+id)  
-    console.log('向服务器发送消息，开始sendCourseSubscribe\n具体参考 https://www.jianshu.com/p/493de887b5a1')  
+    console.log('openid='+id);  
+    let that=this;  
+    wx.requestSubscribeMessage({
+      tmplIds: ['RwrxgRzzQwHi40i9E30pff2IZf3YfsD48ghtvzM9YpY'],
+      //获得access_token
+      success(res){
+        wx.request({
+          url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxf8ac3e1fa90e2c8b&secret=82841ca97f7ab3bd8a1e501f0762dae5',
+          success(res){
+            console.log('access token='+res.data.access_token);
+            let dateList=that.data.start_time.split(' ')[0].split('-');
+            let date=dateList[0]+'年'+dateList[1]+'月'+dateList[2]+'日';
+            
+            var data = {
+              "touser": id,
+              "template_id": "RwrxgRzzQwHi40i9E30pff2IZf3YfsD48ghtvzM9YpY",
+              "data": {
+                "thing1": {
+                  "value": "拼车提醒"
+                },
+                "name7": {
+                  "value": that.data.teamLeader.name
+                },
+                "date8": {
+                  "value": date
+                },
+                "thing10": {
+                  "value": that.data.start_addr
+                }
+              },
+            }
+
+            wx.request({
+              method: 'POST',
+              url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + res.data.access_token,
+              data: data,
+              success(res){
+                console.log(res);
+              }
+            }
+
+            )
+
+          }
+
+        })
+        
+   
+      }
+    })
   }, 
 
   //队长管理
@@ -159,10 +207,29 @@ Page({
         break;
       case 3:
         console.log('提醒所有成员');
-        for (let index = 0; index < this.data.groupsSelect.length; index++) {  
-          let element = this.data.groupsSelect[index].id;  
-          this.sendSubscribe(element);  
-        };
+        
+        // for (let index = 0; index < this.data.groupsSelect.length; index++) {  
+        //   let element = this.data.groupsSelect[index].id;  
+        //   this.sendSubscribe(element);  
+        // };
+        let that=this;
+        wx.request(
+          {
+            method:'POST',
+            data: {
+              'team_seq': this.data.team_seq,
+            },
+            url: 'http://124.71.160.151:3003/getMemberInfo',
+            success(res){
+              for(let i=0;i<res.data.length;i++){
+                let element=res.data[i]["openid"];
+                that.sendSubscribe(element);
+              }
+            }
+          }
+        )
+        
+
         break;
       case 4:
         this.openSelectDialog();
@@ -341,6 +408,13 @@ Page({
       });
     }
   },
+  getAccessToken(success) {
+    wx.request({
+      url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxf8ac3e1fa90e2c8b&secret=82841ca97f7ab3bd8a1e501f0762dae5',
+      success: success
+    })
+  },
+
   showSlideview(e) {
     let Index = e.currentTarget.dataset.index;
     //console.log('slideview is showing', Index);//打印当前展开的序号
