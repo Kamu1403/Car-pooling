@@ -357,13 +357,16 @@ Page({
     let that=this;
     console.log('成员id='+id);
     // this.closeAuthorityDialog();
+    console.log('队长id='+app.globalData.userInfo.useropenid);
     wx.request({
       method:'POST',
       data:{
         seq:that.data.team_seq,
-        id:id
+        mem_id:id,
+        leader_id:app.globalData.userInfo.useropenid
       },
       url: 'http://124.71.160.151:3003/transferPermission',
+      
       success(res){
           console.log('权限移交成功');
       }
