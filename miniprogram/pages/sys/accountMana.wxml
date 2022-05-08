@@ -1,5 +1,5 @@
 <!--pages/sys/accountMana.wxml-->
-<view class="page" data-weui-theme="{{theme}}">
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
   <view class="page__hd">
     <view class="page__title">用户账号管理</view>
   </view>
@@ -14,7 +14,7 @@
       <view class="weui-form-preview__bd">
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">用户id</view>
-          <view class="weui-form-preview__value">{{item.openid}}</view>
+          <view class="weui-form-preview__value" style="font-size: 14px;">{{item.openid}}</view>
         </view>
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">昵称</view>
@@ -33,7 +33,7 @@
 
     <mp-dialog ext-class="dialog" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
       <view>
-        <icon style="margin-bottom: 10px;" type="info" size="70" ></icon>
+        <icon style="margin-bottom: 10px;" type="info" color="rgb(255, 187, 61)" size="60" ></icon>
         <view>确定执行吗？</view>
       </view>
     </mp-dialog>
