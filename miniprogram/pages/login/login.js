@@ -51,7 +51,7 @@ Page({
                       username:res.userInfo.nickName,
                       userphoto:res.userInfo.avatarUrl,
                       logined: true,
-                      userrole:1,
+                      userrole:0,
                       userstatus:1
                       })
                       app.globalData.userInfo.usergender=res.userInfo.gender;
@@ -192,6 +192,11 @@ Page({
   jumpApeal() {
     wx.navigateTo({
       url:  "/pages/appeal/appeal",
+    })
+  },
+  jumpAccountMana() {
+    wx.navigateTo({
+      url:  "/pages/sys/accountMana",
     })
   },
   /**

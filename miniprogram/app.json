@@ -17,18 +17,18 @@
     "pages/teamManage/singleTeam",
     "pages/joinTeam/joinTeam",
     "pages/joinTeam/teamDetail",
-    "pages/teamManage/redirectWeb"
+    "pages/teamManage/redirectWeb",
+    "pages/sys/accountMana"
   ],
   "plugins": {
-      "chooseLocation": {
+    "chooseLocation": {
       "version": "1.0.5",
       "provider": "wx76a9a06e5b4e693e"
-      }
-
+    }
   },
   "permission": {
     "scope.userLocation": {
-    "desc": "你的位置信息将用于小程序定位"
+      "desc": "你的位置信息将用于小程序定位"
     }
   },
   "window": {
@@ -38,25 +38,25 @@
     "navigationBarTitleText": "嘉定拼车系统",
     "navigationBarTextStyle": "black"
   },
-  "tabBar":{
-    "list":[
+  "tabBar": {
+    "list": [
       {
-        "pagePath":"pages/joinTeam/joinTeam",
-        "text":"拼车",
+        "pagePath": "pages/joinTeam/joinTeam",
+        "text": "拼车",
         "iconPath": "icons/carpooling.png",
-        "selectedIconPath":  "icons/_carpooling.png"   
+        "selectedIconPath": "icons/_carpooling.png"
       },
       {
-        "pagePath":"pages/friends/friends",
-        "text":"好友",
+        "pagePath": "pages/friends/friends",
+        "text": "好友",
         "iconPath": "icons/friends.png",
-        "selectedIconPath":  "icons/_friends.png"   
+        "selectedIconPath": "icons/_friends.png"
       },
       {
-        "pagePath":"pages/login/login",
-        "text":"我",
+        "pagePath": "pages/login/login",
+        "text": "我",
         "iconPath": "icons/info.png",
-        "selectedIconPath":  "icons/_info.png"   
+        "selectedIconPath": "icons/_info.png"
       }
     ]
   },

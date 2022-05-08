@@ -66,8 +66,8 @@ Page({
           username: res.data[0].name,
           usergender: res.data[0].gender,
           userphoto: res.data[0].photo,
-          userphone: res.data[0].phone == null? '' : res.data[0].phone,
-          useremail: res.data[0].email == null? '' : res.data[0].email,
+          userphone: res.data[0].phone == null? '未设置' : res.data[0].phone,
+          useremail: res.data[0].email == null? '未设置' : res.data[0].email,
         })
         console.log(res.data)
       }

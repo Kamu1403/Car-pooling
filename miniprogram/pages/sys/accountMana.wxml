@@ -1,0 +1,41 @@
+<!--pages/sys/accountMana.wxml-->
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="page__hd">
+    <view class="page__title">用户账号管理</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-form-preview" wx:for="{{userAccount}}" data-item="item" wx:for-index="idx">
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">用户状态</view>
+          <view class="weui-form-preview__value_in-hd" style="color:{{item.color}}">{{item.status}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">用户id</view>
+          <view class="weui-form-preview__value">{{item.openid}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">昵称</view>
+          <view class="weui-form-preview__value">{{item.username}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">电话</view>
+          <view class="weui-form-preview__value">{{item.userphone}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__ft">
+        <view aria-hidden="{{showDialog ? true : false}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="open" data-src="{{item.seq}}">操作</view>
+      </view>
+    </view>
+    <mp-actionSheet bindactiontap="btnClick" show="{{showDialog}}" actions="{{groups}}" title="账户管理选项"> </mp-actionSheet>
+
+    <mp-dialog ext-class="dialog" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+      <view>
+        <icon style="margin-bottom: 10px;" type="info" size="70" ></icon>
+        <view>确定执行吗？</view>
+      </view>
+    </mp-dialog>
+  </view>
+</view>

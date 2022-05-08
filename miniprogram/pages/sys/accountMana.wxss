@@ -1,0 +1,10 @@
+/* pages/sys/accountMana.wxss */
+@import '../../style/common.wxss';
+@import '../../style/weui.wxss';
+
+.weui-form-preview{
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 5%;
+    margin-bottom: 25px;
+}

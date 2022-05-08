@@ -50,14 +50,13 @@
 <view class="afterlogin" wx:elif="{{logined==true}}" style="height:100%">
   <view class="infobox">
     <image mode="aspectFit" class="userimg" src="{{userphoto}}"></image>
-    <text class="infoword">{{username}}
-    </text>
+    <text wx:if="{{userrole == 1}}" class="infoword">尊敬的管理员\n{{username}}</text>
+    <text wx:else class="infoword">{{username}}</text>
   </view>
   <view class="optionlist">
+    <button wx:if="{{userrole==1}}" style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpAccountMana">用户账号管理</button>
     <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpPersonalInfo">个人信息管理</button>
     <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="jumpHistory">查看历史行程</button>
-    <text>
-    </text>
     <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="logout">退出登录</button>
   </view>  
 </view>
