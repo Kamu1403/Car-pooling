@@ -244,6 +244,7 @@ Page({
         break;
       case 4:
         this.openSelectDialog();
+        this.sendSubscribe(e.detail.id);
         break;
       case 5:
         this.openAuthorityDialog();
@@ -304,15 +305,17 @@ Page({
   btnSelect(e) {
     console.log('成员'+e.detail.value);
     this.closeSelectDialog();
-    switch (e.detail.value) {
-      case 1:
-        this.sendSubscribe(this.data.groupsSelect[e.detail.value].id);  
-        break;
+    // switch (e.detail.value) {
+    //   case 1:
+    //     this.sendSubscribe(this.data.groupsSelect[e.detail.value].id);  
+    //     break;
     
-      default:
-        console.error('team member not match!')
-        break;
-    }
+    //   default:
+    //     console.error('team member not match!')
+    //     break;
+    // }
+    
+    
   },
 
   //转交权限
