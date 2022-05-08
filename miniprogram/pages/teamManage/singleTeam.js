@@ -337,6 +337,7 @@ Page({
         seq:that.data.team_seq,
         id:that.data.groupsSelect[e.detail.value]['id']
       },
+      url: 'http://124.71.160.151:3003/transferPermission',
       success(res){
           console.log('权限移交成功');
       }
