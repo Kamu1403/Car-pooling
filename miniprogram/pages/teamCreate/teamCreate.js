@@ -227,7 +227,27 @@ Page({
     * Notice: 
     *****************************/
     formSubmit: function (e) {
-        console.log(this.data.openid)
+        // 判断账号是不是被封禁
+		if (app.globalData.userInfo.userstatus!=1){
+			wx.showModal({
+				title: "账号被封禁",
+				cancelColor: 'cancelColor',
+				icon: 'none',
+				duration: 2000,  // 持续的时间
+				confirmText: "解禁",
+				success: function(res){
+					if (res.confirm) {
+						wx.switchTab({
+							url: '/pages/login/login',
+						});
+					} 
+
+			}
+			})
+			return;
+		}
+
+
         // 检查结果
         var res = this._formCheker(e);
         if (res == true){
