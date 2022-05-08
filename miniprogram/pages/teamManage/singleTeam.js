@@ -54,9 +54,7 @@ Page({
 
     //提醒队员
     showSelectDialog: false,
-    groupsSelect: [
-      
-    ],
+    groupsSelect: [],
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
     //结束行程  
@@ -122,7 +120,6 @@ Page({
           }
           
           else {
-            
             that.data.groupsSelect.push({text:res.data[i]['name'],value:index,id:res.data[i]['openid']});
             index+=1;
             // console.log(that.data.groupsSelect);
@@ -134,6 +131,7 @@ Page({
         }
       }
     })
+    console.log(that.data.groupsSelect);
   },
 
   //提醒用户  
@@ -219,32 +217,30 @@ Page({
       case 3:
         console.log('提醒所有成员');
         
-        // for (let index = 0; index < this.data.groupsSelect.length; index++) {  
-        //   let element = this.data.groupsSelect[index].id;  
-        //   this.sendSubscribe(element);  
-        // };
-        let that=this;
-        wx.request(
-          {
-            method:'POST',
-            data: {
-              'team_seq': this.data.team_seq,
-            },
-            url: 'http://124.71.160.151:3003/getMemberInfo',
-            success(res){
-              for(let i=0;i<res.data.length;i++){
-                let element=res.data[i]["openid"];
-                that.sendSubscribe(element);
-              }
-            }
-          }
-        )
+        for (let index = 0; index < this.data.groupsSelect.length; index++) {  
+          let element = this.data.groupsSelect[index].id;  
+          this.sendSubscribe(element);  
+        };
+        // let that=this;
+        // wx.request(
+        //   {
+        //     method:'POST',
+        //     data: {
+        //       'team_seq': this.data.team_seq,
+        //     },
+        //     url: 'http://124.71.160.151:3003/getMemberInfo',
+        //     success(res){
+        //       for(let i=0;i<res.data.length;i++){
+        //         let element=res.data[i]["openid"];
+        //         that.sendSubscribe(element);
+        //       }
+        //     }
+        //   }
+        // )
         
-
         break;
       case 4:
         this.openSelectDialog();
-        this.sendSubscribe(e.detail.id);
         break;
       case 5:
         this.openAuthorityDialog();
@@ -293,9 +289,23 @@ Page({
 
   //提醒单个成员
   openSelectDialog() {
-    this.setData({
-      showSelectDialog: true
+    let that=this;
+    var items=[];
+    for (let index = 0; index < this.data.groupsSelect.length; index++) {
+      items.push(this.data.groupsSelect[index].text);  
+    };
+    wx.showActionSheet({
+      itemList: items,
+      success(res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex);
+          that.sendSubscribe(that.data.groupsSelect[res.tapIndex].id)
+        }
+      }
     })
+    // this.setData({
+    //   showSelectDialog: true
+    // })
   },
   closeSelectDialog() {
     this.setData({
@@ -320,48 +330,45 @@ Page({
 
   //转交权限
   openAuthorityDialog() {
-   
-    this.setData({
-      showAuthorityDialog: true
+    let that=this;
+    var items=[];
+    for (let index = 0; index < this.data.groupsSelect.length; index++) {
+      items.push(this.data.groupsSelect[index].text);  
+    };
+    wx.showActionSheet({
+      itemList: items,
+      success(res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex);
+          that.btnAuthority(that.data.groupsSelect[res.tapIndex].id)
+        }
+      }
     })
+    // this.setData({
+    //   showAuthorityDialog: true
+    // })
   },
   closeAuthorityDialog() {
     this.setData({
       showAuthorityDialog: false
     })
   },
-  btnAuthority(e) {
+  btnAuthority(id) {
     let that=this;
-    console.log('成员'+e.detail.value);
-    this.closeAuthorityDialog();
+    console.log('成员id='+id);
+    // this.closeAuthorityDialog();
     wx.request({
       method:'POST',
       data:{
         seq:that.data.team_seq,
-        id:that.data.groupsSelect[e.detail.value]['id']
+        id:id
       },
       url: 'http://124.71.160.151:3003/transferPermission',
       success(res){
           console.log('权限移交成功');
       }
     })
-    // switch (e.detail.value) {
-    //   case 1:
-        
-    //     break;
-    //   case 2:
-    //     break;
-    //   case 3:
-    //     break;
-    //   case 4:
-    //     break;
-    //   case 5:
-    //     break;
-      
-    //   default:
-    //     console.error('team member not match!')
-    //     break;
-    // }
+
   },
   
   // 结束行程  
