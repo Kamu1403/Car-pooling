@@ -19,6 +19,7 @@ Page({
       text: '删除'
     }],
     slideviewShowIndex: 0,
+    isOnShow: false,
     
     // 个人信息
     nowUser: {},
@@ -30,7 +31,7 @@ Page({
       {text: '打车', value: 2},
       {text: '一键提醒', value: 3},
       {text: '提醒单个成员', value: 4},
-      {text: '行程结束', value: 7},
+      {text: '行程结束', type: 'warn',value: 7},
       {text: '转交权限并退出', type: 'warn',value: 5},
       {text: '解散队伍', type: 'warn', value: 6}
     ],
@@ -132,6 +133,14 @@ Page({
       }
     })
     console.log(that.data.groupsSelect);
+  },
+
+  onShow: function () {
+    console.log('onShow:'+this.data.isOnShow);
+    if(this.data.isOnShow)
+      this.onLoad({team_seq:this.data.team_seq});
+    else
+      this.data.isOnShow=true;
   },
 
   //提醒用户  
@@ -341,6 +350,7 @@ Page({
         if (!res.cancel) {
           console.log(res.tapIndex);
           that.btnAuthority(that.data.groupsSelect[res.tapIndex].id)
+          wx.navigateBack();
         }
       }
     })
