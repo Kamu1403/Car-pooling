@@ -32,7 +32,7 @@ Page({
      */
     onLoad: function (options) {
         if (options.dataList) {
-            
+            let that=this;
             console.log('修改小队消息');
             let seq = JSON.parse(options.dataList);
             console.log('group seq:'+seq);
@@ -40,19 +40,7 @@ Page({
             //已经获得了小组序号seq，然后从数据库读取小队消息
             
             this._getOneTeamInfo(seq);
-            if (this.data.gender=="男") {
-                this.setData({
-                    checka: 'true'
-                });
-                console.log('a');
-            } else if (this.data.gender=="女") {
-                this.setData({
-                    checkb: 'true'
-                });
-                console.log('b');
-            } else {
-                console.error('gender not match!');
-            }
+
         }else{
             console.log('新建队伍');
         }
@@ -322,10 +310,27 @@ Page({
                     des_locationName: res.data[0].des_locationName,    //终点地址名称
                     note: res.data[0].note,            // 备注信息
                     update_seq: seq     //更新的seq
-				});
+                });
+                that.setGenderTap(res.data[0].gender);
 			}
 		})
-	}
+    },
+
+    setGenderTap(gender){
+        if (gender=="男") {
+            this.setData({
+                checka: 'true'
+            });
+            console.log('a');
+        } else if (gender=="女") {
+            this.setData({
+                checkb: 'true'
+            });
+            console.log('b');
+        } else {
+            console.error('gender not match!');
+        }
+    }
 })
 
 
