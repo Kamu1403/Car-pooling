@@ -11,11 +11,11 @@ Page({
 			search: this.search.bind(this)
 		});
 
-		this._getTeamInfo("progress", "20"); // 获取数据
+		this._getTeamInfo("progress", "0"); // 获取数据
 	},
 
 	onShow() {
-		this._getTeamInfo("progress", "20"); 	// 获取数据
+		this._getTeamInfo("progress", "0"); 	// 获取数据
 	},
 
 
