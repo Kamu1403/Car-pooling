@@ -19,7 +19,8 @@
     "pages/joinTeam/teamDetail",
     "pages/teamManage/redirectWeb",
     "pages/sys/accountMana",
-    "pages/sys/complaint/complaint"
+    "pages/sys/complaint/complaint",
+    "pages/sys/report/report"
   ],
   "plugins": {
     "chooseLocation": {

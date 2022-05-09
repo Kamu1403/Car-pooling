@@ -3,5 +3,5 @@
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
     "mp-dialog": "weui-miniprogram/dialog/dialog"
   },
-  "navigationBarTitleText": "用户账号管理"
+  "navigationBarTitleText": "举报信息查看"
 }
