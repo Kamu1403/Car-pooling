@@ -68,7 +68,9 @@ Page({
 	onLoad: function (options) {
     let that = this;
     that.setData({
-        team_seq: options.team_seq
+        team_seq: options.team_seq,
+        memberInfo: [],
+        groupsSelect: []
       }
     )
     // 根据team_seq找小队信息（）
