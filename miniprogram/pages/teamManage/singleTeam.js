@@ -453,7 +453,7 @@ Page({
   },
   addReview(){
     wx.navigateTo({
-      url: '/pages/teamManage/routeReview/routeReview'
+      url: '/pages/teamManage/routeReview/routeReview?team_seq=' + this.data.team_seq
     })
   },
   // 删除成员
