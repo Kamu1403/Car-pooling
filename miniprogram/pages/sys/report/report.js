@@ -121,7 +121,14 @@ Page({
     var that = this;
     var i = e.currentTarget.dataset.src;
     that.data.now_seq = i;
-    if (that.data.report[i].status == '已处理') {
+    if (that.data.report[i].status == '未处理'){
+      that.setData({
+        groups: [
+          { text: '封禁被举报者', type: 'warn', value: 1 },
+          { text: '封禁举报者', type: 'warn', value: 2 },
+        ]
+      });
+    }else {
       that.setData({
         groups: [
         ]
