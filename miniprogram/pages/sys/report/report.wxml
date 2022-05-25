@@ -1,31 +1,30 @@
-<!--pages/sys/accountMana.wxml-->
+<!--pages/sys/report/report.wxml-->
 <view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
   <view class="page__hd">
   <view class="top">
-    <view class="page__title">用户账号信息</view>
-    <navigator class="weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea" aria-role="button" url="./report/report">举报信息查看</navigator>
+    <view class="page__title">举报详情</view>
   </view>
   </view>
   <view class="page__bd">
-    <view class="weui-form-preview" wx:for="{{userAccount}}" data-item="item" wx:for-index="idx">
+    <view class="weui-form-preview" wx:for="{{report}}" data-item="item" wx:for-index="idx">
       <view class="weui-form-preview__hd">
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">用户状态</view>
+          <view class="weui-form-preview__label">举报状态</view>
           <view class="weui-form-preview__value_in-hd" style="color:{{item.color}}">{{item.status}}</view>
         </view>
       </view>
       <view class="weui-form-preview__bd">
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">用户id</view>
-          <view class="weui-form-preview__value" style="font-size: 14px;">{{item.openid}}</view>
+          <view class="weui-form-preview__label">举报者id</view>
+          <view class="weui-form-preview__value" style="font-size: 13px;">{{item.reporterId}}</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">昵称</view>
-          <view class="weui-form-preview__value">{{item.username}}</view>
+          <view class="weui-form-preview__label">被举报者id</view>
+          <view class="weui-form-preview__value" style="font-size: 13px;">{{item.suspecterId}}</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">电话</view>
-          <view class="weui-form-preview__value">{{item.userphone}}</view>
+          <view class="weui-form-preview__label">举报原因</view>
+          <view class="weui-form-preview__value">{{item.message}}</view>
         </view>
       </view>
       <view class="weui-form-preview__ft">

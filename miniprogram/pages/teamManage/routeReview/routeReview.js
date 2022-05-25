@@ -11,14 +11,19 @@ Page({
     score: 0,
     textLen: 0,
     maxTextLen: 250,
-    text: ''
+    text: '',
+    team_seq: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    let that = this;
+    that.setData({
+      team_seq: options.team_seq,
+    })
+    // console.log(this.data.team_seq)
   },
 
   chooseImage() {
@@ -64,6 +69,7 @@ Page({
         'text': this.data.text,
         'useropenid': app.globalData.userInfo.useropenid,
         'photo': this.data.files[0],
+        'team_seq': this.data.team_seq
       },
       url: 'http://124.71.160.151:3004/insertReview',
       success: function (res) {
