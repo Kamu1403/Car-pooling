@@ -18,7 +18,6 @@
     "pages/joinTeam/teamDetail",
     "pages/teamManage/redirectWeb",
     "pages/sys/accountMana",
-<<<<<<< HEAD
 
 
     "pages/notification_groupDetail/groupDetail",
@@ -33,12 +32,10 @@
     "pages/setting/setting",
     "pages/add_groups/add_groups",
     "pages/groupChatRoom/groupChatRoom",
-    "pages/groupSetting/groupSetting"
+    "pages/groupSetting/groupSetting",
 
-=======
     "pages/sys/complaint/complaint",
     "pages/sys/report/report"
->>>>>>> develop
   ],
   "plugins": {
     "chooseLocation": {
