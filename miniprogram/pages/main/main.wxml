@@ -74,21 +74,6 @@
   </view>
 </view>
 
-<!-- tablebar -->
-<view class="{{isIPX?'chatRoom_tab_X':'chatRoom_tab'}}">
-
-  <view class="tableBar">
-    <image src="../../images/comtactshighlight@2x.png"></image>
-    <text class="activeText">联系人</text>
-  </view>
-
-
-  <view class="tableBar" bindtap="tab_setting">
-    <image src="../../images/setting@2x.png"></image>
-    <text>设置</text>
-  </view>
-</view>
-
 <!-- 提示内容 -->
 <import src="../../comps/toast/toast.wxml" />
 <template is="toast" data="{{ ..._toast_ }}"></template>
