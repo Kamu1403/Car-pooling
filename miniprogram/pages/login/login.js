@@ -249,6 +249,9 @@ Page({
     })
     app.globalData.logined = true;
     app.globalData.userInfo.useropenid = '';
+    /***************************************/
+    WebIM.conn.close();
+    /***************************************/
   },
   jumpPersonalInfo() {
     wx.navigateTo({
