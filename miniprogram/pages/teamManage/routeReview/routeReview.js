@@ -55,6 +55,7 @@ Page({
   },
 
   submit: function () {
+    let that=this;
     //用于测试，后期应当写入数据库，并在下方加入返回前一个页面的函数
     if (this.data.files.length == 0) {
       wx.showToast({
@@ -78,7 +79,9 @@ Page({
           title: '修改成功',
         })
         setTimeout(() => {
-          wx.navigateBack()
+          wx.navigateTo({
+            url: '/pages/teamManage/routeReview/addFriend?team_seq=' + that.data.team_seq,
+          });
         }, 1000)
       }
     })

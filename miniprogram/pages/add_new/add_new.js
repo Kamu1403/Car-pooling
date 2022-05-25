@@ -88,7 +88,7 @@ Page({
 
 	isExistFriend: function(name, list){
 		for(let index = 0; index < list.length; index++){
-			if(name == list[index].name){
+			if(name.toLowerCase() == list[index].name.toLowerCase()){
 				return true
 			}
 		}

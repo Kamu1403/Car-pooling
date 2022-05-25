@@ -1,0 +1,13 @@
+/* example/input/input.wxss */
+@import '../../../style/common.wxss';
+
+.weui-agree .weui-agree__text {
+  display: inline;
+}
+.my-weui-slideicon {
+  width: 75rpx;
+  height: 75rpx;
+  border-collapse: collapse;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}

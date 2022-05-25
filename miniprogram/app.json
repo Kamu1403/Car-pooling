@@ -13,6 +13,7 @@
     "pages/teamCreate/teamCreate",
     "pages/teamManage/teamManage",
     "pages/teamManage/routeReview/routeReview",
+    "pages/teamManage/routeReview/addFriend",
     "pages/teamManage/singleTeam",
     "pages/joinTeam/joinTeam",
     "pages/joinTeam/teamDetail",
