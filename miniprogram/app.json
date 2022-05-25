@@ -4,7 +4,6 @@
     "pages/appeal/appeal",
     "pages/showinfo/showinfo",
     "pages/report/report",
-    "pages/friends/friends",
     "pages/personalInfo/personalInfo",
     "pages/personalInfo/change",
     "pages/personalInfo/changeheadimg",
@@ -18,7 +17,23 @@
     "pages/joinTeam/joinTeam",
     "pages/joinTeam/teamDetail",
     "pages/teamManage/redirectWeb",
-    "pages/sys/accountMana"
+    "pages/sys/accountMana",
+
+
+    "pages/notification_groupDetail/groupDetail",
+    "pages/notification_friendDetail/friendDetail",
+    "pages/main/main",
+    "pages/chatroom/chatroom",
+    "pages/register/register",
+    "pages/add_new/add_new",
+    "pages/chat/chat",
+    "pages/notification/notification",
+    "pages/groups/groups",
+    "pages/setting/setting",
+    "pages/add_groups/add_groups",
+    "pages/groupChatRoom/groupChatRoom",
+    "pages/groupSetting/groupSetting"
+
   ],
   "plugins": {
     "chooseLocation": {
@@ -47,7 +62,7 @@
         "selectedIconPath": "icons/_carpooling.png"
       },
       {
-        "pagePath": "pages/friends/friends",
+        "pagePath": "pages/main/main",
         "text": "好友",
         "iconPath": "icons/friends.png",
         "selectedIconPath": "icons/_friends.png"
