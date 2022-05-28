@@ -1,0 +1,13 @@
+<view class="notification_title">
+	<text>通知</text>
+</view>
+<view class="address_bottom" bindtap="into_friendNot">
+	<image src="../../images/notification.png"></image>
+	<text>加好友申请</text>
+	<text wx:if='{{ messageNum > 0 }}' class="notification_dot">{{ messageNum }}</text>
+</view>
+<view class="address_bottom" bindtap="into_groupNot">
+	<image src="../../images/jiaqun@2x.png"></image>
+	<text>加群组申请</text>
+	<text wx:if='{{ groupInviteNum > 0 }}' class="notification_dot">{{ groupInviteNum }}</text>
+</view>

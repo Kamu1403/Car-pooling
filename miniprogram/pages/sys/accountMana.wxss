@@ -8,3 +8,13 @@
     border-radius: 5%;
     margin-bottom: 25px;
 }
+
+.top{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.weui-btn weui-btn_mini weui-btn_default weui-wa-hotarea{
+  padding: 0%;
+}

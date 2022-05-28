@@ -1,0 +1,43 @@
+<!--pages/sys/report/report.wxml-->
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+  <view class="page__hd">
+  <view class="top">
+    <view class="page__title">举报详情</view>
+  </view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-form-preview" wx:for="{{report}}" data-item="item" wx:for-index="idx">
+      <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">举报状态</view>
+          <view class="weui-form-preview__value_in-hd" style="color:{{item.color}}">{{item.status}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">举报者id</view>
+          <view class="weui-form-preview__value" style="font-size: 13px;">{{item.reporterId}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">被举报者id</view>
+          <view class="weui-form-preview__value" style="font-size: 13px;">{{item.suspecterId}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">举报原因</view>
+          <view class="weui-form-preview__value">{{item.message}}</view>
+        </view>
+      </view>
+      <view class="weui-form-preview__ft">
+        <view aria-hidden="{{showDialog ? true : false}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="open" data-src="{{item.seq}}">操作</view>
+      </view>
+    </view>
+    <mp-actionSheet bindactiontap="btnClick" show="{{showDialog}}" actions="{{groups}}" title="账户管理选项"> </mp-actionSheet>
+
+    <mp-dialog ext-class="dialog" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+      <view>
+        <icon style="margin-bottom: 10px;" type="info" color="rgb(255, 187, 61)" size="60" ></icon>
+        <view>确定执行吗？</view>
+      </view>
+    </mp-dialog>
+  </view>
+</view>

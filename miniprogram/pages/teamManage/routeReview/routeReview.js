@@ -11,14 +11,19 @@ Page({
     score: 0,
     textLen: 0,
     maxTextLen: 250,
-    text: ''
+    text: '',
+    team_seq: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    let that = this;
+    that.setData({
+      team_seq: options.team_seq,
+    })
+    // console.log(this.data.team_seq)
   },
 
   chooseImage() {
@@ -50,6 +55,7 @@ Page({
   },
 
   submit: function () {
+    let that=this;
     //用于测试，后期应当写入数据库，并在下方加入返回前一个页面的函数
     if (this.data.files.length == 0) {
       wx.showToast({
@@ -64,6 +70,7 @@ Page({
         'text': this.data.text,
         'useropenid': app.globalData.userInfo.useropenid,
         'photo': this.data.files[0],
+        'team_seq': this.data.team_seq
       },
       url: 'http://124.71.160.151:3004/insertReview',
       success: function (res) {
@@ -72,7 +79,9 @@ Page({
           title: '修改成功',
         })
         setTimeout(() => {
-          wx.navigateBack()
+          wx.navigateTo({
+            url: '/pages/teamManage/routeReview/addFriend?team_seq=' + that.data.team_seq,
+          });
         }, 1000)
       }
     })

@@ -19,6 +19,7 @@ Page({
       text: '删除'
     }],
     slideviewShowIndex: 0,
+    isOnShow: false,
     
     // 个人信息
     nowUser: {},
@@ -30,7 +31,7 @@ Page({
       {text: '打车', value: 2},
       {text: '一键提醒', value: 3},
       {text: '提醒单个成员', value: 4},
-      {text: '行程结束', value: 7},
+      {text: '行程结束', type: 'warn',value: 7},
       {text: '转交权限并退出', type: 'warn',value: 5},
       {text: '解散队伍', type: 'warn', value: 6}
     ],
@@ -54,9 +55,7 @@ Page({
 
     //提醒队员
     showSelectDialog: false,
-    groupsSelect: [
-      
-    ],
+    groupsSelect: [],
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
     //结束行程  
@@ -69,7 +68,9 @@ Page({
 	onLoad: function (options) {
     let that = this;
     that.setData({
-        team_seq: options.team_seq
+        team_seq: options.team_seq,
+        memberInfo: [],
+        groupsSelect: []
       }
     )
     // 根据team_seq找小队信息（）
@@ -122,7 +123,6 @@ Page({
           }
           
           else {
-            
             that.data.groupsSelect.push({text:res.data[i]['name'],value:index,id:res.data[i]['openid']});
             index+=1;
             // console.log(that.data.groupsSelect);
@@ -134,6 +134,15 @@ Page({
         }
       }
     })
+    console.log(that.data.groupsSelect);
+  },
+
+  onShow: function () {
+    console.log('onShow:'+this.data.isOnShow);
+    if(this.data.isOnShow)
+      this.onLoad({team_seq:this.data.team_seq});
+    else
+      this.data.isOnShow=true;
   },
 
   //提醒用户  
@@ -219,32 +228,30 @@ Page({
       case 3:
         console.log('提醒所有成员');
         
-        // for (let index = 0; index < this.data.groupsSelect.length; index++) {  
-        //   let element = this.data.groupsSelect[index].id;  
-        //   this.sendSubscribe(element);  
-        // };
-        let that=this;
-        wx.request(
-          {
-            method:'POST',
-            data: {
-              'team_seq': this.data.team_seq,
-            },
-            url: 'http://124.71.160.151:3003/getMemberInfo',
-            success(res){
-              for(let i=0;i<res.data.length;i++){
-                let element=res.data[i]["openid"];
-                that.sendSubscribe(element);
-              }
-            }
-          }
-        )
+        for (let index = 0; index < this.data.groupsSelect.length; index++) {  
+          let element = this.data.groupsSelect[index].id;  
+          this.sendSubscribe(element);  
+        };
+        // let that=this;
+        // wx.request(
+        //   {
+        //     method:'POST',
+        //     data: {
+        //       'team_seq': this.data.team_seq,
+        //     },
+        //     url: 'http://124.71.160.151:3003/getMemberInfo',
+        //     success(res){
+        //       for(let i=0;i<res.data.length;i++){
+        //         let element=res.data[i]["openid"];
+        //         that.sendSubscribe(element);
+        //       }
+        //     }
+        //   }
+        // )
         
-
         break;
       case 4:
         this.openSelectDialog();
-        this.sendSubscribe(e.detail.id);
         break;
       case 5:
         this.openAuthorityDialog();
@@ -293,9 +300,23 @@ Page({
 
   //提醒单个成员
   openSelectDialog() {
-    this.setData({
-      showSelectDialog: true
+    let that=this;
+    var items=[];
+    for (let index = 0; index < this.data.groupsSelect.length; index++) {
+      items.push(this.data.groupsSelect[index].text);  
+    };
+    wx.showActionSheet({
+      itemList: items,
+      success(res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex);
+          that.sendSubscribe(that.data.groupsSelect[res.tapIndex].id)
+        }
+      }
     })
+    // this.setData({
+    //   showSelectDialog: true
+    // })
   },
   closeSelectDialog() {
     this.setData({
@@ -320,48 +341,49 @@ Page({
 
   //转交权限
   openAuthorityDialog() {
-   
-    this.setData({
-      showAuthorityDialog: true
+    let that=this;
+    var items=[];
+    for (let index = 0; index < this.data.groupsSelect.length; index++) {
+      items.push(this.data.groupsSelect[index].text);  
+    };
+    wx.showActionSheet({
+      itemList: items,
+      success(res) {
+        if (!res.cancel) {
+          console.log(res.tapIndex);
+          that.btnAuthority(that.data.groupsSelect[res.tapIndex].id)
+          wx.navigateBack();
+        }
+      }
     })
+    // this.setData({
+    //   showAuthorityDialog: true
+    // })
   },
   closeAuthorityDialog() {
     this.setData({
       showAuthorityDialog: false
     })
   },
-  btnAuthority(e) {
+  btnAuthority(id) {
     let that=this;
-    console.log('成员'+e.detail.value);
-    this.closeAuthorityDialog();
+    console.log('成员id='+id);
+    // this.closeAuthorityDialog();
+    console.log('队长id='+app.globalData.userInfo.useropenid);
     wx.request({
       method:'POST',
       data:{
         seq:that.data.team_seq,
-        id:that.data.groupsSelect[e.detail.value]['id']
+        mem_id:id,
+        leader_id:app.globalData.userInfo.useropenid
       },
       url: 'http://124.71.160.151:3003/transferPermission',
+      
       success(res){
           console.log('权限移交成功');
       }
     })
-    // switch (e.detail.value) {
-    //   case 1:
-        
-    //     break;
-    //   case 2:
-    //     break;
-    //   case 3:
-    //     break;
-    //   case 4:
-    //     break;
-    //   case 5:
-    //     break;
-      
-    //   default:
-    //     console.error('team member not match!')
-    //     break;
-    // }
+
   },
   
   // 结束行程  
@@ -431,7 +453,7 @@ Page({
   },
   addReview(){
     wx.navigateTo({
-      url: '/pages/teamManage/routeReview/routeReview'
+      url: '/pages/teamManage/routeReview/routeReview?team_seq=' + this.data.team_seq
     })
   },
   // 删除成员

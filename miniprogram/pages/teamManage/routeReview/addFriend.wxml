@@ -1,0 +1,46 @@
+<!--pages/teamManage/routeReview/addFriend.wxml-->
+<template is="toast" data="{{ ..._toast_ }}"></template>
+<import src="../../../comps/toast/toast.wxml"/>
+
+<view class="page" data-weui-theme="{{theme}}">
+ <mp-form-page title="是否要加个好友以后有缘再拼?">
+    <mp-form id="form">
+        <mp-cells title="队伍成员">
+            <mp-checkbox-group prop="checkbox" multi="{{true}}" bindchange="checkboxChange">
+                <view class="page__bd page__bd_spacing">
+                    <view class="weui-flex">
+                        <view class="weui-flex__item">
+                            <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+                            </mp-checkbox>
+                        </view>
+                        <view class='img-view'>
+                            <view slot="icon" wx:for="{{checkboxItems}}" >
+                                <image src="{{item.photo}}" class="my-weui-slideicon"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+
+            </mp-checkbox-group>
+        </mp-cells>
+    </mp-form>
+    <view slot="button">
+        <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
+    </view>
+</mp-form-page>
+</view>
+<!-- <view class="page" data-weui-theme="{{theme}}">
+    <view class="page__hd">
+        <view class="page__title">Flex</view>
+        <view class="page__desc">Flex布局</view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+            </view>
+            <view>
+                <image src="../../../images/Emoji.png" style="width: 20px;height: 20px;"></image>
+            </view>
+        </view>
+    </view>
+</view> -->
