@@ -376,6 +376,6 @@ page{
 }
 
 .tableBar1 .em-unread-spot {
-  left: 90%
+  left: 90%;
 }
 

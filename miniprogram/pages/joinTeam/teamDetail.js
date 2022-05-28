@@ -102,8 +102,30 @@ Page({
 				var info = "";		// 加入队伍的提示信息
 				if (res.data.isIn == true)
 					info = "您已加入队伍，无需重复加入";
-				else if (res.data.joinSuccess == true)
-					info = "加入队伍成功";
+				else if (res.data.joinSuccess == true) {
+          info = "加入队伍成功";
+          wx.request({
+            method: "GET",
+            data: {
+              'tem_seq': this.data.seq,
+              'tem_name': this.data.tem_name
+            },
+            url: 'http://124.71.160.151:3003/findGroup',
+            success: function(res) {
+              console.log(res.data);
+              let option = {
+                'groupId': res.data[0].group_id,
+                success: function() {
+                  console.log("加入群聊成功");
+                },
+                error: function(e) {
+                  console.log(e);
+                }
+              }
+              wx.WebIM.joinGroup(option);
+            }
+          })
+        }
 				else
 					info = "加入队伍失败";
 
