@@ -4,7 +4,9 @@
  * Function: 向数据库传送数据
  ****************************************/
 function uploadTeamInfo(data){
-	// 队伍本身信息
+  var group_id;
+  var tem_seq;
+  // 队伍本身信息
 	wx.request({
 		method: 'POST',
 		data:{
@@ -26,9 +28,66 @@ function uploadTeamInfo(data){
 		},
 		url: 'http://124.71.160.151:3001/teaminfo_insert', 
 		success: function(res){ 
-			// console.log("Successfully created a new team and save its info into database!");
+      // console.log("Successfully created a new team and save its info into database!");
+      /**********************************************************/
+      wx.request({
+        method: 'GET',
+        url: 'http://124.71.160.151:3003/findSeq',
+        success: function(res) {
+          tem_seq = res.data[0].seq;
+        }
+      })
+      /**********************************************************/
 		}
-	});
+  });
+  /******************************************************/
+  let options = {
+    // 创建群聊：群名称、群为公开，不需要审核即可加入，允许邀请好友，群主为own
+    data: {
+      groupname: data.teamname,
+      desc: '',
+      members: [],
+      "public": true,
+      'approval': false,
+      'allowinvites': true,
+      'owner': data.openid
+    },
+    success: function(respData){
+      console.log("创建群聊成功");
+      wx.WebIM.conn.getGroup({
+        limit: 50,
+        success: function(res){
+          for (let i = 0; i < res.data.length; ++i) {
+            if (res.data[i].groupname == data.teamname) {
+              group_id = res.data[i].groupid;
+            }
+          }
+          wx.request({
+            method: 'POST',
+            data: {
+              'tem_seq': tem_seq,
+              'tem_name': data.teamname,
+              'group_id': group_id
+            },
+            url: 'http://124.71.160.151:3003/createGroup',
+            success: function() {
+              console.log("向数据库添加群聊信息成功");
+            },
+            error: function() {
+              console.log("向数据库添加群聊信息失败");
+            }
+          })
+        },
+        error: function(){
+        }
+      });
+    },
+    error: function(err){
+      console.log("创建群聊失败");
+    },
+  };
+  wx.WebIM.conn.createGroupNew(options);
+  /******************************************************/
 };
 
 
