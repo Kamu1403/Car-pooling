@@ -373,6 +373,9 @@ page{
 
 .tableBar1 image {
   height: 100%;
-  width: 100%;
+}
+
+.tableBar1 .em-unread-spot {
+  left: 90%
 }
 
