@@ -32,7 +32,7 @@ Page({
      */
     onLoad: function (options) {
         if (options.dataList) {
-            let that=this;
+            
             console.log('修改小队消息');
             let seq = JSON.parse(options.dataList);
             console.log('group seq:'+seq);
@@ -40,7 +40,19 @@ Page({
             //已经获得了小组序号seq，然后从数据库读取小队消息
             
             this._getOneTeamInfo(seq);
-
+            if (this.data.gender=="男") {
+                this.setData({
+                    checka: 'true'
+                });
+                console.log('a');
+            } else if (this.data.gender=="女") {
+                this.setData({
+                    checkb: 'true'
+                });
+                console.log('b');
+            } else {
+                console.error('gender not match!');
+            }
         }else{
             console.log('新建队伍');
         }
@@ -215,27 +227,7 @@ Page({
     * Notice: 
     *****************************/
     formSubmit: function (e) {
-        // 判断账号是不是被封禁
-		if (app.globalData.userInfo.userstatus!=1){
-			wx.showModal({
-				title: "账号被封禁",
-				cancelColor: 'cancelColor',
-				icon: 'none',
-				duration: 2000,  // 持续的时间
-				confirmText: "解禁",
-				success: function(res){
-					if (res.confirm) {
-						wx.switchTab({
-							url: '/pages/login/login',
-						});
-					} 
-
-			}
-			})
-			return;
-		}
-
-
+        console.log(this.data.openid)
         // 检查结果
         var res = this._formCheker(e);
         if (res == true){
@@ -310,27 +302,10 @@ Page({
                     des_locationName: res.data[0].des_locationName,    //终点地址名称
                     note: res.data[0].note,            // 备注信息
                     update_seq: seq     //更新的seq
-                });
-                that.setGenderTap(res.data[0].gender);
+				});
 			}
 		})
-    },
-
-    setGenderTap(gender){
-        if (gender=="男") {
-            this.setData({
-                checka: 'true'
-            });
-            console.log('a');
-        } else if (gender=="女") {
-            this.setData({
-                checkb: 'true'
-            });
-            console.log('b');
-        } else {
-            console.error('gender not match!');
-        }
-    }
+	}
 })
 
 

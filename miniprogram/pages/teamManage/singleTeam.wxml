@@ -72,6 +72,6 @@
     </view>  
   </mp-halfScreenDialog> 
   
-  <!-- <mp-actionSheet bindactiontap="btnSelect" show="{{showSelectDialog}}" actions="{{groupsSelect}}" title="提醒单个成员"> </mp-actionSheet>
-  <mp-actionSheet bindactiontap="btnAuthority" show="{{showAuthorityDialog}}" actions="{{groupsSelect}}" title="转交权限给以下一名用户"> </mp-actionSheet> -->
+  <mp-actionSheet bindactiontap="btnSelect" show="{{showSelectDialog}}" actions="{{groupsSelect}}" title="提醒单个成员"> </mp-actionSheet>
+  <mp-actionSheet bindactiontap="btnAuthority" show="{{showAuthorityDialog}}" actions="{{groupsSelect}}" title="转交权限给以下一名用户"> </mp-actionSheet>
 </view>
