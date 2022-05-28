@@ -459,6 +459,7 @@ Page({
   // 删除成员
   delMember(e) {
     console.log("删除成员");
+    console.log(e);
   },
   // 添加成员
   addMember(e) {
@@ -529,5 +530,29 @@ Page({
           [checkSlideView]: false
         });
     }
+  },
+
+  into_group() {
+    let seq = this.data.team_seq;
+    let name = this.data.teamName;
+    wx.request({
+      method: "POST",
+      data: {
+        'tem_seq': seq,
+        'tem_name': name
+      },
+      url: 'http://124.71.160.151:3003/findGroup',
+      success: function(res) {
+        console.log(res);
+        let nameList = {
+          myName: app.globalData.userInfo.openid,
+          your: name,
+          groupId: res.data[0].group_id
+        };
+        wx.navigateTo({
+          url: "../groupChatRoom/groupChatRoom?username=" + JSON.stringify(nameList)
+        });    
+      }
+    })
   }
 })

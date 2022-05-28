@@ -105,7 +105,7 @@ Page({
 				else if (res.data.joinSuccess == true) {
           info = "加入队伍成功";
           wx.request({
-            method: "GET",
+            method: "POST",
             data: {
               'tem_seq': this.data.seq,
               'tem_name': this.data.tem_name

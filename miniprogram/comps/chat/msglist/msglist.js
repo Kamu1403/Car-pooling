@@ -173,8 +173,6 @@ Component({
             photoList: temPhoto
           })
         }
-        console.dir(that.data.nameList);
-        console.dir(that.data.photoList);
       }
     })
     /***********************************************************/
