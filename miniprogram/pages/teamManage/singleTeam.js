@@ -66,6 +66,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+    console.log(options);
     let that = this;
     that.setData({
         team_seq: options.team_seq,
@@ -134,7 +135,6 @@ Page({
         }
       }
     })
-    console.log(that.data.groupsSelect);
   },
 
   onShow: function () {
@@ -459,7 +459,16 @@ Page({
   // 删除成员
   delMember(e) {
     console.log("删除成员");
-    console.log(e);
+    let index = e.currentTarget.dataset.index;
+    if (this.data.isLeader) {
+      this.delMember(this.data.memberInfo[index]);
+      this.ReLoad();
+    }
+    else {
+      wx.showToast({
+        title: '您没有权限删除队员',
+      })
+    }
   },
   // 添加成员
   addMember(e) {
@@ -471,14 +480,47 @@ Page({
     console.log("离开队伍");
     if (now_user == this.data.teamLeader.useropenid) {
       // 队长离开队伍，需要将权限给别人
+      wx.showToast({
+        title: '请先转交权限',
+      })
     }
     else {
       // 直接退出
+      this.delMember(now_user);
+      wx.showToast({
+        title: '退出小队成功',
+      })
+      setTimeout(()=>{
+        wx.navigateTo({
+          url: '../joinTeam/joinTeam',
+        })
+      }, 1000)
     }
   },
   // 解散队伍
   delTeam(e) {
     console.log("解散队伍");
+    // 没必要，效果相同与行程结束
+  },
+  delMenber(openid) {
+    var that = this;
+    wx.request({
+      method: "POST",
+      data: {
+        'seq': that.data.tem_seq,
+        'openid': openid
+      },
+      url: 'http://124.71.160.151:3003/delMember',
+      success: function() {
+        console.log("删除成员成功");
+      }
+    })
+  },
+  ReLoad() {
+    let opt = {
+      'team_seq': this.data.tem_seq
+    };
+    this.onLoad(opt);
   },
 
   // 以下两个函数保证slide-view自动收回

@@ -104,6 +104,7 @@ Page({
 					info = "您已加入队伍，无需重复加入";
 				else if (res.data.joinSuccess == true) {
           info = "加入队伍成功";
+          /********************************************/
           wx.request({
             method: "POST",
             data: {
@@ -125,6 +126,7 @@ Page({
               wx.WebIM.joinGroup(option);
             }
           })
+          /*************************************************/
         }
 				else
 					info = "加入队伍失败";
