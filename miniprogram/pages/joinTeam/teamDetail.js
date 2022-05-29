@@ -48,7 +48,8 @@ Page({
 
 	// 加入队伍
 	joinTeam: function (e) {
-		// 判断是否已经登陆
+    // 判断是否已经登陆
+    let that = this;
 		if (app.globalData.userInfo.useropenid==""){
 			wx.showModal({
 				title: "请先登陆",
@@ -65,7 +66,6 @@ Page({
 
 			}
 			})
-
 			return;
 		}
 		// 判断账号是不是被封禁
@@ -104,11 +104,12 @@ Page({
 					info = "您已加入队伍，无需重复加入";
 				else if (res.data.joinSuccess == true) {
           info = "加入队伍成功";
+          /********************************************/
           wx.request({
             method: "POST",
             data: {
-              'tem_seq': this.data.seq,
-              'tem_name': this.data.tem_name
+              'tem_seq': that.data.seq,
+              'tem_name': that.data.tem_name
             },
             url: 'http://124.71.160.151:3003/findGroup',
             success: function(res) {
@@ -125,6 +126,7 @@ Page({
               wx.WebIM.joinGroup(option);
             }
           })
+          /*************************************************/
         }
 				else
 					info = "加入队伍失败";

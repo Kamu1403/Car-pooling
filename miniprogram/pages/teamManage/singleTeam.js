@@ -61,13 +61,21 @@ Page({
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
     //结束行程  
+<<<<<<< HEAD
     finishDialogShow: false,  
-
+    // options
+    opt: {},
+    
     // 邀请成员，显示好友的半弹窗
     dialog: false,
     wrap: false,
     friends_list: [ // 好友列表
     ]
+=======
+    finishDialogShow: false,
+
+
+>>>>>>> 2dee647d05a1c0f05b5614cd7f124248084a6c04
   },
 
   	/**
@@ -78,7 +86,8 @@ Page({
     that.setData({
         team_seq: options.team_seq,
         memberInfo: [],
-        groupsSelect: []
+        groupsSelect: [],
+        opt: options,
       }
     )
     // 根据team_seq找小队信息（）
@@ -142,7 +151,6 @@ Page({
         }
       }
     })
-    console.log(that.data.groupsSelect);
   },
 
   onShow: function () {
@@ -480,7 +488,19 @@ Page({
   // 删除成员
   delMember(e) {
     console.log("删除成员");
-    console.log(e);
+    let index = e.currentTarget.dataset.index;
+    if (this.data.isLeader) {
+      this.delOne(this.data.team_seq, this.data.memberInfo[index].openid);
+      wx.showToast({
+        title: '删除成员成功',
+      })
+      this.ReLoad();
+    }
+    else {
+      wx.showToast({
+        title: '您没有权限删除队员',
+      })
+    }
   },
   // 添加成员，即添加好友到自己的队伍
   addMember(e) {
@@ -560,18 +580,46 @@ Page({
 
   // 离开队伍
   leaveTeam(e) {
-    let now_user = this.data.nowUser.useropenid;
     console.log("离开队伍");
-    if (now_user == this.data.teamLeader.useropenid) {
+    if (this.data.isLeader) {
       // 队长离开队伍，需要将权限给别人
+      wx.showToast({
+        title: '请先转交权限',
+      })
     }
     else {
       // 直接退出
+      this.delOne(this.data.team_seq, this.data.nowUser.openid);
+      wx.showToast({
+        title: '退出小队成功',
+      })
+      setTimeout(()=>{
+        wx.navigateBack();
+      }, 1000)
     }
   },
+
+
   // 解散队伍
   delTeam(e) {
     console.log("解散队伍");
+    // 没必要，效果相同与行程结束
+  },
+  delOne(seq, openid) {
+    wx.request({
+      method: "POST",
+      data: {
+        'seq': seq,
+        'openid': openid
+      },
+      url: 'http://124.71.160.151:3003/delMember',
+      success: function() {
+        console.log("删除成员成功");
+      }
+    })
+  },
+  ReLoad() {
+    this.onLoad(this.data.opt);
   },
 
   // 以下两个函数保证slide-view自动收回
