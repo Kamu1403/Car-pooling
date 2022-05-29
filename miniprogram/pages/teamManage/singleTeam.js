@@ -553,11 +553,7 @@ Page({
 			  	'friends_openid': res,
 			  },
         url: 'http://124.71.160.151:3001/getUserBasicInfo',
-			  success: function (res) {
-          console.log("aaaaaaaaa");
-          console.log(res.data);
-          console.log("aaaaaaaaa");
-          
+			  success: function (res) {          
 			  	that.setData({
             friends_list: res.data,   // 设置用户数据
             dialog: true,             // 激活弹窗
