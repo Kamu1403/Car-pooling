@@ -37,10 +37,6 @@
           <!-- <image class='line' src="../../images/line.png"></image> -->
           <!-- 0.5px border -->
         </view>
-        <view class="otherItem" bindtap="into_groups">
-          <image src="../../images/group@2x.png"></image>
-          <text>群组</text>
-        </view>
       </view>
 
       <view wx:for="{{listMain}}" wx:for-item="group" wx:key="{{group.id}}" id="{{ 'inToView'+group.id}}" data-id='{{group.id}}'>

@@ -285,15 +285,9 @@ Page({
     });
   },
 
-  into_groups: function () {
-    wx.navigateTo({
-      url: "/pages/groups/groups?myName=" + this.data.myName
-    });
-  },
-
   into_room: function (event) {
     var nameList = {
-      myName: this.data.myName,
+      myName: getApp().globalData.userInfo.useropenid,
       your: event.target.dataset.username
     };
     wx.navigateTo({

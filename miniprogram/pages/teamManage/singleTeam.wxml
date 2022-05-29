@@ -1,7 +1,9 @@
 <view class="page" data-weui-theme="{{theme}}" bindtap="getTap">
   <view class="page__hd">
-    <view class="page__title">队伍名称：{{teamName}}</view>
-    <button bindtap="into_group">队内交流</button>
+    <view style="display: inline-block;" class="page__title">队伍名称：{{teamName}}</view>
+    <view style="display: inline-block; float: right;">
+      <image class="msg_img" bindtap="into_group" src="../../images/session@2x.png"></image>
+    </view>
   </view>
   <view class="page__bd">
     <mp-cells title="行程详情">

@@ -14,3 +14,10 @@
 .my-button {
   margin: 40rpx;
 }
+
+.msg_img {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  padding-top: 30%;
+}
