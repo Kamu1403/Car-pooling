@@ -59,19 +59,22 @@ Page({
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
     //结束行程  
-    finishDialogShow: false,  
+    finishDialogShow: false,
+
+    // options
+    opt: {},
   },
 
   	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-    console.log(options);
     let that = this;
     that.setData({
         team_seq: options.team_seq,
         memberInfo: [],
-        groupsSelect: []
+        groupsSelect: [],
+        opt: options,
       }
     )
     // 根据team_seq找小队信息（）
@@ -461,7 +464,10 @@ Page({
     console.log("删除成员");
     let index = e.currentTarget.dataset.index;
     if (this.data.isLeader) {
-      this.delMember(this.data.memberInfo[index]);
+      this.delOne(this.data.team_seq, this.data.memberInfo[index].openid);
+      wx.showToast({
+        title: '删除成员成功',
+      })
       this.ReLoad();
     }
     else {
@@ -476,9 +482,8 @@ Page({
   },
   // 离开队伍
   leaveTeam(e) {
-    let now_user = this.data.nowUser.useropenid;
     console.log("离开队伍");
-    if (now_user == this.data.teamLeader.useropenid) {
+    if (this.data.isLeader) {
       // 队长离开队伍，需要将权限给别人
       wx.showToast({
         title: '请先转交权限',
@@ -486,28 +491,27 @@ Page({
     }
     else {
       // 直接退出
-      this.delMember(now_user);
+      this.delOne(this.data.team_seq, this.data.nowUser.openid);
       wx.showToast({
         title: '退出小队成功',
       })
       setTimeout(()=>{
-        wx.navigateTo({
-          url: '../joinTeam/joinTeam',
-        })
+        wx.navigateBack();
       }, 1000)
     }
   },
+
+
   // 解散队伍
   delTeam(e) {
     console.log("解散队伍");
     // 没必要，效果相同与行程结束
   },
-  delMenber(openid) {
-    var that = this;
+  delOne(seq, openid) {
     wx.request({
       method: "POST",
       data: {
-        'seq': that.data.tem_seq,
+        'seq': seq,
         'openid': openid
       },
       url: 'http://124.71.160.151:3003/delMember',
@@ -517,10 +521,7 @@ Page({
     })
   },
   ReLoad() {
-    let opt = {
-      'team_seq': this.data.tem_seq
-    };
-    this.onLoad(opt);
+    this.onLoad(this.data.opt);
   },
 
   // 以下两个函数保证slide-view自动收回
