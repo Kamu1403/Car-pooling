@@ -1,7 +1,5 @@
 {
-	"navigationBarBackgroundColor":"#ffffff",
-	"navigationBarTextStyle":"black",
-	"navigationBarTitleText":"Easemob IM",
+  "navigationBarTitleText": "好友列表",
 	"usingComponents": {
       "swipe-delete": "../../comps/swipedelete/swipedelete"
     }

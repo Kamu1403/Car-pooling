@@ -5,10 +5,7 @@ let msgType = require("comps/chat/msgtype"); // 信息格式
 let ToastPannel = require("./comps/toast/toast"); // 土司
 let disp = require("utils/broadcast");  // 广播？
 let logout = false;
-const AgoraMiniappSDK = require('./emedia/Agora_Miniapp_SDK_for_WeChat'); // 声网（用户语音通信等媒体流的通信）
-wx.AgoraMiniappSDK = AgoraMiniappSDK
 console.log('WebIM', WebIM)
-console.log('wx.AgoraMiniappSDK', wx.AgoraMiniappSDK)
 let emediaState = require('comps/chat/multiEmedia/emediaState') // 会议？
 function ack(receiveMsg){
 	// 处理未读消息回执
@@ -157,7 +154,6 @@ App({
 		WebIM.conn.listen({
 			onOpened(message){
 				console.log('im登录成功')
-				// WebIM.conn.setPresence();
 				if(getCurrentRoute() == "pages/login/login" ){
 					me.onLoginSuccess(wx.getStorageSync("myUsername"));
 				}
@@ -183,7 +179,7 @@ App({
 					icon: 'none',
 					duration: 2000
 				});
-				wx.redirectTo({
+				wx.switchTab({
 						url: "../login/login"
 					});
 				me.conn.closed = true;
@@ -301,10 +297,6 @@ App({
 			},
 
 			onRoster(message){
-				// let pages = getCurrentPages();
-				// if(pages[0]){
-				// 	pages[0].onShow();
-				// }
 			},
 			
 			onCmdMessage(message){
@@ -371,7 +363,7 @@ App({
 							duration: 1000
 						});
 						WebIM.conn.close();
-						wx.redirectTo({
+						wx.switchTab({
 							url: "../login/login"
 						});
 						logout = true
@@ -384,7 +376,7 @@ App({
 						title: "offline by multi login",
 						duration: 1000
 					});
-					wx.redirectTo({
+					wx.switchTab({
 						url: "../login/login"
 					});
 				}
@@ -413,14 +405,7 @@ App({
 				if (error.type == 16) {///sendMsgError
 					// https://developers.weixin.qq.com/community/develop/doc/00084a400202787b54f8c9e6357800
 					// 因为上面的原因 这里不要一直提示了
-					return 
-					console.log('socket_errorsocket_error', error)
-					wx.showToast({
-						title: "网络已断开",
-						icon: 'none',
-						duration: 2000
-					});
-					disp.fire("em.xmpp.error.sendMsgErr", error);
+					return;
 				}
 			},
 		});
@@ -434,7 +419,7 @@ App({
 		// 选择图片或者拍照也会触发onShow，所以忽略聊天页面
 		if (WebIM.conn.isOpened() && currentPage.route != "pages/chatroom/chatroom" && currentPage.route != "pages/groupChatRoom/groupChatRoom") {
 			let myName = wx.getStorageSync("myUsername");
-			wx.redirectTo({
+			wx.switchTab({
 				url: "../main/main?myName=" + myName
 			});
 		}
@@ -444,11 +429,6 @@ App({
 
 	onLoginSuccess: function(myName){
 		wx.hideLoading()
-
-    // 登录成功跳转到main内容界面
-		// wx.redirectTo({
-		// 	url: "../main/main?myName=" + myName
-		// });
 	},
   // 获取
   getUserInfo(cb){

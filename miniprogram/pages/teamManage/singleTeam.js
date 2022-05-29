@@ -586,7 +586,6 @@ Page({
       },
       url: 'http://124.71.160.151:3003/findGroup',
       success: function(res) {
-        console.log(res);
         let nameList = {
           myName: app.globalData.userInfo.openid,
           your: name,
