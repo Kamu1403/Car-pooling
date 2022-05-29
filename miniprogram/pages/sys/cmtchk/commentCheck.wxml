@@ -1,0 +1,31 @@
+<!--pages/sys/cmtchk/commentCheck.wxml-->
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+  <view class="page__hd">
+    <view class="top">
+    <view class="page__title">队伍评价审核</view>
+    </view>
+  </view>
+    <view class="page__bd">
+      <view class="weui-form-preview" wx:for="{{comment}}" data-item="item" wx:for-index="idx">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">审核状态</view>
+            <view class="weui-form-preview__value_in-hd" style="color:{{item.color}}">{{item.status}}</view>
+          </view>
+        </view>
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">队伍id</view>
+            <view class="weui-form-preview__value" style="font-size: 14px;">{{item.teamid}}</view>
+          </view>
+          <view class="weui-form-preview__item">
+            <view class="weui-form-preview__label">用户id</view>
+            <view class="weui-form-preview__value">{{item.openid}}</view>
+          </view>
+        </view>
+        <view class="weui-form-preview__ft">
+          <view class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="jumpDetail" data-src="{{item.seq}}">详情</view>
+        </view>
+      </view>
+    </view>
+  </view>

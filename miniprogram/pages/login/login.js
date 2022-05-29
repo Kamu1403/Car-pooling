@@ -199,6 +199,11 @@ Page({
       url:  "/pages/sys/accountMana",
     })
   },
+  jumpCommentCheck(){
+    wx.navigateTo({
+      url: '/pages/sys/cmtchk/commentCheck',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
