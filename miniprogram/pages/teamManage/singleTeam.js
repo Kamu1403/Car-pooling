@@ -61,21 +61,16 @@ Page({
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
     //结束行程  
-<<<<<<< HEAD
+
     finishDialogShow: false,  
     // options
     opt: {},
-    
+
     // 邀请成员，显示好友的半弹窗
     dialog: false,
     wrap: false,
     friends_list: [ // 好友列表
     ]
-=======
-    finishDialogShow: false,
-
-
->>>>>>> 2dee647d05a1c0f05b5614cd7f124248084a6c04
   },
 
   	/**
