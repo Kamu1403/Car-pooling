@@ -125,6 +125,8 @@ Component({
       if (isFail) {
         //this.renderFail(sessionKey)
       }
+
+      console.log(this.data.chatMsg);
     },
     renderFail(sessionKey) {
       let me = this
@@ -176,6 +178,8 @@ Component({
       }
     })
     /***********************************************************/
+    console.log(this.data.nameList);
+    console.log(this.data.photoList);
   },
   attached() {
     this.__visibility__ = true;

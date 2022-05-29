@@ -40,7 +40,7 @@
 		<view class="main" class="{{ item.style }}">
 			<view class="user">
 				<!-- yourname：就是消息的 from -->
-				<text class="user-text">{{ nameList[item.yourname] + ' ' + item.time}}</text>
+				<text class="user-text">{{nameList[item.yourname] + item.yourname}}</text>
 			</view>
 			<!-- <image class="avatar" src="../../../images/theme@2x.png"/> -->
 			<image class="avatar" src="{{photoList[item.yourname]}}"/>

@@ -174,11 +174,11 @@ App({
 				});
 			},
 			onClosed(){
-				wx.showToast({
-					title: "网络已断开",
-					icon: 'none',
-					duration: 2000
-				});
+				// wx.showToast({
+				// 	title: "网络已断开",
+				// 	icon: 'none',
+				// 	duration: 2000
+				// });
 				wx.switchTab({
 						url: "../login/login"
 					});
