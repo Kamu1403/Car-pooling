@@ -43,7 +43,7 @@
 
   <!-- 控制队伍人数（多于7人时不显示） -->
   <view wx:if="{{teamNum < 7}}">
-    <button type="primary" bindtap="addMember" class="my-button">邀请成员</button>
+    <button type="primary" bindtap="openHalfScreen" class="my-button" aria-role="button">邀请成员</button>
   </view>
 
   <!-- 退出队伍 -->
@@ -78,3 +78,48 @@
   <!-- <mp-actionSheet bindactiontap="btnSelect" show="{{showSelectDialog}}" actions="{{groupsSelect}}" title="提醒单个成员"> </mp-actionSheet>
   <mp-actionSheet bindactiontap="btnAuthority" show="{{showAuthorityDialog}}" actions="{{groupsSelect}}" title="转交权限给以下一名用户"> </mp-actionSheet> -->
 </view>
+
+
+<!-- 选择好友 -->
+<view aria-role="dialog" aria-modal="true" aria-labelledby="js_dialog2_title">
+  <view class="weui-mask weui-transition {{dialog ? 'weui-transition_show' : ''}}" bindtap="close" aria-role="button" aria-label="关闭"></view>
+  <view class="weui-half-screen-dialog weui-half-screen-dialog_bottom-fixed weui-transition {{dialog ? 'weui-transition_show' : ''}}">
+      <view class="weui-half-screen-dialog__hd">
+          <view class="weui-half-screen-dialog__hd__side" bindtap="close">
+              <view aria-role="button" style="display:none;" class="weui-btn_icon weui-wa-hotarea">返回<i class="weui-icon-back-arrow-thin"></i></view>
+              <view aria-role="button" style="display:none;" class="weui-btn_icon weui-wa-hotarea">关闭<i class="weui-icon-close-thin"></i></view>
+              <view aria-role="button" class="weui-btn_icon weui-wa-hotarea">关闭<i class="weui-icon-slide-down"></i></view>
+          </view>
+          <view class="weui-half-screen-dialog__hd__main">
+              <strong class="weui-half-screen-dialog__title" id="js_dialog2_title">标题</strong>
+          </view>
+          <view class="weui-half-screen-dialog__hd__side">
+              <view aria-role="button" class="weui-icon-btn">更多<i class="weui-icon-more"></i></view>
+          </view>
+      </view>
+      <view class="weui-half-screen-dialog__bd">
+          <view class="weui-bottom-fixed-opr-page  {{wrap ? 'weui-bottom-fixed-opr-page_btn-wrap' : ''}}">
+            <view class="weui-bottom-fixed-opr-page__content">
+              <view class="weui-half-screen-dialog__desc">好友列表</view>
+              <view class="weui-half-screen-dialog__tips" role="option">
+                <!-- 显示所有好友列表 -->
+		            <block wx:for="{{friends_list}}" wx:key="index">
+		            	<!-- 好友信息 -->
+		            	<button class="weui-form-preview" bindtap="addMember" data-openid="{{item.openid}}">
+		            		<view class="weui-form-preview__hd" aria-role="option">
+                      <!-- 信息展示 -->
+		            			<view class="weui-form-preview__item">
+                        <!-- <image src="{{item.photo}}" style="height:80%;width:20%">{{item.name}}</image>  -->
+                        <label>{{item.name}}</label>
+		            			</view>
+		            		</view>
+
+		            	</button>
+		            </block>
+              </view>
+            </view>
+          </view>
+      </view>
+  </view>
+</view>
+

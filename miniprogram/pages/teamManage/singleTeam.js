@@ -1,3 +1,5 @@
+var WebIM = require("../../utils/WebIM")["default"];
+
 var app = getApp();
 
 Page({
@@ -59,10 +61,21 @@ Page({
     //转交权限，json与以上groupsSelect共用
     showAuthorityDialog: false,
     //结束行程  
-    finishDialogShow: false,
-
+<<<<<<< HEAD
+    finishDialogShow: false,  
     // options
     opt: {},
+    
+    // 邀请成员，显示好友的半弹窗
+    dialog: false,
+    wrap: false,
+    friends_list: [ // 好友列表
+    ]
+=======
+    finishDialogShow: false,
+
+
+>>>>>>> 2dee647d05a1c0f05b5614cd7f124248084a6c04
   },
 
   	/**
@@ -146,6 +159,19 @@ Page({
       this.onLoad({team_seq:this.data.team_seq});
     else
       this.data.isOnShow=true;
+
+    const promise2 = new Promise((resolve, reject) => {
+      wx.createSelectorQuery().select('#js_btn1_2')
+        .boundingClientRect((rect) => {
+          resolve(rect.height);
+        })
+        .exec();
+    });
+    Promise.all([promise2]).then((values) => {
+      if (values[0] != values[1]) {
+        this.setData({ wrap: true });
+      }
+    });
   },
 
   //提醒用户  
@@ -476,10 +502,82 @@ Page({
       })
     }
   },
-  // 添加成员
+  // 添加成员，即添加好友到自己的队伍
   addMember(e) {
-    console.log("添加成员");
+    console.log(e);
+    // 申请加入队伍
+		wx.request({
+			method: 'POST',
+			data: {
+				seq: this.data.team_seq,
+				openid: e.currentTarget.dataset.openid,
+				role: 'member'
+			},
+			url: 'http://124.71.160.151:3001/joinTeam',
+			success: function (res) {
+				var info = "";		// 加入队伍的提示信息
+				if (res.data.isIn == true){  
+					info = "TA已加入队伍，无需重复加入";
+        }
+        else if (res.data.joinSuccess == true) {
+          info = "加入队伍成功";
+        }
+				else{
+          info = "加入队伍失败";
+        }
+				wx.showToast({
+					title: info,
+					icon: 'none',
+					duration: 2000,  // 持续的时间
+				});
+			}
+		});
+
   },
+  // 获取好友列表
+  _getFriends(){
+    // 从自己的好友列表来添加成员
+    // 获取到好友列表
+    return new Promise((resolve) => {
+      WebIM.conn.getContacts().then( (res) => {
+        console.log(res.data)
+        resolve(res.data);  // res.data > ['user1', 'user2']
+      });
+    });
+  },
+  // 打开添加成员的半弹窗
+  openHalfScreen(){
+    let that = this;
+
+    // 先获得好友的openid
+    that._getFriends().then((res)=>{
+      // 然后获取用户数据
+		  wx.request({
+			  method: 'POST',
+			  data: {
+			  	'friends_openid': res,
+			  },
+        url: 'http://124.71.160.151:3001/getUserBasicInfo',
+			  success: function (res) {
+          console.log("aaaaaaaaa");
+          console.log(res.data);
+          console.log("aaaaaaaaa");
+          
+			  	that.setData({
+            friends_list: res.data,   // 设置用户数据
+            dialog: true,             // 激活弹窗
+			  	});
+			  }
+      });
+    });
+  },
+  // 关闭添加成员的半弹窗
+  close() {
+    this.setData({
+      dialog: false,
+    });
+  },
+
   // 离开队伍
   leaveTeam(e) {
     console.log("离开队伍");
