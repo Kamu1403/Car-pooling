@@ -38,12 +38,16 @@
 			<text class="time-text">{{ item.time }}</text>
 		</view> -->
 		<view class="main" class="{{ item.style }}">
-			<view class="user">
+			<view class="user" wx:if="{{item.style}}">
 				<!-- yourname：就是消息的 from -->
-				<text class="user-text">{{nameList[item.yourname] + item.yourname}}</text>
+				<text class="user-text">{{nameList2[item.yourname]}}</text>
 			</view>
+      <view class="user" wx:else>
+				<text class="user-text">{{nameList[item.yourname]}}</text>
+      </view>
 			<!-- <image class="avatar" src="../../../images/theme@2x.png"/> -->
-			<image class="avatar" src="{{photoList[item.yourname]}}"/>
+			<image wx:if="{{item.style}}" class="avatar" src="{{photoList2[item.yourname]}}"/>
+			<image wx:else class="avatar" src="{{photoList[item.yourname]}}"/>
 			<view class="msg">
 				<image
 				class="err {{(item.style == 'self' && item.isFail) ? 'show' : 'hide'}}"

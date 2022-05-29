@@ -24,6 +24,8 @@ Component({
     /* 用户名的转化 */
     nameList: {},
     photoList: {},
+    nameList: {},
+    photoList: {},
   },
   methods: {
     clickMsg(data) {
@@ -126,7 +128,6 @@ Component({
         //this.renderFail(sessionKey)
       }
 
-      console.log(this.data.chatMsg);
     },
     renderFail(sessionKey) {
       let me = this
@@ -163,7 +164,7 @@ Component({
       url: 'http://124.71.160.151:3003/getUserInfo',
       success: function (res2) {
         for (let i = 0; i < res2.data.length; i++) {
-          let tem_id = res2.data[i]["openid"];
+          let tem_id = res2.data[i]["openid"].toLowerCase();
           let tem_name = res2.data[i]["name"];
           let tem_photo = res2.data[i]["photo"];
           let temName = that.data.nameList;
@@ -177,9 +178,26 @@ Component({
         }
       }
     })
+    wx.request({
+      method: 'GET',
+      url: 'http://124.71.160.151:3003/getUserInfo',
+      success: function (res2) {
+        for (let i = 0; i < res2.data.length; i++) {
+          let tem_id = res2.data[i]["openid"];
+          let tem_name = res2.data[i]["name"];
+          let tem_photo = res2.data[i]["photo"];
+          let temName = that.data.nameList;
+          temName[tem_id] = tem_name;
+          let temPhoto = that.data.photoList;
+          temPhoto[tem_id] = tem_photo;
+          that.setData({
+            nameList2: temName,
+            photoList2: temPhoto
+          })
+        }
+      }
+    })
     /***********************************************************/
-    console.log(this.data.nameList);
-    console.log(this.data.photoList);
   },
   attached() {
     this.__visibility__ = true;

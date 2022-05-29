@@ -45,8 +45,8 @@
           <swipe-delete>
             <view class="tap_mask" catchtap="into_room" data-username="{{ item.name }}">
               <view class="address_bottom" data-username="{{ item.name }}" catchtap="into_room">
-                <image src="../../images/theme@2x.png" catchtap="into_room" data-username="{{ item.name }}"></image>
-                <text catchtap="into_room" data-username="{{ item.name }}">{{item.name}}</text>
+                <image src="{{photoList[item.name]}}" catchtap="into_room" data-username="{{ item.name }}"></image>
+                <text catchtap="into_room" data-username="{{ item.name }}">{{nameList[item.name]}}</text>
               </view>
             </view>
           </swipe-delete>

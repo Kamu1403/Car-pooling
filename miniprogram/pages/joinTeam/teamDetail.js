@@ -109,7 +109,7 @@ Page({
             method: "POST",
             data: {
               'tem_seq': that.data.seq,
-              'tem_name': that.data.tem_name
+              'tem_name': that.data.teamname
             },
             url: 'http://124.71.160.151:3003/findGroup',
             success: function(res) {
@@ -123,7 +123,7 @@ Page({
                   console.log(e);
                 }
               }
-              wx.WebIM.joinGroup(option);
+              wx.WebIM.conn.joinGroup(option);
             }
           })
           /*************************************************/
