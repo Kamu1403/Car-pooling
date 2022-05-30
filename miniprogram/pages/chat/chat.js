@@ -105,11 +105,6 @@ Page({
 
 		this.getRoster();
 
-    // 判断小程序的API，回调，参数，组件等是否在当前版本可用。
-    // 这里是关闭了微信自带的返回home按钮
-		// if (wx.canIUse('hideHomeButton')) {
-		// 	wx.hideHomeButton()
-		// }
 	},
 
 	listGroups(){ // 列出组
@@ -380,7 +375,8 @@ Page({
 			myName: my,
 			your: detail.groupName,
 			groupId: detail.info.to
-		};
+    };
+    console.log(nameList);
 		wx.navigateTo({
 			url: "../groupChatRoom/groupChatRoom?username=" + JSON.stringify(nameList)
 		});

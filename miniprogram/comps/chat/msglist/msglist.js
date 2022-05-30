@@ -296,6 +296,6 @@ Component({
 
     });
 
-
+    console.log(this.data.chatMsg);
   },
 });
