@@ -1,0 +1,34 @@
+<!--pages/sys/cmtchk/cmt/commentDetail.wxml-->
+<page-meta root-font-size="system" />
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+  <view class="weui-msg">
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">评论内容</view>
+      <image mode="aspectFit" class="img" src="{{photo}}"></image>
+      <view class="weui-msg__desc">{{content}}</view>
+      <view class="weui-msg__custom-area">
+        <view class="weui-form-preview__list">
+          <view class="weui-form-preview__item" aria-role="option"><label class="weui-form-preview__label">队伍id</label>
+            <view class="weui-form-preview__value">{{teamid}}</view>
+          </view>
+          <view class="weui-form-preview__item" aria-role="option"><label class="weui-form-preview__label">用户id</label>
+            <view class="weui-form-preview__value">{{openid}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn weui-btn_warn" aria-role="button" bindtap="checkSuccess">审核通过</button>
+        <button class="weui-btn weui-btn_warn" aria-role="button" bindtap="checkfailure">审核驳回</button>
+        <button class="weui-btn weui-btn_primary" aria-role="button" bindtap="goBack">返回</button>
+      </view>
+    </view>
+    <mp-dialog ext-class="dialog" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+      <view>
+        <icon style="margin-bottom: 10px;" type="warn" color="rgb(255, 187, 61)" size="60" ></icon>
+        <view>确定执行吗？</view>
+      </view>
+    </mp-dialog>
+  </view>
+</view>

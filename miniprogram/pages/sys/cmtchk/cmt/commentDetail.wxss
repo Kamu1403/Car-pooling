@@ -1,0 +1,10 @@
+/* pages/sys/cmtchk/cmt/commentDetail.wxss */
+.weui-msg__text-area:first-child{
+  padding-top: 0px;
+}
+.img{
+  margin-left: 5px auto;
+  max-width:90%;
+  max-height:90%;
+  flex: 2 1 0;
+}

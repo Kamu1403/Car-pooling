@@ -34,7 +34,9 @@
     "pages/groupSetting/groupSetting",
 
     "pages/sys/complaint/complaint",
-    "pages/sys/report/report"
+    "pages/sys/report/report",
+    "pages/sys/cmtchk/commentCheck",
+    "pages/sys/cmtchk/cmt/commentDetail"
   ],
   "plugins": {
     "chooseLocation": {
