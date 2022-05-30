@@ -29,9 +29,7 @@
     "pages/chat/chat",
     "pages/notification/notification",
     "pages/groups/groups",
-    "pages/add_groups/add_groups",
     "pages/groupChatRoom/groupChatRoom",
-    "pages/groupSetting/groupSetting",
 
     "pages/sys/complaint/complaint",
     "pages/sys/report/report",

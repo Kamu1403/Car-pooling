@@ -1,115 +1,66 @@
-var WebIM = require("../../utils/WebIM")["default"];
-let disp = require("../../utils/broadcast");
-
+// pages/groups/groups.js
 Page({
-	data: {
-		search_btn: true,
-		search_friend: false,
-		show_mask: false,
-		groupList: [],		// 群聊列表
-		myName: ""
-	},
 
-	onLoad: function(option){
-		let me = this;
-		disp.on("em.xmpp.invite.joingroup", function(){
-			var pageStack = getCurrentPages();
-			// 判断是否当前路由是本页
-			if(pageStack[pageStack.length - 1].route === me.route){
-				me.listGroups();
-			}
-		});
+  /**
+   * 页面的初始数据
+   */
+  data: {
 
-		disp.on("em.xmpp.invite.deleteGroup", function(){
-			var pageStack = getCurrentPages();
-			// 判断是否当前路由是本页
-			if(pageStack[pageStack.length - 1].route === me.route){
-				me.listGroups();
-			}
-		});
-		
-		this.setData({
-			myName: option.myName
-		});
-	},
+  },
 
-	onShow: function(){
-		console.log(111)
-		this.listGroups();
-	},
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
 
-	// 列出所有群组 (调用 listRooms 函数获取当前登录用户加入的群组列表)
-	listGroups(){
-		var me = this;
-		wx.WebIM.conn.getGroup({
-			limit: 50,
-			success: function(res){
-				me.setData({
-					groupList: res.data
-				});
-				// 好像也没有别的官方通道共享数据啊
-				getApp().globalData.groupList = res.data || [];
-			},
-			error: function(){
+  },
 
-			}
-		});
-		console.log(this.data.groupList)
-	},
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
 
-	openSearch: function(){
-		this.setData({
-			search_btn: false,
-			search_friend: true,
-			show_mask: true
-		});
-	},
+  },
 
-	cancel: function(){
-		this.setData({
-			search_btn: true,
-			search_friend: false,
-			show_mask: false
-		});
-	},
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {
 
-	close_mask: function(){
-		this.setData({
-			search_btn: true,
-			search_friend: false,
-			show_mask: false
-		});
-	},
+  },
 
-	into_room: function(event){
-		var nameList = {
-			myName: this.data.myName,
-			your: event.currentTarget.dataset.username,
-			groupId: event.currentTarget.dataset.roomid
-		};
-		wx.navigateTo({
-			url: "../groupChatRoom/groupChatRoom?username=" + JSON.stringify(nameList)
-		});
-	},
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
 
-	build_group: function(){
-		var me = this;
-		var nameList = {
-			myName: me.data.myName
-		};
-		wx.navigateTo({
-			url: "../add_groups/add_groups?owner=" + JSON.stringify(nameList)
-		});
-	},
+  },
 
-	edit_group: function(event){
-		var nameList = {
-			myName: this.data.myName,
-			groupName: event.currentTarget.dataset.username,
-			roomId: event.currentTarget.dataset.roomid
-		};
-		wx.navigateTo({
-			url: "../groupSetting/groupSetting?groupInfo=" + JSON.stringify(nameList)
-		});
-	}
-});
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+
+  }
+})
