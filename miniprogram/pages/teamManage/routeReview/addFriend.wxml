@@ -10,11 +10,11 @@
                 <view class="page__bd page__bd_spacing">
                     <view class="weui-flex">
                         <view class="weui-flex__item">
-                            <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+                            <mp-checkbox wx:for="{{checkboxItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}" >
                             </mp-checkbox>
                         </view>
                         <view class='img-view'>
-                            <view slot="icon" wx:for="{{checkboxItems}}" >
+                            <view slot="icon" wx:for="{{checkboxItems}}">
                                 <image src="{{item.photo}}" class="my-weui-slideicon"></image>
                             </view>
                         </view>
