@@ -1,5 +1,5 @@
 <!--pages/login/login.wxml-->
-<image class="bgpic" style="opacity:{{0.9}}" src="../../images/loginbgpic.png" mode="aspectFill"></image>
+<image class="bgpic" style="opacity:{{0.9}}" src="cloud://cloud1-7gya2juj2ed83338.636c-cloud1-7gya2juj2ed83338-1310971162/loginbgpic.png" mode="aspectFill"></image>
 <view wx:if="{{logined==false}}">
   <view class="buttonbox1">
     <button style="height:100rpx;width:450rpx;font-size:45rpx" bindtap="userlogin">登陆</button> 
