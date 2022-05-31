@@ -207,7 +207,7 @@ Page({
     var delName = event.currentTarget.dataset.username;
     var myName = wx.getStorageSync("myUsername"); // 获取当前用户名
     wx.showModal({
-      title: "确认删除好友" + delName,
+      title: "确认删除好友\"" + this.data.nameList[delName] + "\"",
       cancelText: "取消",
       confirmText: "删除",
       success(res) {
