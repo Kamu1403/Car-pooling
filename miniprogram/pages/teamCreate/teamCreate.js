@@ -325,12 +325,10 @@ Page({
             this.setData({
                 checka: 'true'
             });
-            console.log('a');
         } else if (gender=="女") {
             this.setData({
                 checkb: 'true'
             });
-            console.log('b');
         } else {
             console.error('gender not match!');
         }
