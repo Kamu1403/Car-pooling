@@ -164,12 +164,17 @@ Page({
             error_info = phone.length!=11 ? error_info + "手机号码不规范 " : error_info; // 手机号码位数不对
             error_info = !gender ? error_info + "未选择性别 " : error_info; 
             error_info = this.data.start_date == "" ? error_info + "未选择出发日期 " : error_info;
-            error_info = this.data.start_time == "" ? error_info + "未选择出发时间 " : error_info;
-            error_info = this.data.end_date == "" ? error_info + "未选择到达日期 " : error_info;
+			error_info = this.data.start_time == "" ? error_info + "未选择出发时间 " : error_info;
+			error_info = this.data.end_date == "" ? error_info + "未选择到达日期 " : error_info;
             error_info = this.data.end_time == "" ? error_info + "未选择到达时间 " : error_info;
-            error_info = this.data.start_addr == "" ? error_info + "未选择出发地 " : error_info;
+			if ((this.data.start_date > this.data.end_date) || 
+				(this.data.start_date == this.data.end_date && this.data.start_time >= this.data.end_time)){
+					error_info = error_info + "出发时间晚于到达时间 ";
+			}
+			error_info = this.data.start_addr == "" ? error_info + "未选择出发地 " : error_info;
             error_info = this.data.des_addr == "" ? error_info + "未选择目的地 " : error_info;
-        }
+			error_info = this.data.start_addr == this.data.des_addr ? error_info + "出发地和目的地不可以一致 " : error_info;
+		}
 
         // 检查是否有错误信息
         // 有报错信息
@@ -215,7 +220,7 @@ Page({
     * Notice: 
     *****************************/
     formSubmit: function (e) {
-        // 判断账号是不是被封禁
+		// 判断账号是不是被封禁
 		if (app.globalData.userInfo.userstatus!=1){
 			wx.showModal({
 				title: "账号被封禁",
@@ -295,7 +300,6 @@ Page({
 			},
 			url: 'http://124.71.160.151:3001/getOneTeamInfo',
 			success: function (res) {
-                console.log(res.data);
 				that.setData({ 
                     teamname: res.data[0].teamname,           // 队伍名
                     phone: res.data[0].phone,
