@@ -30,7 +30,6 @@ Page({
 				wx.cloud.callFunction({
 					name: "login",
 					success: (ress) => {
-						console.log(ress);
 						that.setData({
 							useropenid: ress.result.openid
 						})
@@ -44,8 +43,6 @@ Page({
 							},
 							url: 'http://124.71.160.151:3000/getuserinfo',
 							success: function (res2) {
-								console.log(res2.data);
-								console.log(res2.data.length);
 								if (res2.data.length == 0) //如果没有资料
 								{
 									that.setData({
@@ -63,9 +60,7 @@ Page({
 									app.globalData.logined = true;
 									app.globalData.userInfo.role = 0;
 									app.globalData.userInfo.userstatus = 1;
-									console.log(app.globalData.userInfo);
 									// 如果状态正常，那么允许使用其他功能
-									console.log("状态aaa", app.globalData.userInfo.userstatus)
 									if (app.globalData.userInfo.userstatus == 1)
 										wx.showTabBar();
 									/************************************************************************/
@@ -76,7 +71,6 @@ Page({
 										nickname: res.userInfo.nickName,
 										appKey: WebIM.config.appkey,
 										success: function (res) {
-											console.log('注册成功', res)
 											// that.toastSuccess('注册成功'); // toast（吐司）就是提示成功失败的小提示框
 											var data = {
 												apiUrl: WebIM.config.apiURL,
@@ -266,7 +260,9 @@ Page({
 		app.globalData.userInfo.useropenid = '';
 		/***************************************/
 		WebIM.conn.close();
-		/***************************************/
+    /***************************************/
+    // 不允许使用其他功能
+    wx.showTabBar();
 	},
 	jumpPersonalInfo() {
 		wx.navigateTo({
@@ -312,7 +308,6 @@ Page({
 	 */
 	onShow: function () {
 		if (this.data.logined == 1) {
-			console.log('test');
 			const that = this;
 			wx.request({
 				method: 'POST',
@@ -338,7 +333,6 @@ Page({
 							userstatus: res2.data[0].status
 						})
 						// 如果状态正常，那么允许使用其他功能
-						console.log("状态ddd", app.globalData.userInfo.userstatus)
 						if (app.globalData.userInfo.userstatus == 1)
 							wx.showTabBar();
 					}
