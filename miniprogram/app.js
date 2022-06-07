@@ -414,17 +414,17 @@ App({
 	onShow(){
 		// 从搜索页面进的时候退出后再回来会回到首页，此时并没有调用退出，导致登录不上
 		// 判断当前是登录状态直接跳转到chat页面
-		const pages = getCurrentPages();
-		const currentPage = pages[pages.length - 1];
-		// 选择图片或者拍照也会触发onShow，所以忽略聊天页面
-		if (WebIM.conn.isOpened() && currentPage.route != "pages/chatroom/chatroom" && currentPage.route != "pages/groupChatRoom/groupChatRoom") {
-			let myName = wx.getStorageSync("myUsername");
-			wx.switchTab({
-				url: "../main/main?myName=" + myName
-			});
-		}
+		// const pages = getCurrentPages();
+		// const currentPage = pages[pages.length - 1];
+		// // 选择图片或者拍照也会触发onShow，所以忽略聊天页面
+		// if (WebIM.conn.isOpened() && currentPage.route != "pages/chatroom/chatroom" && currentPage.route != "pages/groupChatRoom/groupChatRoom") {
+		// 	let myName = wx.getStorageSync("myUsername");
+		// 	wx.switchTab({
+		// 		url: "../main/main?myName=" + myName
+		// 	});
+		// }
 
-		wx.hideHomeButton()
+		// wx.hideHomeButton()
 	},
 
 	onLoginSuccess: function(myName){

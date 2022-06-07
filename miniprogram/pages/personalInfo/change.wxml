@@ -3,7 +3,7 @@
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_active">
       <view class="weui-cell__bd">
-        <input class="weui-input" placeholder-class="weui-input__placeholder" placeholder="{{placeholder}}" bindchange="valuechange" />
+        <input class="weui-input" placeholder-class="weui-input__placeholder" placeholder="{{placeholder}}" bindinput="valuechange" />
       </view>
       <view class="weui-cell__ft">
         <view class="weui-vcode-btn" aria-role="button" bindtap="submit">保存</view>

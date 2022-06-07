@@ -8,7 +8,7 @@ Page({
 
   chooseImage() {
     const that = this;
-    if(that.data.files.length >= 3){
+    if(that.data.files.length >= 1){
       wx.showToast({
         title: '最多只能上传一张图片',
         icon: 'none',
