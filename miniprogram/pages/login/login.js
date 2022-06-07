@@ -145,7 +145,6 @@ Page({
 										useremail: res2.data[0].email,
 										userstatus: res2.data[0].status
 									});
-									console.log("状态bbb", app.globalData.userInfo.userstatus)
 									// 如果状态正常，那么允许使用其他功能
 									if (app.globalData.userInfo.userstatus == 1)
 										wx.showTabBar();
@@ -227,7 +226,6 @@ Page({
 							});
 
 							// 如果状态正常，那么允许使用其他功能
-							console.log("状态ccc", app.globalData.userInfo.userstatus)
 							if (app.globalData.userInfo.userstatus == 1)
 								wx.showTabBar();
 
@@ -262,7 +260,7 @@ Page({
 		WebIM.conn.close();
     /***************************************/
     // 不允许使用其他功能
-    wx.showTabBar();
+    wx.hideTabBar();
 	},
 	jumpPersonalInfo() {
 		wx.navigateTo({
