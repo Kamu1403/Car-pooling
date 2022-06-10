@@ -92,9 +92,6 @@ Page({
     wrap: false,
     friends_list: [ // 好友列表
     ],
-    finishDialogShow: false,
-
-
   },
 
   /**

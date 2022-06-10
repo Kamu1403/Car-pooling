@@ -91,7 +91,7 @@
               <view aria-role="button" class="weui-btn_icon weui-wa-hotarea">关闭<i class="weui-icon-slide-down"></i></view>
           </view>
           <view class="weui-half-screen-dialog__hd__main">
-              <strong class="weui-half-screen-dialog__title" id="js_dialog2_title">标题</strong>
+              <strong class="weui-half-screen-dialog__title" id="js_dialog2_title">邀请成员</strong>
           </view>
           <view class="weui-half-screen-dialog__hd__side">
               <view aria-role="button" class="weui-icon-btn">更多<i class="weui-icon-more"></i></view>
