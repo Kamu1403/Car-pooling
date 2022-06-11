@@ -29,27 +29,6 @@ Page({
   },
 
   onLoad(option) {
-    let that = this;
-    /***********************************************************/
-    wx.request({
-      method: 'GET',
-      url: 'http://124.71.160.151:3003/getUserInfo',
-      success: function (res2) {
-        for (let i = 0; i < res2.data.length; i++) {
-          let tem_id = res2.data[i]["openid"].toLowerCase();
-          let tem_name = res2.data[i]["name"];
-          let tem_photo = res2.data[i]["photo"];
-          let temName = that.data.nameList;
-          temName[tem_id] = tem_name;
-          let temPhoto = that.data.photoList;
-          temPhoto[tem_id] = tem_photo;
-          that.setData({
-            nameList: temName,
-            photoList: temPhoto
-          })
-        }
-      }
-    })
     const me = this;
     const app = getApp();
     new app.ToastPannel.ToastPannel();
@@ -103,6 +82,28 @@ Page({
   },
 
   onShow() {
+    let that = this;
+    /***********************************************************/
+    wx.request({
+      method: 'GET',
+      url: 'http://124.71.160.151:3003/getUserInfo',
+      success: function (res2) {
+        console.log(res2);
+        for (let i = 0; i < res2.data.length; i++) {
+          let tem_id = res2.data[i]["openid"].toLowerCase();
+          let tem_name = res2.data[i]["name"];
+          let tem_photo = res2.data[i]["photo"];
+          let temName = that.data.nameList;
+          temName[tem_id] = tem_name;
+          let temPhoto = that.data.photoList;
+          temPhoto[tem_id] = tem_photo;
+          that.setData({
+            nameList: temName,
+            photoList: temPhoto
+          })
+        }
+      }
+    })
     this.setData({
       messageNum: getApp().globalData.saveFriendList.length,
       unReadSpotNum: getApp().globalData.unReadMessageNum > 99 ? '99+' : getApp().globalData.unReadMessageNum,
