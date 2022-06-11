@@ -64,5 +64,6 @@
         }
       ]
     }
-  }
+  },
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }
