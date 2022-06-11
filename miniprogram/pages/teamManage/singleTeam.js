@@ -341,7 +341,7 @@ Page({
         this.openAuthorityDialog();
         break;
       case 6:
-        this.delTeam(e);
+        this.delTeam(this.data.team_seq);
         break;
       case 7:
         this.setData({
@@ -652,9 +652,23 @@ Page({
 
 
   // 解散队伍
-  delTeam(e) {
+  delTeam(seq) {
     console.log("解散队伍");
-    // 没必要，效果相同与行程结束
+    console.log(seq)
+    wx.request(
+      {
+        method:"POST",
+        data:{
+          'seq':seq
+        },
+        url: 'http://124.71.160.151:3003/delTeam',
+        success: function () {
+          console.log("删除队伍成功");
+          wx.navigateBack()
+        }
+      }
+    )
+    
   },
   delOne(seq, openid) {
     wx.request({
