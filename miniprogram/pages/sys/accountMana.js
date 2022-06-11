@@ -128,6 +128,7 @@ Page({
   open(e) {
     var that = this;
     var i = e.currentTarget.dataset.src;
+    console.log(i);
     that.data.now_seq = i;
     if (that.data.userAccount[i].status == '封禁中') {
       that.setData({
@@ -197,6 +198,7 @@ Page({
       url: 'http://124.71.160.151:3006/getuserstatus',
       success: function (res) {
         var list = [];
+        var seq = 0;
         for (let i = 0; i < res.data.length; i++) {
           var status;
           var color;
@@ -224,8 +226,9 @@ Page({
             openid: res.data[i].openid,
             username: res.data[i].name,
             userphone: res.data[i].phone == null ? "未设置" : res.data[i].phone,
-            seq: i,
+            seq: seq,
           });
+          seq++;
         }
         that.setData({
           userAccount: list
@@ -252,6 +255,7 @@ Page({
       url: 'http://124.71.160.151:3006/getuserstatus',
       success: function (res) {
         var list = [];
+        var seq = 0;
         for (let i = 0; i < res.data.length; i++) {
           var status;
           var color;
@@ -279,8 +283,9 @@ Page({
             openid: res.data[i].openid,
             username: res.data[i].name,
             userphone: res.data[i].phone == null ? "未设置" : res.data[i].phone,
-            seq: i,
+            seq: seq,
           });
+          seq++;
         }
         that.setData({
           userAccount: list

@@ -69,7 +69,6 @@ Page({
           userphone: res.data[0].phone == null? '未设置' : res.data[0].phone,
           useremail: res.data[0].email == null? '未设置' : res.data[0].email,
         })
-        console.log(res.data)
       }
     })
   },
