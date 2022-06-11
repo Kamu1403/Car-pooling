@@ -86,6 +86,7 @@ Page({
     finishDialogShow: false,
     // options
     opt: {},
+    tem_group_id: "",
 
     // 邀请成员，显示好友的半弹窗
     dialog: false,
@@ -132,7 +133,10 @@ Page({
           },
           url: 'http://124.71.160.151:3003/findGroup',
           success: function (res) {
-            console.log(res.data);
+            // console.log(res.data);
+            that.setData({
+              tem_group_id: res.data[0].group_id
+            });
             let option = {
               'groupId': res.data[0].group_id,
               success: function () {
@@ -546,6 +550,13 @@ Page({
     let index = e.currentTarget.dataset.index;
     if (this.data.isLeader) {
       this.delOne(this.data.team_seq, this.data.memberInfo[index].openid);
+      let option = {
+        "groupId": this.data.tem_group_id,
+        "username": this.data.memberInfo[index].openid.toLowerCase()       // 群组成员名称
+      };
+      wx.WebIM.conn.removeSingleGroupMember(option).then((res) => {
+        console.log(res)
+      })
       wx.showToast({
         title: '删除成员成功',
       })
@@ -611,10 +622,7 @@ Page({
         },
         url: 'http://124.71.160.151:3001/getUserBasicInfo',
         success: function (res) {
-          console.log("aaaaaaaaa");
           console.log(res.data);
-          console.log("aaaaaaaaa");
-
           that.setData({
             friends_list: res.data, // 设置用户数据
             dialog: true, // 激活弹窗
@@ -641,6 +649,13 @@ Page({
     } else {
       // 直接退出
       this.delOne(this.data.team_seq, this.data.nowUser.openid);
+      let option = {
+        "groupId": this.data.tem_group_id
+      };
+      console.log(option);
+      wx.WebIM.conn.quitGroup(option).then((res) => {
+        console.log(res)
+      })
       wx.showToast({
         title: '退出小队成功',
       })
@@ -668,7 +683,12 @@ Page({
         }
       }
     )
-    
+    let option = {
+      groupId: this.data.tem_group_id
+    };
+    wx.WebIM.conn.dissolveGroup(option).then((res) => {
+      console.log(res)
+    })
   },
   delOne(seq, openid) {
     wx.request({
