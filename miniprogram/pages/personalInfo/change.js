@@ -34,9 +34,26 @@ Page({
     if(that.data.changeWhat == 'gender'){
       if(that.data.tmp =='男')
         that.data.tmp = 0;
-      else
+      else if(that.data.tmp =='女')
         that.data.tmp = 1;
+      else{
+        wx.showToast({
+          icon: 'error',
+          title: '请输入男或女'
+        })
+        return;
+      }
     }
+    else if(that.data.changeWhat == 'phone'){
+      if(that.data.tmp.length != 11 || isNaN(Number(that.data.tmp,10))){
+        wx.showToast({
+          icon: 'none',
+          title: '请输入11位手机号，不允许有除数字外的字符'
+        })
+        return;
+      }
+    }
+
     //修改用户对应信息
     wx.request({
       method:'POST',

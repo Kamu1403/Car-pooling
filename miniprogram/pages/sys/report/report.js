@@ -164,6 +164,7 @@ Page({
       method: 'POST',
       url: 'http://124.71.160.151:3006/getreport',
       success: function (res) {
+        console.log(res.data);
         var list = [];
         for (let i = 0; i < res.data.length; i++) {
           var status;
@@ -182,7 +183,9 @@ Page({
             status: status,
             color: color,
             reporterId: res.data[i].reporter_openid,
+            reporterName: res.data[i].rname,
             suspecterId: res.data[i].suspect_openid,
+            suspecterName: res.data[i].sname,
             message: res.data[i].message,
             seq: i,
           });

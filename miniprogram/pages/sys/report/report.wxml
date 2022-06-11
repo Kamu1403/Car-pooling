@@ -19,8 +19,16 @@
           <view class="weui-form-preview__value" style="font-size: 13px;">{{item.reporterId}}</view>
         </view>
         <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">举报者用户名</view>
+          <view class="weui-form-preview__value" style="font-size: 13px;">{{item.reporterName}}</view>
+        </view>
+        <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">被举报者id</view>
           <view class="weui-form-preview__value" style="font-size: 13px;">{{item.suspecterId}}</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">被举报者用户名</view>
+          <view class="weui-form-preview__value" style="font-size: 13px;">{{item.suspecterName}}</view>
         </view>
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">举报原因</view>
