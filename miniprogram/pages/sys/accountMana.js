@@ -200,6 +200,8 @@ Page({
         for (let i = 0; i < res.data.length; i++) {
           var status;
           var color;
+          if (res.data[i].openid == app.globalData.userInfo.useropenid)
+            continue;
           if (res.data[i].status == 0) {
             status = "封禁中";
             color = "red";
@@ -253,6 +255,8 @@ Page({
         for (let i = 0; i < res.data.length; i++) {
           var status;
           var color;
+          if (res.data[i].openid == app.globalData.userInfo.useropenid)
+            continue;
           if (res.data[i].status == 0) {
             status = "封禁中";
             color = "red";

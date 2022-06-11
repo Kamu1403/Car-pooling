@@ -23,7 +23,7 @@
                   </view>
                 </block>
               </view>
-              <view class="weui-uploader__input-box">
+              <view wx:if="{{!files.length}}" class="weui-uploader__input-box">
                 <view aria-role="button" aria-label="上传" class="weui-uploader__input" bindtap="chooseImage"></view>
               </view>
             </view>
